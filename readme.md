@@ -6,3 +6,4 @@
 - Changed DatabaseSeeder to add test user.
 - Added GeneralSeeder for general information about administration.
 - Added ResourcesSeeder for Play, Lead, and Prospect.
+- Changed timezone to Asia/Jakarta.
