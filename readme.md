@@ -9,3 +9,5 @@
 - Changed timezone to Asia/Jakarta.
 - Added old database config with name 'oldrps'.
 - Removed default user and password migration.
+- Removed Play ID on tested well zone, changed with formation name.
+- Added tested well and tested well zone migration.

@@ -12,6 +12,9 @@ class ResourcesSeeder extends Seeder
      */
     public function run()
     {
+        /**
+         * Play Seeder
+         */
         $plays = DB::connection('oldrps')->table('rsc_play as pl')
             ->leftJoin('rsc_gcf as gcf', 'pl.gcf_id', '=', 'gcf.gcf_id')
             ->leftJoin('adm_basin as b', 'pl.basin_id', '=', 'b.basin_id')
@@ -41,6 +44,49 @@ class ResourcesSeeder extends Seeder
             ->whereNotIn('pl.wk_id', ['WK0000', 'WK9999']);
         $plays = $this->withGcf($plays)->get();
 
+        // Menyimpan Play ID original dari database rps_skkmigas, dan mapping
+        // dengan ID Play baru
+        $originalPlayIds = [];
+
+        foreach ($plays as $play) {
+            $gcfId = $this->gcfSave($play);
+
+            // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
+            if ($play->working_area_id != 'WK1047') {
+                $play->basin_name = DB::table('basin_working_area')
+                    ->where('working_area_id', $play->working_area_id)
+                    ->value('basin_name');
+            }
+
+            $playId = DB::table('play')->insertGetId([
+                'working_area_id' => $play->working_area_id,
+                'gcf_id' => $gcfId,
+                'basin_name' => $play->basin_name,
+                'province_name' => $play->province_name,
+                'remark' => $play->remark,
+                'analog_to' => $play->analog_to,
+                'analog_distance' => $play->analog_distance,
+                'shore' => $play->shore,
+                'terrain' => $play->terrain,
+                'nearby_field' => $play->nearby_field,
+                'nearby_infra' => $play->nearby_infra,
+                's2_year' => $play->s2_year,
+                's2_crossline' => $play->s2_crossline,
+                's2_line_distance' => $play->s2_line_distance,
+                'chem_sample' => $play->chem_sample,
+                'chem_depth' => $play->chem_depth,
+                'grav_acreage' => $play->grav_acreage,
+                'grav_depth' => $play->grav_depth,
+                'resi_acreage' => $play->resi_acreage,
+                'created_at' => $play->created_at,
+            ]);
+
+            $originalPlayIds[$play->play_id] = $playId;
+        }
+
+        /**
+         * Lead Seeder
+         */
         $leads = DB::connection('oldrps')->table('rsc_lead as ld')
             ->join('rsc_play as pl', 'pl.play_id', '=', 'ld.play_id')
             ->leftJoin('rsc_gcf as gcf', 'ld.gcf_id', '=', 'gcf.gcf_id')
@@ -127,277 +173,11 @@ class ResourcesSeeder extends Seeder
             ->whereNotIn('pl.wk_id', ['WK0000', 'WK9999']);
         $leads = $this->withGcf($leads)->get();
 
-        $drillables = DB::connection('oldrps')->table('rsc_prospect as pr')
-            ->join('rsc_play as pl', 'pl.play_id', '=', 'pr.play_id')
-            ->leftJoin('rsc_drillable as dr', 'pr.prospect_id', '=', 'dr.prospect_id')
-            ->leftJoin('rsc_gcf as gcf', 'pr.gcf_id', '=', 'gcf.gcf_id')
-            ->leftJoin('rsc_seismic_2d as s2', 'pr.prospect_id', '=', 's2.prospect_id')
-            ->leftJoin('rsc_seismic_3d as s3', 'pr.prospect_id', '=', 's3.prospect_id')
-            ->leftJoin('rsc_electromagnetic as elec', 'pr.prospect_id', '=', 'elec.prospect_id')
-            ->leftJoin('rsc_geochemistry as chem', 'pr.prospect_id', '=', 'chem.prospect_id')
-            ->leftJoin('rsc_geological as geo', 'pr.prospect_id', '=', 'geo.prospect_id')
-            ->leftJoin('rsc_gravity as grav', 'pr.prospect_id', '=', 'grav.prospect_id')
-            ->leftJoin('rsc_resistivity as resi', 'pr.prospect_id', '=', 'resi.prospect_id')
-            ->leftJoin('rsc_other as oter', 'pr.prospect_id', '=', 'oter.prospect_id')
-            ->leftJoin('adm_basin as b', 'pl.basin_id', '=', 'b.basin_id')
-            ->leftJoin('adm_province as p', 'pl.province_id', '=', 'p.province_id')
-            ->select(
-                'pr.play_id as play_id',
-                'pl.wk_id as working_area_id',
-                'b.basin_name as basin_name',
-                'p.province_name as province_name',
-                'pr.structure_name as closure_name',
-                'pr.prospect_clarified as clarified',
-                'pr.prospect_date_initiate as initiate',
-                'pr.prospect_latitude as latitude',
-                'pr.prospect_longitude as longitude',
-                'pr.prospect_shore as shore',
-                'pr.prospect_terrain as terrain',
-                'pr.prospect_near_field as nearby_field',
-                'pr.prospect_near_infra_structure as nearby_infra',
-                'dr.dr_por_p90 as por_p90',
-                'dr.dr_por_p50 as por_p50',
-                'dr.dr_por_p10 as por_p10',
-                'dr.dr_satur_p90 as sat_p90',
-                'dr.dr_satur_p50 as sat_p50',
-                'dr.dr_satur_p10 as sat_p10',
-                'pr.prospect_submit_date as created_at',
-                'pr.prospect_is_deleted'
-            )
-            ->where('pr.prospect_type', '=', 'drillable')
-            ->whereNotIn('pl.wk_id', ['WK0000', 'WK9999']);
-        $drillables = $this->withGcf($drillables);
-        $drillables = $this->withProspectSurvey($drillables)->get();
-
-        $postdrillWells = DB::connection('oldrps')->table('rsc_well as wl')
-            ->select(
-                'wl.prospect_id',
-                'wl.wk_id as working_area_id',
-                'wl.wl_name as well_name',
-                'wl.wl_latitude as latitude',
-                'wl.wl_longitude as longitude',
-                'wl.wl_type as well_type',
-                'wl.wl_status as well_status',
-                'wl.wl_integrity as well_integrity',
-                'wl.wl_date_complete as well_date',
-                'wl.wl_shore as shore',
-                'wl.wl_terrain as terrain',
-                'wl.wl_target_depth_tvd as target_depth_tvd',
-                'wl.wl_target_depth_md as target_depth_md',
-                'wl.wl_actual_depth as actual_depth',
-                'wl.wl_number_mdt as mdt_sample',
-                'wl.wl_number_rft as rft_sample',
-                'wl.wl_res_pressure as initial_pressure',
-                'wl.wl_last_pressure as last_pressure',
-                'wl.wl_pressure_gradient as gradient_pressure',
-                'wl.wl_last_temp as reservoir_temp',
-                'wl.wl_result as wl_result',
-
-                'wz.zone_clastic_p90_por as clastic_por_p90',
-                'wz.zone_clastic_p50_por as clastic_por_p50',
-                'wz.zone_clastic_p10_por as clastic_por_p10',
-                'wz.zone_clastic_p90_satur as clastic_sat_p90',
-                'wz.zone_clastic_p50_satur as clastic_sat_p50',
-                'wz.zone_clastic_p10_satur as clastic_sat_p10',
-                'wz.zone_clastic_p90_por as carbo_por_p90',
-                'wz.zone_clastic_p50_por as carbo_por_p50',
-                'wz.zone_clastic_p10_por as carbo_por_p10',
-                'wz.zone_clastic_p90_satur as carbo_sat_p90',
-                'wz.zone_clastic_p50_satur as carbo_sat_p50',
-                'wz.zone_clastic_p10_satur as carbo_sat_p10',
-                'wz.zone_fvf_oil_p50 as boi',
-                'wz.zone_fvf_gas_p50 as bgi',
-                'wz.zone_fluid_ratio as gas_oil_ratio',
-                'wz.zone_hc_oil_show as oil_show',
-                'wz.zone_hc_gas_show as gas_show',
-                'wz.zone_hc_water_cut as well_water_cut',
-                'wz.zone_hc_water_gwc as water_depth_gwc',
-                'wz.zone_hc_water_owc as water_depth_owc',
-                'wz.zone_rock_method as rock_sampling_method',
-                'wz.zone_rock_petro as petrography_analysis',
-                'wz.zone_rock_total_core as total_core_barrel',
-                'wz.zone_rock_barrel_equal as one_core_barrel',
-                'wz.zone_rock_barrel as total_barrel_data',
-                'wz.zone_rock_preservative as preservative_core',
-                'wz.zone_rock_routine as routine_core',
-                'wz.zone_rock_scal as scal_data',
-                'wz.zone_fluid_pressure as seperator_pressure',
-                'wz.zone_fluid_temp as seperator_temp',
-                'wz.zone_fluid_tubing as tubing_pressure',
-                'wz.zone_fluid_casing as casing_pressure',
-                'wz.zone_fluid_grv_oil as oil_gravity',
-                'wz.zone_fluid_grv_gas as gas_gravity',
-                'wz.zone_fluid_grv_conden as condensate_gravity',
-                'wl.wl_submit_date as created_at'
-            )
-            ->join('rsc_wellzone as wz', 'wz.wl_id', '=', 'wl.wl_id')
-            ->whereNotIn('wl.wk_id', ['WK0000', 'WK9999'])
-            ->where('wl.prospect_type', '=', 'postdrill')
-            ->groupBy('wl.wl_name')
-            ->get();
-
-        $postdrills = DB::connection('oldrps')->table('rsc_prospect as pr')
-            ->join('rsc_play as pl', 'pl.play_id', '=', 'pr.play_id')
-            ->leftJoin('rsc_gcf as gcf', 'pr.gcf_id', '=', 'gcf.gcf_id')
-            ->leftJoin('rsc_seismic_2d as s2', 'pr.prospect_id', '=', 's2.prospect_id')
-            ->leftJoin('rsc_seismic_3d as s3', 'pr.prospect_id', '=', 's3.prospect_id')
-            ->leftJoin('rsc_electromagnetic as elec', 'pr.prospect_id', '=', 'elec.prospect_id')
-            ->leftJoin('rsc_geochemistry as chem', 'pr.prospect_id', '=', 'chem.prospect_id')
-            ->leftJoin('rsc_geological as geo', 'pr.prospect_id', '=', 'geo.prospect_id')
-            ->leftJoin('rsc_gravity as grav', 'pr.prospect_id', '=', 'grav.prospect_id')
-            ->leftJoin('rsc_resistivity as resi', 'pr.prospect_id', '=', 'resi.prospect_id')
-            ->leftJoin('rsc_other as oter', 'pr.prospect_id', '=', 'oter.prospect_id')
-            ->leftJoin('adm_basin as b', 'pl.basin_id', '=', 'b.basin_id')
-            ->leftJoin('adm_province as p', 'pl.province_id', '=', 'p.province_id')
-            ->select(
-                'pr.prospect_id',
-                'pr.play_id as play_id',
-                'pl.wk_id as working_area_id',
-                'b.basin_name as basin_name',
-                'p.province_name as province_name',
-                'pr.structure_name as structure_name',
-                'pr.prospect_clarified as clarified',
-                'pr.prospect_date_initiate as initiate',
-                'pr.prospect_latitude as latitude',
-                'pr.prospect_longitude as longitude',
-                'pr.prospect_shore as shore',
-                'pr.prospect_terrain as terrain',
-                'pr.prospect_near_field as nearby_field',
-                'pr.prospect_near_infra_structure as nearby_infra',
-                'pr.prospect_submit_date as created_at',
-                'pr.prospect_is_deleted'
-            )
-            ->where('pr.prospect_type', '=', 'postdrill')
-            ->whereNotIn('pl.wk_id', ['WK0000', 'WK9999']);
-        $postdrills = $this->withGcf($postdrills);
-        $postdrills = $this->withProspectSurvey($postdrills)->get();
-
-        $testedWell = DB::connection('oldrps')->table('rsc_well as wl')
-            ->select(
-                'wl.prospect_id',
-                'wl.wk_id as working_area_id',
-                'wl.wl_name as well_name',
-                'wl.wl_latitude as latitude',
-                'wl.wl_longitude as longitude',
-                'wl.wl_type as well_type',
-                'wl.wl_status as well_status',
-                'wl.wl_integrity as well_integrity',
-                'wl.wl_date_complete as well_date',
-                'wl.wl_shore as shore',
-                'wl.wl_terrain as terrain',
-                'wl.wl_target_depth_tvd as target_depth_tvd',
-                'wl.wl_target_depth_md as target_depth_md',
-                'wl.wl_actual_depth as actual_depth',
-                'wl.wl_number_mdt as mdt_sample',
-                'wl.wl_number_rft as rft_sample',
-                'wl.wl_res_pressure as initial_pressure',
-                'wl.wl_last_pressure as last_pressure',
-                'wl.wl_pressure_gradient as gradient_pressure',
-                'wl.wl_last_temp as reservoir_temp',
-                'wl.wl_result as wl_result',
-
-                'wl.wl_submit_date as created_at'
-            )
-            ->leftJoin('rsc_wellzone as wz', 'wz.wl_id', '=', 'wl.wl_id')
-            ->whereNotIn('wl.wk_id', ['WK0000', 'WK9999'])
-            ->where('wl.prospect_type', '=', 'discovery')
-            ->groupBy('wl.wl_name')
-            ->get();
-
-        $testedWellZone = DB::connection('oldrps')->table('rsc_well as wl')
-            ->select(
-                'wl.wl_result as wl_result',
-
-                'wz.zone_clastic_p90_por as clastic_por_p90',
-                'wz.zone_clastic_p50_por as clastic_por_p50',
-                'wz.zone_clastic_p10_por as clastic_por_p10',
-                'wz.zone_clastic_p90_satur as clastic_sat_p90',
-                'wz.zone_clastic_p50_satur as clastic_sat_p50',
-                'wz.zone_clastic_p10_satur as clastic_sat_p10',
-                'wz.zone_clastic_p90_por as carbo_por_p90',
-                'wz.zone_clastic_p50_por as carbo_por_p50',
-                'wz.zone_clastic_p10_por as carbo_por_p10',
-                'wz.zone_clastic_p90_satur as carbo_sat_p90',
-                'wz.zone_clastic_p50_satur as carbo_sat_p50',
-                'wz.zone_clastic_p10_satur as carbo_sat_p10',
-                'wz.zone_fvf_oil_p50 as boi',
-                'wz.zone_fvf_gas_p50 as bgi',
-                'wz.zone_fluid_ratio as gas_oil_ratio',
-                'wz.zone_hc_oil_show as oil_show',
-                'wz.zone_hc_gas_show as gas_show',
-                'wz.zone_hc_water_cut as well_water_cut',
-                'wz.zone_hc_water_gwc as water_depth_gwc',
-                'wz.zone_hc_water_owc as water_depth_owc',
-                'wz.zone_rock_method as rock_sampling_method',
-                'wz.zone_rock_petro as petrography_analysis',
-                'wz.zone_rock_total_core as total_core_barrel',
-                'wz.zone_rock_barrel_equal as one_core_barrel',
-                'wz.zone_rock_barrel as total_barrel_data',
-                'wz.zone_rock_preservative as preservative_core',
-                'wz.zone_rock_routine as routine_core',
-                'wz.zone_rock_scal as scal_data',
-                'wz.zone_fluid_pressure as seperator_pressure',
-                'wz.zone_fluid_temp as seperator_temp',
-                'wz.zone_fluid_tubing as tubing_pressure',
-                'wz.zone_fluid_casing as casing_pressure',
-                'wz.zone_fluid_grv_oil as oil_gravity',
-                'wz.zone_fluid_grv_gas as gas_gravity',
-                'wz.zone_fluid_grv_conden as condensate_gravity',
-                'wl.wl_submit_date as created_at'
-            )
-            ->join('rsc_wellzone as wz', 'wz.wl_id', '=', 'wl.wl_id')
-            ->whereNotIn('wl.wk_id', ['WK0000', 'WK9999'])
-            ->where('wl.prospect_type', '=', 'discovery')
-            ->groupBy('wl.wl_name')
-            ->get();
-
-        // Menyimpan ID original dari database rps_skkmigas, dengan mapping
-        // dengan ID Play baru
-        $originalPlayIds = [];
-
-        // Play seeder
-        foreach ($plays as $play) {
-            $gcfId = $this->gcfSave($play);
-
-            // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
-            if ($play->working_area_id != 'WK1047') {
-                $play->basin_name = DB::table('basin_working_area')
-                    ->where('working_area_id', $play->working_area_id)
-                    ->value('basin_name');
-            }
-
-            $playId = DB::table('play')->insertGetId([
-                'working_area_id' => $play->working_area_id,
-                'gcf_id' => $gcfId,
-                'basin_name' => $play->basin_name,
-                'province_name' => $play->province_name,
-                'remark' => $play->remark,
-                'analog_to' => $play->analog_to,
-                'analog_distance' => $play->analog_distance,
-                'shore' => $play->shore,
-                'terrain' => $play->terrain,
-                'nearby_field' => $play->nearby_field,
-                'nearby_infra' => $play->nearby_infra,
-                's2_year' => $play->s2_year,
-                's2_crossline' => $play->s2_crossline,
-                's2_line_distance' => $play->s2_line_distance,
-                'chem_sample' => $play->chem_sample,
-                'chem_depth' => $play->chem_depth,
-                'grav_acreage' => $play->grav_acreage,
-                'grav_depth' => $play->grav_depth,
-                'resi_acreage' => $play->resi_acreage,
-                'created_at' => $play->created_at,
-            ]);
-
-            $originalPlayIds[$play->play_id] = $playId;
-        }
-
-        // Lead seeder
         foreach ($leads as $lead) {
             $gcfId = $this->gcfSave($lead);
 
             if ($lead->lead_is_deleted) {
-                $deletedAt = Carbon::parse($lead->created_at)->addMonths(6)
+                $deletedAt = Carbon::parse($lead->created_at)->addMonths(4)
                     ->toDateTimeString();
                 $deleteReason = 'Delete status dari database lama';
             } else {
@@ -489,14 +269,58 @@ class ResourcesSeeder extends Seeder
             ]);
         }
 
-        // Drillable seeder
+        /**
+         * Drillable Seeder
+         */
+        $drillables = DB::connection('oldrps')->table('rsc_prospect as pr')
+            ->join('rsc_play as pl', 'pl.play_id', '=', 'pr.play_id')
+            ->leftJoin('rsc_drillable as dr', 'pr.prospect_id', '=', 'dr.prospect_id')
+            ->leftJoin('rsc_gcf as gcf', 'pr.gcf_id', '=', 'gcf.gcf_id')
+            ->leftJoin('rsc_seismic_2d as s2', 'pr.prospect_id', '=', 's2.prospect_id')
+            ->leftJoin('rsc_seismic_3d as s3', 'pr.prospect_id', '=', 's3.prospect_id')
+            ->leftJoin('rsc_electromagnetic as elec', 'pr.prospect_id', '=', 'elec.prospect_id')
+            ->leftJoin('rsc_geochemistry as chem', 'pr.prospect_id', '=', 'chem.prospect_id')
+            ->leftJoin('rsc_geological as geo', 'pr.prospect_id', '=', 'geo.prospect_id')
+            ->leftJoin('rsc_gravity as grav', 'pr.prospect_id', '=', 'grav.prospect_id')
+            ->leftJoin('rsc_resistivity as resi', 'pr.prospect_id', '=', 'resi.prospect_id')
+            ->leftJoin('rsc_other as oter', 'pr.prospect_id', '=', 'oter.prospect_id')
+            ->leftJoin('adm_basin as b', 'pl.basin_id', '=', 'b.basin_id')
+            ->leftJoin('adm_province as p', 'pl.province_id', '=', 'p.province_id')
+            ->select(
+                'pr.play_id as play_id',
+                'pl.wk_id as working_area_id',
+                'b.basin_name as basin_name',
+                'p.province_name as province_name',
+                'pr.structure_name as closure_name',
+                'pr.prospect_clarified as clarified',
+                'pr.prospect_date_initiate as initiate',
+                'pr.prospect_latitude as latitude',
+                'pr.prospect_longitude as longitude',
+                'pr.prospect_shore as shore',
+                'pr.prospect_terrain as terrain',
+                'pr.prospect_near_field as nearby_field',
+                'pr.prospect_near_infra_structure as nearby_infra',
+                'dr.dr_por_p90 as por_p90',
+                'dr.dr_por_p50 as por_p50',
+                'dr.dr_por_p10 as por_p10',
+                'dr.dr_satur_p90 as sat_p90',
+                'dr.dr_satur_p50 as sat_p50',
+                'dr.dr_satur_p10 as sat_p10',
+                'pr.prospect_submit_date as created_at',
+                'pr.prospect_is_deleted'
+            )
+            ->where('pr.prospect_type', '=', 'drillable')
+            ->whereNotIn('pl.wk_id', ['WK0000', 'WK9999']);
+        $drillables = $this->withGcf($drillables);
+        $drillables = $this->withProspectSurvey($drillables)->get();
+
         foreach ($drillables as $drillable) {
             $gcfId = $this->gcfSave($drillable);
             $surveyId = $this->prospectSurveySave($drillable);
 
             if ($drillable->prospect_is_deleted) {
                 $deletedAt = Carbon::parse($drillable->created_at)
-                    ->addMonths(6)
+                    ->addMonths(5)
                     ->toDateTimeString();
                 $deleteReason = 'Delete status dari database lama';
             } else {
@@ -539,7 +363,78 @@ class ResourcesSeeder extends Seeder
             ]);
         }
 
-        // Postdrill well seeder
+        /**
+         * Postdrill Well Seeder
+         */
+        $postdrillWells = DB::connection('oldrps')->table('rsc_well as wl')
+            ->select(
+                'wl.prospect_id',
+                'wl.wk_id as working_area_id',
+                'wl.wl_name as well_name',
+                'wl.wl_latitude as latitude',
+                'wl.wl_longitude as longitude',
+                'wl.wl_type as well_type',
+                'wl.wl_status as well_status',
+                'wl.wl_integrity as well_integrity',
+                'wl.wl_date_complete as well_date',
+                'wl.wl_shore as shore',
+                'wl.wl_terrain as terrain',
+                'wl.wl_target_depth_tvd as target_depth_tvd',
+                'wl.wl_target_depth_md as target_depth_md',
+                'wl.wl_actual_depth as actual_depth',
+                'wl.wl_number_mdt as mdt_sample',
+                'wl.wl_number_rft as rft_sample',
+                'wl.wl_res_pressure as initial_pressure',
+                'wl.wl_last_pressure as last_pressure',
+                'wl.wl_pressure_gradient as gradient_pressure',
+                'wl.wl_last_temp as reservoir_temp',
+                'wl.wl_result as wl_result',
+
+                'wz.zone_clastic_p50_thickness as clastic_gross_reservoir',
+                'wz.zone_clastic_p90_por as clastic_por_p90',
+                'wz.zone_clastic_p50_por as clastic_por_p50',
+                'wz.zone_clastic_p10_por as clastic_por_p10',
+                'wz.zone_clastic_p90_satur as clastic_sat_p90',
+                'wz.zone_clastic_p50_satur as clastic_sat_p50',
+                'wz.zone_clastic_p10_satur as clastic_sat_p10',
+                'wz.zone_carbo_p50_thickness as carbo_gross_reservoir',
+                'wz.zone_carbo_p90_por as carbo_por_p90',
+                'wz.zone_carbo_p50_por as carbo_por_p50',
+                'wz.zone_carbo_p10_por as carbo_por_p10',
+                'wz.zone_carbo_p90_satur as carbo_sat_p90',
+                'wz.zone_carbo_p50_satur as carbo_sat_p50',
+                'wz.zone_carbo_p10_satur as carbo_sat_p10',
+                'wz.zone_fvf_oil_p50 as boi',
+                'wz.zone_fvf_gas_p50 as bgi',
+                'wz.zone_fluid_ratio as gas_oil_ratio',
+                'wz.zone_hc_oil_show as oil_show',
+                'wz.zone_hc_gas_show as gas_show',
+                'wz.zone_hc_water_cut as well_water_cut',
+                'wz.zone_hc_water_gwc as water_depth_gwc',
+                'wz.zone_hc_water_owc as water_depth_owc',
+                'wz.zone_rock_method as rock_sampling_method',
+                'wz.zone_rock_petro as petrography_analysis',
+                'wz.zone_rock_total_core as total_core_barrel',
+                'wz.zone_rock_barrel_equal as one_core_barrel',
+                'wz.zone_rock_barrel as total_barrel_data',
+                'wz.zone_rock_preservative as preservative_core',
+                'wz.zone_rock_routine as routine_core',
+                'wz.zone_rock_scal as scal_data',
+                'wz.zone_fluid_pressure as seperator_pressure',
+                'wz.zone_fluid_temp as seperator_temp',
+                'wz.zone_fluid_tubing as tubing_pressure',
+                'wz.zone_fluid_casing as casing_pressure',
+                'wz.zone_fluid_grv_oil as oil_gravity',
+                'wz.zone_fluid_grv_gas as gas_gravity',
+                'wz.zone_fluid_grv_conden as condensate_gravity',
+                'wl.wl_submit_date as created_at'
+            )
+            ->join('rsc_wellzone as wz', 'wz.wl_id', '=', 'wl.wl_id')
+            ->whereNotIn('wl.wk_id', ['WK0000', 'WK9999'])
+            ->where('wl.prospect_type', '=', 'postdrill')
+            ->groupBy('wl.wl_name')
+            ->get();
+
         $originalWellPostdrillIds = [];
 
         foreach ($postdrillWells as $well) {
@@ -549,13 +444,6 @@ class ResourcesSeeder extends Seeder
 
             $reservoirProperty = $this->clasticVsCarbonate($well);
             $well->well_name = $this->nameCleaner($well->well_name);
-
-            // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
-            if ($well->working_area_id != 'WK1047') {
-                $basinName = DB::table('basin_working_area')
-                    ->where('working_area_id', $well->working_area_id)
-                    ->value('basin_name');
-            }
 
             // Well result
             if ($well->wl_result === 'Oil+Gas') {
@@ -570,8 +458,7 @@ class ResourcesSeeder extends Seeder
 
             $wellId = DB::table('postdrill_well')->insertGetId([
                 'working_area_id' => $well->working_area_id,
-                'basin_name' => $basinName,
-                'well_name' => $well->well_name,
+                'well_name' => $this->nameCleaner($well->well_name),
                 'latitude' => $well->latitude,
                 'longitude' => $well->longitude,
                 'well_type' => $well->well_type,
@@ -591,6 +478,7 @@ class ResourcesSeeder extends Seeder
                 'reservoir_temp' => $well->reservoir_temp,
                 'well_result' => $well->wl_result,
                 'reservoir_property' => $reservoirProperty['property'],
+                'gross_reservoir' => $reservoirProperty['grossReservoir'],
                 'por_p90' => $reservoirProperty['porP90'],
                 'por_p50' => $reservoirProperty['porP50'],
                 'por_p10' => $reservoirProperty['porP10'],
@@ -626,14 +514,52 @@ class ResourcesSeeder extends Seeder
             $originalWellPostdrillIds[$well->prospect_id] = $wellId;
         }
 
-        // Postdrill seeder
+        /**
+         * Postdrill Seeder
+         */
+        $postdrills = DB::connection('oldrps')->table('rsc_prospect as pr')
+            ->join('rsc_play as pl', 'pl.play_id', '=', 'pr.play_id')
+            ->leftJoin('rsc_gcf as gcf', 'pr.gcf_id', '=', 'gcf.gcf_id')
+            ->leftJoin('rsc_seismic_2d as s2', 'pr.prospect_id', '=', 's2.prospect_id')
+            ->leftJoin('rsc_seismic_3d as s3', 'pr.prospect_id', '=', 's3.prospect_id')
+            ->leftJoin('rsc_electromagnetic as elec', 'pr.prospect_id', '=', 'elec.prospect_id')
+            ->leftJoin('rsc_geochemistry as chem', 'pr.prospect_id', '=', 'chem.prospect_id')
+            ->leftJoin('rsc_geological as geo', 'pr.prospect_id', '=', 'geo.prospect_id')
+            ->leftJoin('rsc_gravity as grav', 'pr.prospect_id', '=', 'grav.prospect_id')
+            ->leftJoin('rsc_resistivity as resi', 'pr.prospect_id', '=', 'resi.prospect_id')
+            ->leftJoin('rsc_other as oter', 'pr.prospect_id', '=', 'oter.prospect_id')
+            ->leftJoin('adm_basin as b', 'pl.basin_id', '=', 'b.basin_id')
+            ->leftJoin('adm_province as p', 'pl.province_id', '=', 'p.province_id')
+            ->select(
+                'pr.prospect_id',
+                'pr.play_id as play_id',
+                'pl.wk_id as working_area_id',
+                'b.basin_name as basin_name',
+                'p.province_name as province_name',
+                'pr.structure_name as structure_name',
+                'pr.prospect_clarified as clarified',
+                'pr.prospect_date_initiate as initiate',
+                'pr.prospect_latitude as latitude',
+                'pr.prospect_longitude as longitude',
+                'pr.prospect_shore as shore',
+                'pr.prospect_terrain as terrain',
+                'pr.prospect_near_field as nearby_field',
+                'pr.prospect_near_infra_structure as nearby_infra',
+                'pr.prospect_submit_date as created_at',
+                'pr.prospect_is_deleted'
+            )
+            ->where('pr.prospect_type', '=', 'postdrill')
+            ->whereNotIn('pl.wk_id', ['WK0000', 'WK9999']);
+        $postdrills = $this->withGcf($postdrills);
+        $postdrills = $this->withProspectSurvey($postdrills)->get();
+
         foreach ($postdrills as $postdrill) {
             $gcfId = $this->gcfSave($postdrill);
             $surveyId = $this->prospectSurveySave($postdrill);
 
             if ($postdrill->prospect_is_deleted) {
                 $deletedAt = Carbon::parse($postdrill->created_at)
-                    ->addMonths(6)
+                    ->addMonths(3)
                     ->toDateTimeString();
                 $deleteReason = 'Delete status dari database lama';
             } else {
@@ -662,7 +588,7 @@ class ResourcesSeeder extends Seeder
                 'gcf_id' => $gcfId,
                 'basin_name' => $postdrill->basin_name,
                 'province_name' => $postdrill->province_name,
-                'structure_name' => $postdrill->structure_name,
+                'structure_name' => $this->nameCleaner($postdrill->structure_name),
                 'clarified' => $postdrill->clarified,
                 'initiate' => $postdrill->initiate,
                 'latitude' => $postdrill->latitude,
@@ -677,7 +603,128 @@ class ResourcesSeeder extends Seeder
             ]);
         }
 
-        // Tested well seeder
+        $originalDiscoveryIds = [];
+
+        /**
+         * Discovery Seeder
+         */
+        $discoveries = DB::connection('oldrps')->table('rsc_prospect as pr')
+            ->join('rsc_play as pl', 'pl.play_id', '=', 'pr.play_id')
+            ->leftJoin('rsc_gcf as gcf', 'pr.gcf_id', '=', 'gcf.gcf_id')
+            ->leftJoin('rsc_seismic_2d as s2', 'pr.prospect_id', '=', 's2.prospect_id')
+            ->leftJoin('rsc_seismic_3d as s3', 'pr.prospect_id', '=', 's3.prospect_id')
+            ->leftJoin('rsc_electromagnetic as elec', 'pr.prospect_id', '=', 'elec.prospect_id')
+            ->leftJoin('rsc_geochemistry as chem', 'pr.prospect_id', '=', 'chem.prospect_id')
+            ->leftJoin('rsc_geological as geo', 'pr.prospect_id', '=', 'geo.prospect_id')
+            ->leftJoin('rsc_gravity as grav', 'pr.prospect_id', '=', 'grav.prospect_id')
+            ->leftJoin('rsc_resistivity as resi', 'pr.prospect_id', '=', 'resi.prospect_id')
+            ->leftJoin('rsc_other as oter', 'pr.prospect_id', '=', 'oter.prospect_id')
+            ->leftJoin('adm_basin as b', 'pl.basin_id', '=', 'b.basin_id')
+            ->leftJoin('adm_province as p', 'pl.province_id', '=', 'p.province_id')
+            ->select(
+                'pr.prospect_id',
+                'pr.play_id as play_id',
+                'pl.wk_id as working_area_id',
+                'b.basin_name as basin_name',
+                'p.province_name as province_name',
+                'pr.structure_name as structure_name',
+                'pr.prospect_clarified as clarified',
+                'pr.prospect_date_initiate as initiate',
+                'pr.prospect_latitude as latitude',
+                'pr.prospect_longitude as longitude',
+                'pr.prospect_shore as shore',
+                'pr.prospect_terrain as terrain',
+                'pr.prospect_near_field as nearby_field',
+                'pr.prospect_near_infra_structure as nearby_infra',
+                'pr.prospect_submit_date as created_at',
+                'pr.prospect_is_deleted'
+            )
+            ->where('pr.prospect_type', '=', 'discovery')
+            ->whereNotIn('pl.wk_id', ['WK0000', 'WK9999']);
+        $discoveries = $this->withGcf($discoveries);
+        $discoveries = $this->withProspectSurvey($discoveries)->get();
+
+        foreach ($discoveries as $discovery) {
+            $gcfId = $this->gcfSave($discovery);
+            $surveyId = $this->prospectSurveySave($discovery);
+
+            if ($discovery->prospect_is_deleted) {
+                $deletedAt = Carbon::parse($discovery->created_at)
+                    ->addMonths(3)
+                    ->toDateTimeString();
+                $deleteReason = 'Delete status dari database lama';
+            } else {
+                $deletedAt = null;
+                $deleteReason = null;
+            }
+
+            // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
+            if ($play->working_area_id != 'WK1047') {
+                $play->basin_name = DB::table('basin_working_area')
+                    ->where('working_area_id', $play->working_area_id)
+                    ->value('basin_name');
+            }
+
+            $discoveryId = DB::table('discovery')->insertGetId([
+                'working_area_id' => $discovery->working_area_id,
+                'play_id' => $originalPlayIds[$discovery->play_id],
+                'prospect_survey_id' => $surveyId,
+                'gcf_id' => $gcfId,
+                'basin_name' => $discovery->basin_name,
+                'province_name' => $discovery->province_name,
+                'structure_name' => $this->nameCleaner($discovery->structure_name),
+                'clarified' => $discovery->clarified,
+                'initiate' => $discovery->initiate,
+                'latitude' => $discovery->latitude,
+                'longitude' => $discovery->longitude,
+                'shore' => $discovery->shore,
+                'terrain' => $discovery->terrain,
+                'nearby_field' => $discovery->nearby_field,
+                'nearby_infra' => $discovery->nearby_infra,
+                'created_at' => $discovery->created_at,
+                'deleted_at' => $deletedAt,
+                'delete_reason' => $deleteReason,
+            ]);
+
+            $originalDiscoveryIds[$discovery->prospect_id] = $discoveryId;
+        }
+
+        /**
+         * Tested Well (Discovery Well) Seeder
+         */
+        $testedWell = DB::connection('oldrps')->table('rsc_well as wl')
+            ->select(
+                'wl.wl_id as well_id',
+                'wl.prospect_id',
+                'wl.wk_id as working_area_id',
+                'wl.wl_name as well_name',
+                'wl.wl_formation as formation_name',
+                'wl.wl_latitude as latitude',
+                'wl.wl_longitude as longitude',
+                'wl.wl_type as well_type',
+                'wl.wl_status as well_status',
+                'wl.wl_integrity as well_integrity',
+                'wl.wl_date_complete as well_date',
+                'wl.wl_shore as shore',
+                'wl.wl_terrain as terrain',
+                'wl.wl_target_depth_tvd as target_depth_tvd',
+                'wl.wl_target_depth_md as target_depth_md',
+                'wl.wl_actual_depth as actual_depth',
+                'wl.wl_number_mdt as mdt_sample',
+                'wl.wl_number_rft as rft_sample',
+                'wl.wl_res_pressure as initial_pressure',
+                'wl.wl_last_pressure as last_pressure',
+                'wl.wl_pressure_gradient as gradient_pressure',
+                'wl.wl_last_temp as reservoir_temp',
+                'wl.wl_result as well_result',
+                'wl.wl_submit_date as created_at'
+            )
+            ->leftJoin('rsc_wellzone as wz', 'wz.wl_id', '=', 'wl.wl_id')
+            ->whereNotIn('wl.wk_id', ['WK0000', 'WK9999'])
+            ->where('wl.prospect_type', '=', 'discovery')
+            ->groupBy('wl.wl_name')
+            ->get();
+
         $originalWellDiscoveryIds = [];
 
         foreach ($testedWell as $well) {
@@ -687,27 +734,19 @@ class ResourcesSeeder extends Seeder
 
             $well->well_name = $this->nameCleaner($well->well_name);
 
-            // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
-            if ($well->working_area_id != 'WK1047') {
-                $basinName = DB::table('basin_working_area')
-                    ->where('working_area_id', $well->working_area_id)
-                    ->value('basin_name');
-            }
-
             // Well result
-            if ($well->wl_result === 'Oil+Gas') {
-                $well->wl_result = 'Oil, Gas';
-            } elseif ($well->wl_result === 'Condensate+Gas') {
-                $well->wl_result = 'Gas, Condensate';
-            } elseif ($well->wl_result === 'Oil+Gas+Condensate') {
-                $well->wl_result = 'Oil, Gas, Condensate';
-            } elseif ($well->wl_result === 'Oil+Condensate') {
-                $well->wl_result = 'Oil, Condensate';
+            if ($well->well_result === 'Oil+Gas') {
+                $well->well_result = 'Oil, Gas';
+            } elseif ($well->well_result === 'Condensate+Gas') {
+                $well->well_result = 'Gas, Condensate';
+            } elseif ($well->well_result === 'Oil+Gas+Condensate') {
+                $well->well_result = 'Oil, Gas, Condensate';
+            } elseif ($well->well_result === 'Oil+Condensate') {
+                $well->well_result = 'Oil, Condensate';
             }
 
             $wellId = DB::table('tested_well')->insertGetId([
                 'working_area_id' => $well->working_area_id,
-                'basin_name' => $basinName,
                 'well_name' => $well->well_name,
                 'latitude' => $well->latitude,
                 'longitude' => $well->longitude,
@@ -726,102 +765,124 @@ class ResourcesSeeder extends Seeder
                 'last_pressure' => $well->last_pressure,
                 'gradient_pressure' => $well->gradient_pressure,
                 'reservoir_temp' => $well->reservoir_temp,
+                'created_at' => $well->created_at,
             ]);
 
-            $originalWellDiscoveryIds[$well->prospect_id] = $wellId;
-        }
+            $originalWellDiscoveryIds[$well->well_id] = $wellId;
 
-        // Tested well zone seeder
-        foreach ($testedWellZone as $zone) {
-            // TODO :
-            // 1. Buat zone name baru jika kosong
-            // 2. Carikan Play dari masing2 struktur, namun cek dulu
-            //    jika targeted formation name
-            // 3. Zone result harus diisi, jika kosong ambil dari
-            //    oil dan gas show, fvf
+            $testedWellZones = DB::connection('oldrps')->table('rsc_wellzone as wz')
+                ->select(
+                    'wz.zone_name',
+                    'wz.zone_prod_res_radius as radius_investigation',
+                    'wz.zone_thickness',
+                    'wz.zone_result',
+                    'wz.zone_clastic_p50_thickness as clastic_gross_reservoir',
+                    'wz.zone_clastic_p90_por as clastic_por_p90',
+                    'wz.zone_clastic_p50_por as clastic_por_p50',
+                    'wz.zone_clastic_p10_por as clastic_por_p10',
+                    'wz.zone_clastic_p90_satur as clastic_sat_p90',
+                    'wz.zone_clastic_p50_satur as clastic_sat_p50',
+                    'wz.zone_clastic_p10_satur as clastic_sat_p10',
+                    'wz.zone_carbo_p50_thickness as carbo_gross_reservoir',
+                    'wz.zone_carbo_p90_por as carbo_por_p90',
+                    'wz.zone_carbo_p50_por as carbo_por_p50',
+                    'wz.zone_carbo_p10_por as carbo_por_p10',
+                    'wz.zone_carbo_p90_satur as carbo_sat_p90',
+                    'wz.zone_carbo_p50_satur as carbo_sat_p50',
+                    'wz.zone_carbo_p10_satur as carbo_sat_p10',
+                    'wz.zone_fvf_oil_p50 as boi',
+                    'wz.zone_fvf_gas_p50 as bgi',
+                    'wz.zone_fluid_ratio as gas_oil_ratio',
+                    'wz.zone_hc_oil_show as oil_show',
+                    'wz.zone_hc_gas_show as gas_show',
+                    'wz.zone_hc_water_cut as well_water_cut',
+                    'wz.zone_hc_water_gwc as water_depth_gwc',
+                    'wz.zone_hc_water_owc as water_depth_owc',
+                    'wz.zone_rock_method as rock_sampling_method',
+                    'wz.zone_rock_petro as petrography_analysis',
+                    'wz.zone_rock_total_core as total_core_barrel',
+                    'wz.zone_rock_barrel_equal as one_core_barrel',
+                    'wz.zone_rock_barrel as total_barrel_data',
+                    'wz.zone_rock_preservative as preservative_core',
+                    'wz.zone_rock_routine as routine_core',
+                    'wz.zone_rock_scal as scal_data',
+                    'wz.zone_fluid_pressure as seperator_pressure',
+                    'wz.zone_fluid_temp as seperator_temp',
+                    'wz.zone_fluid_tubing as tubing_pressure',
+                    'wz.zone_fluid_casing as casing_pressure',
+                    'wz.zone_fluid_grv_oil as oil_gravity',
+                    'wz.zone_fluid_grv_gas as gas_gravity',
+                    'wz.zone_fluid_grv_conden as condensate_gravity'
+                )
+                ->where('wz.wl_id', '=', $well->well_id)
+                ->get();
 
-            // change this
-            if ($well->well_name === '----') {
-                continue;
+            $zoneNameSequence = 0;
+            foreach ($testedWellZones as $zone) {
+                // TODO :
+                // 1. Buat zone name baru jika kosong
+                // 2. Carikan Play dari masing2 struktur, namun cek dulu
+                //    jika targeted formation name
+                // 3. Zone result harus diisi, jika kosong ambil dari
+                //    oil dan gas show, fvf
+
+                if (trim($zone->zone_name) === '') {
+                    $zoneNameSequence = $zoneNameSequence + 1;
+                    $zone->zone_name = $well->well_name . ' ZN' . $zoneNameSequence;
+                } else {
+                    $zone->zone_name = $this->nameCleaner($zone->zone_name);
+                }
+
+                if (empty($zone->zone_result)) {
+                    if ($well->well_result === 'Condensate+Gas') {
+                        $zone->zone_result = 'Gas';
+                    } elseif ($well->well_result === 'Oil+Condensate') {
+                        $zone->zone_result = 'Oil';
+                    }
+                }
+
+                $reservoirProperty = $this->clasticVsCarbonate($zone);
+
+                DB::table('tested_well_zone')->insert([
+                    'tested_well_id' => $wellId,
+                    'zone_name' => $zone->zone_name,
+                    'zone_result' => $zone->zone_result,
+                    'zone_formation' => $well->formation_name,
+                    'radius_investigation' => $zone->radius_investigation,
+                    'zone_thickness' => $zone->zone_thickness,
+                    'reservoir_property' => $reservoirProperty['property'],
+                    'gross_reservoir' => $reservoirProperty['grossReservoir'],
+                    'por_p90' => $reservoirProperty['porP90'],
+                    'por_p50' => $reservoirProperty['porP50'],
+                    'por_p10' => $reservoirProperty['porP10'],
+                    'sat_p90' => $reservoirProperty['satP90'],
+                    'sat_p50' => $reservoirProperty['satP90'],
+                    'sat_p10' => $reservoirProperty['satP90'],
+                    'boi' => $zone->boi,
+                    'bgi' => $zone->bgi,
+                    'gas_oil_ratio' => $zone->gas_oil_ratio,
+                    'oil_show' => $zone->oil_show,
+                    'gas_show' => $zone->gas_show,
+                    'well_water_cut' => $zone->well_water_cut,
+                    'water_depth_gwc' => $zone->water_depth_gwc,
+                    'water_depth_owc' => $zone->water_depth_owc,
+                    'rock_sampling_method' => $zone->rock_sampling_method,
+                    'petrography_analysis' => $zone->petrography_analysis,
+                    'total_core_barrel' => $zone->total_core_barrel,
+                    'one_core_barrel' => $zone->one_core_barrel,
+                    'total_barrel_data' => $zone->total_barrel_data,
+                    'preservative_core' => $zone->preservative_core,
+                    'routine_core' => $zone->routine_core,
+                    'scal_data' => $zone->scal_data,
+                    'seperator_pressure' => $zone->seperator_pressure,
+                    'seperator_temp' => $zone->seperator_temp,
+                    'tubing_pressure' => $zone->tubing_pressure,
+                    'casing_pressure' => $zone->casing_pressure,
+                    'oil_gravity' => $zone->oil_gravity,
+                    'gas_gravity' => $zone->gas_gravity,
+                    'condensate_gravity' => $zone->condensate_gravity,
+                ]);
             }
-
-            $reservoirProperty = $this->clasticVsCarbonate($well);
-            $well->well_name = $this->nameCleaner($well->well_name);
-
-            // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
-            if ($well->working_area_id != 'WK1047') {
-                $basinName = DB::table('basin_working_area')
-                    ->where('working_area_id', $well->working_area_id)
-                    ->value('basin_name');
-            }
-
-            // Zone result
-            if ($zone->wl_result === 'Oil+Gas') {
-                $zone->wl_result = 'Oil, Gas';
-            } elseif ($zone->wl_result === 'Condensate+Gas') {
-                $zone->wl_result = 'Gas, Condensate';
-            } elseif ($zone->wl_result === 'Oil+Gas+Condensate') {
-                $zone->wl_result = 'Oil, Gas, Condensate';
-            } elseif ($zone->wl_result === 'Oil+Condensate') {
-                $zone->wl_result = 'Oil, Condensate';
-            }
-
-            $wellId = DB::table('tested_well_zone')->insertGetId([
-                'tested_well_id' => $originalWellDiscoveryIds[$zone->well_id],
-                'basin_name' => $basinName,
-                'zone_name' => $zoneName,
-                'latitude' => $zone->latitude,
-                'longitude' => $zone->longitude,
-                'well_type' => $zone->well_type,
-                'well_status' => $zone->well_status,
-                'well_integrity' => $zone->well_integrity,
-                'well_date' => $zone->well_date,
-                'shore' => $zone->shore,
-                'terrain' => $zone->terrain,
-                'target_depth_tvd' => $zone->target_depth_tvd,
-                'target_depth_md' => $zone->target_depth_md,
-                'actual_depth' => $zone->actual_depth,
-                'mdt_sample' => $zone->mdt_sample,
-                'rft_sample' => $zone->rft_sample,
-                'initial_pressure' => $zone->initial_pressure,
-                'last_pressure' => $zone->last_pressure,
-                'gradient_pressure' => $zone->gradient_pressure,
-                'reservoir_temp' => $zone->reservoir_temp,
-                'well_result' => $zone->wl_result,
-                'reservoir_property' => $reservoirProperty['property'],
-                'por_p90' => $reservoirProperty['porP90'],
-                'por_p50' => $reservoirProperty['porP50'],
-                'por_p10' => $reservoirProperty['porP10'],
-                'sat_p90' => $reservoirProperty['satP90'],
-                'sat_p50' => $reservoirProperty['satP90'],
-                'sat_p10' => $reservoirProperty['satP90'],
-                'boi' => $zone->boi,
-                'bgi' => $zone->bgi,
-                'gas_oil_ratio' => $zone->gas_oil_ratio,
-                'oil_show' => $zone->oil_show,
-                'gas_show' => $zone->gas_show,
-                'well_water_cut' => $zone->well_water_cut,
-                'water_depth_gwc' => $zone->water_depth_gwc,
-                'water_depth_owc' => $zone->water_depth_owc,
-                'rock_sampling_method' => $zone->rock_sampling_method,
-                'petrography_analysis' => $zone->petrography_analysis,
-                'total_core_barrel' => $zone->total_core_barrel,
-                'one_core_barrel' => $zone->one_core_barrel,
-                'total_barrel_data' => $zone->total_barrel_data,
-                'preservative_core' => $zone->preservative_core,
-                'routine_core' => $zone->routine_core,
-                'scal_data' => $zone->scal_data,
-                'seperator_pressure' => $zone->seperator_pressure,
-                'seperator_temp' => $zone->seperator_temp,
-                'tubing_pressure' => $zone->tubing_pressure,
-                'casing_pressure' => $zone->casing_pressure,
-                'oil_gravity' => $zone->oil_gravity,
-                'gas_gravity' => $zone->gas_gravity,
-                'condensate_gravity' => $zone->condensate_gravity,
-                'created_at' => $zone->created_at,
-            ]);
-
-            $originalWellPostdrillIds[$well->prospect_id] = $wellId;
         }
     }
 
@@ -1184,6 +1245,7 @@ class ResourcesSeeder extends Seeder
 
         if ($totalClastic >= $totalCarbo) {
             $reservoirProperty = 'Clastic';
+            $grossReservoir = $data->clastic_gross_reservoir;
             $porP90 = $data->clastic_por_p90;
             $porP50 = $data->clastic_por_p50;
             $porP10 = $data->clastic_por_p10;
@@ -1192,6 +1254,7 @@ class ResourcesSeeder extends Seeder
             $satP10 = $data->clastic_sat_p10;
         } elseif ($totalCarbo >= $totalClastic) {
             $reservoirProperty = 'Carbonate';
+            $grossReservoir = $data->carbo_gross_reservoir;
             $porP90 = $data->carbo_por_p90;
             $porP50 = $data->carbo_por_p50;
             $porP10 = $data->carbo_por_p10;
@@ -1199,7 +1262,8 @@ class ResourcesSeeder extends Seeder
             $satP50 = $data->carbo_sat_p50;
             $satP10 = $data->carbo_sat_p10;
         } else {
-            $reservoirProperty = 'Carbonate';
+            $reservoirProperty = 'Clastic';
+            $grossReservoir = $data->clastic_gross_reservoir;
             $porP90 = $data->clastic_por_p90;
             $porP50 = $data->clastic_por_p50;
             $porP10 = $data->clastic_por_p10;
@@ -1210,6 +1274,7 @@ class ResourcesSeeder extends Seeder
 
         return [
             'property' => $reservoirProperty,
+            'grossReservoir' => $grossReservoir,
             'porP90' => $porP90,
             'porP50' => $porP50,
             'porP10' => $porP10,
@@ -1223,7 +1288,7 @@ class ResourcesSeeder extends Seeder
     {
         $name = trim(strtoupper($name));
         $name = str_replace('#', '', $name);
-        $name = str_replace('_', ' ', $name);
+        $name = str_replace('_', '-', $name);
         $name = str_replace(' - ', '-', $name);
 
         return $name;

@@ -508,8 +508,6 @@ class CreateInitialTables extends Migration
             $table->increments('id');
             $table->string('working_area_id', 15);
             $table->foreign('working_area_id')->references('id')->on('working_area');
-            $table->string('basin_name', 100);
-            $table->foreign('basin_name')->references('basin_name')->on('basin')->onUpdate('cascade');
 
             $table->string('well_name', 100);
             $table->string('latitude', 100);
@@ -545,6 +543,9 @@ class CreateInitialTables extends Migration
             $table->float('bgi')->nullable();
             $table->float('gas_oil_ratio')->nullable();
 
+            $table->string('gross_reservoir', 100)->nullable()->comment(
+                'Gross reservoir thickness'
+            );
             // Hydrocarbon indication.
             $table->string('oil_show', 100)->nullable();
             $table->string('gas_show', 100)->nullable();
@@ -654,8 +655,6 @@ class CreateInitialTables extends Migration
             $table->increments('id');
             $table->string('working_area_id', 15);
             $table->foreign('working_area_id')->references('id')->on('working_area');
-            $table->string('basin_name', 100);
-            $table->foreign('basin_name')->references('basin_name')->on('basin')->onUpdate('cascade');
 
             $table->string('well_name', 100);
             $table->string('latitude', 100);
@@ -675,18 +674,24 @@ class CreateInitialTables extends Migration
             $table->string('last_pressure', 100)->nullable();
             $table->string('gradient_pressure', 100)->nullable();
             $table->string('reservoir_temp', 100)->nullable();
+
+            $table->dateTime('created_at');
+            $table->dateTime('updated_at')->nullable();
+            $table->dateTime('deleted_at')->nullable();
+            $table->text('update_reason')->nullable();
+            $table->text('delete_reason')->nullable();
         });
 
         Schema::create('tested_well_zone', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('tested_well_id');
             $table->foreign('tested_well_id')->references('id')->on('tested_well');
-            $table->unsignedInteger('play_id');
-            $table->foreign('play_id')->references('id')->on('play');
 
             // General data mandatory.
             $table->string('zone_name', 100);
-            $table->string('zone_result', 100);
+            $table->string('zone_result', 100)->nullable();
+            $table->string('zone_formation', 100);
+            $table->string('zone_formation_level', 100)->nullable();
             $table->float('radius_investigation');
             $table->float('zone_thickness');
             $table->string('reservoir_property')->comment(
@@ -706,7 +711,7 @@ class CreateInitialTables extends Migration
             $table->string('gross_reservoir', 100)->nullable()->comment(
                 'Gross reservoir thickness'
             );
-            $table->string('net_gross', 100)->nullable()->commenet('Net to gross');
+            $table->string('net_gross', 100)->nullable()->comment('Net to gross');
             $table->string('test_duration', 100)->nullable();
             $table->string('initial_flow', 100)->nullable();
             $table->string('initial_shut_in', 100)->nullable();
