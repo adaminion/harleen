@@ -12,10 +12,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // no mass assigned rule
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        DB::table('user')->insert([
+            'username' => 'dev',
+            'password' => bcrypt('a'),
+            'role' => 'developer',
+        ]);
 
-        Model::reguard();
+        DB::table('user')->insert([
+            'username' => 'wk1001',
+            'password' => bcrypt('a'),
+            'role' => 'contractor',
+        ]);
+
+        $this->call(GeneralSeeder::class);
+        $this->call(ResourcesSeeder::class);
     }
 }
