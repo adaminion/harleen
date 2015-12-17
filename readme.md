@@ -7,3 +7,5 @@
 - Added GeneralSeeder for general information about administration.
 - Added ResourcesSeeder for Play, Lead, and Prospect.
 - Changed timezone to Asia/Jakarta.
+- Added old database config with name 'oldrps'.
+- Removed default user and password migration.
