@@ -12,3 +12,5 @@
 - Removed Play ID on tested well zone, changed with formation name.
 - Added tested well and tested well zone migration.
 - Added discovery tested well zone migration.
+- Added Semantic UI for CSS framework.
+- Added getLogin in AuthController.
