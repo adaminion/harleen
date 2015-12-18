@@ -725,8 +725,6 @@ class ResourcesSeeder extends Seeder
             ->groupBy('wl.wl_name')
             ->get();
 
-        $originalWellDiscoveryIds = [];
-
         foreach ($testedWell as $well) {
             if ($well->well_name === '----') {
                 continue;
@@ -767,8 +765,6 @@ class ResourcesSeeder extends Seeder
                 'reservoir_temp' => $well->reservoir_temp,
                 'created_at' => $well->created_at,
             ]);
-
-            $originalWellDiscoveryIds[$well->well_id] = $wellId;
 
             $testedWellZones = DB::connection('oldrps')->table('rsc_wellzone as wz')
                 ->select(
@@ -819,13 +815,6 @@ class ResourcesSeeder extends Seeder
 
             $zoneNameSequence = 0;
             foreach ($testedWellZones as $zone) {
-                // TODO :
-                // 1. Buat zone name baru jika kosong
-                // 2. Carikan Play dari masing2 struktur, namun cek dulu
-                //    jika targeted formation name
-                // 3. Zone result harus diisi, jika kosong ambil dari
-                //    oil dan gas show, fvf
-
                 if (trim($zone->zone_name) === '') {
                     $zoneNameSequence = $zoneNameSequence + 1;
                     $zone->zone_name = $well->well_name . ' ZN' . $zoneNameSequence;
@@ -843,7 +832,7 @@ class ResourcesSeeder extends Seeder
 
                 $reservoirProperty = $this->clasticVsCarbonate($zone);
 
-                DB::table('tested_well_zone')->insert([
+                $testedWellZoneId = DB::table('tested_well_zone')->insertGetId([
                     'tested_well_id' => $wellId,
                     'zone_name' => $zone->zone_name,
                     'zone_result' => $zone->zone_result,
@@ -882,6 +871,13 @@ class ResourcesSeeder extends Seeder
                     'gas_gravity' => $zone->gas_gravity,
                     'condensate_gravity' => $zone->condensate_gravity,
                 ]);
+
+                if (!empty($well->prospect_id)) {
+                    DB::table('discovery_tested_well_zone')->insert([
+                        'tested_well_zone_id' => $testedWellZoneId,
+                        'discovery_id' => $originalDiscoveryIds[$well->prospect_id],
+                    ]);
+                }
             }
         }
     }
