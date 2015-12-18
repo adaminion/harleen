@@ -15,7 +15,7 @@
       min-height: 100%;
     }
     body {
-      background-color: #34495e;
+      background-color: #78909C;
       margin-top: 60px;
       margin-bottom: 150px;
     }
@@ -64,7 +64,7 @@
         @elseif (request()->user()->role === 'administrator')
           <a class="navbar-brand" href="{{ url('/') }}">Administrator</a>
         @elseif (request()->user()->role === 'developer')
-          <a class="navbar-brand" href="{{ url('/') }}">DEV MODE</a>
+          <a class="navbar-brand" href="{{ url('/') }}">Dev.</a>
         @endif
       </div>
 
