@@ -14,3 +14,5 @@
 Route::get('/', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
+
+Route::get('developer', 'DeveloperController@index');

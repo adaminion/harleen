@@ -18,3 +18,6 @@
 - Added login.blade.php view template.
 - Added postLogin and getLogout in AuthController.
 - Changed model User tables to 'user'.
+- Added master.blade.php as main layout.
+- Added AdministratorController and administrator index layout.
+- Added DeveloperController and developer index layout
