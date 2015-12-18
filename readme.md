@@ -21,3 +21,4 @@
 - Added master.blade.php as main layout.
 - Added AdministratorController and administrator index layout.
 - Added DeveloperController and developer index layout
+- Removed Semantic UI, go for Bootstrap.

@@ -1,76 +1,110 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Revitalisasi Pelaporan Sumberdaya | SKK Migas</title>
   <link rel="icon" href="{{ asset('favicon.ico') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/semantic.min.css') }}">
+  <title>Revitalisasi Pelaporan Sumberdaya</title>
+
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
   <style type="text/css">
-  body {
-    background-color : #fff;
-  }
-  .ui.menu .item img.logo {
-    margin-right: 1.5em;
-  }
-  .main.container {
-    margin-top: 7em;
-  }
-  .wireframe {
-    margin-top: 2em;
-  }
-  .ui.footer.segment {
-    margin: 5em 0em 0em;
-    padding: 5em 0em;
-  }
+    html {
+      position: relative;
+      min-height: 100%;
+    }
+    body {
+      margin-top: 60px;
+      margin-bottom: 60px;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #fff;
+    }
+    body > .container {
+      padding: 60px 15px 0;
+    }
+    .container .text-muted {
+      margin: 20px 0;
+    }
+    .footer > .container {
+      padding-right: 15px;
+      padding-left: 15px;
+    }
   </style>
   @yield('css')
 </head>
 
 <body>
-  <div class="ui fixed menu">
-    <div class="ui container">
-      <a href="#" class="header item">
-        <img class="logo" src="{{ asset('img/logo-skkmigas.png') }}">
-        WKNAME
-      </a>
-      <div class="ui simple dropdown item">
-        Resources <i class="dropdown icon"></i>
-        <div class="menu">
-          <a class="item" href="#">Play</a>
-          <a class="item" href="#">Lead</a>
-          <a class="item" href="#">Drillable</a>
-          <a class="item" href="#">Postdrill</a>
-          <a class="item" href="#">Discovery</a>
-          <a class="item" href="#">Well Postdrill</a>
-          <a class="item" href="#">Well Discovery</a>
-        </div>
-        <a href="#" class="item">Summary</a>
-        <a href="#" class="item">Upload</a>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed"
+                data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        @if (request()->user()->role === 'contractor')
+          <a class="navbar-brand" href="{{ url('/') }}">Contractor</a>
+        @elseif (request()->user()->role === 'administrator')
+          <a class="navbar-brand" href="{{ url('/') }}">Administrator</a>
+        @elseif (request()->user()->role === 'developer')
+          <a class="navbar-brand" href="{{ url('/') }}">We GUCCI, boys!</a>
+        @endif
+      </div>
+
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+          @if (request()->user()->role === 'contractor')
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                Resources <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('play') }}">Play</a></li>
+                <li><a href="{{ url('lead') }}">Lead</a></li>
+                <li><a href="{{ url('drillable') }}">Drillable</a></li>
+                <li><a href="{{ url('postdrill') }}">Postdrill</a></li>
+                <li><a href="{{ url('postdrill') }}">Postdrill Well</a></li>
+                <li><a href="{{ url('discovery') }}">Discovery</a></li>
+                <li><a href="{{ url('discovery') }}">Discovery Well</a></li>
+              </ul>
+            </li>
+          @elseif (request()->user()->role === 'administrator')
+            <li><a href="{{ url('resources') }}">Resources</a></li>
+            <li><a href="{{ url('account') }}">Account</a></li>
+          @elseif (request()->user()->role === 'developer')
+            <li><a href="{{ url('resources') }}">Resources</a></li>
+            <li><a href="{{ url('developer/database') }}">Database</a></li>
+            <li><a href="{{ url('account') }}">Account</a></li>
+          @endif
+
+          <li><a href="{{ url('logout') }}">Logout</a></li>
+
+        </ul>
       </div>
     </div>
-  </div>
+  </nav>
 
-  <div class="ui main container">
-    <h1 class="ui header">The Page of Administrator</h1>
-  </div>
+  @yield('content')
 
-  <div class="ui inverted vertical footer segment">
-    <div class="ui center aligned container">
-      <img src="{{ asset('img/logo-skkmigas.png') }}" class="ui centered mini image">
-      <div class="ui horizontal inverted small divided link list">
-        <a class="item" href="#">Contact Us</a>
-        <a class="item" href="#">Terms and Conditions</a>
-        <a class="item" href="#">Privacy Policy</a>
-      </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted">&#64; 2011 - {{ date('Y') }} SKK Migas.</p>
     </div>
-  </div>
+  </footer>
 
-  <script src="{{ asset('js/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/semantic.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+  <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
   @yield('js')
 </body>
 </html>
