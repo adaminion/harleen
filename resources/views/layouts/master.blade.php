@@ -17,13 +17,13 @@
     body {
       background-color: #34495e;
       margin-top: 60px;
-      margin-bottom: 180px;
+      margin-bottom: 150px;
     }
     .footer {
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 180px;
+      height: 150px;
       background-color: #fff;
     }
     body > .container {
@@ -37,7 +37,7 @@
       padding-left: 15px;
     }
     .footer > .container > img {
-      margin-top: 30px;
+      margin-top: 25px;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -110,8 +110,8 @@
            alt="Logo SKK Migas" width="10%">
       <p class="text-muted">
         Copyright &copy; {{ date('Y') }} SKK Migas.
-        <a href="#">Site Map</a> |
-        <a href="#">Contact Us</a> |
+        <a href="#">Site Map</a> &middot;
+        <a href="#">Contact Us</a> &middot;
         <a href="#">Terms</a>
       </p>
     </div>

@@ -23,3 +23,4 @@
 - Added DeveloperController and developer index layout
 - Removed Semantic UI, go for Bootstrap.
 - Fixed footer with Bootstrap.
+- Fixed footer height size.
