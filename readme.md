@@ -14,3 +14,5 @@
 - Added discovery tested well zone migration.
 - Added Semantic UI for CSS framework.
 - Added getLogin in AuthController.
+- Added SKK Migas favicon.ico, logo, and RTOR.
+- Added login.blade.php view template.
