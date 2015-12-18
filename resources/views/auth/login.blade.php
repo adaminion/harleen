@@ -36,7 +36,7 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="username" placeholder="User name">
+              <input type="text" name="username" placeholder="Username">
             </div>
           </div>
           <div class="field">

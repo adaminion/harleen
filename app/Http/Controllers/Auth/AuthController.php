@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Auth;
+use Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -33,9 +35,42 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function getLogin()
     {
         return view('auth.login');
+    }
+
+    /**
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
+    public function postLogin()
+    {
+        $user = Request::get('username');
+        $pass = Request::get('password');
+
+        if (Auth::attempt(['username' => $user, 'password' => $pass])) {
+            $role = Auth::user()->role;
+
+            if ($role === 'contractor') {
+                return redirect()->intended('contractor');
+            } elseif ($role === 'administrator') {
+                return redirect()->intended('administrator');
+            } elseif ($role === 'developer') {
+                return redirect()->intended('developer');
+            }
+        } else {
+            return redirect()->intended('/')
+                ->withErrors(['login' => 'User and password do not match.']);
+        }
+    }
+
+    public function getLogou()
+    {
+        Auth::logout();
+        return redirect()->intended('/');
     }
 
     /**

@@ -16,3 +16,5 @@
 - Added getLogin in AuthController.
 - Added SKK Migas favicon.ico, logo, and RTOR.
 - Added login.blade.php view template.
+- Added postLogin and getLogout in AuthController.
+- Changed model User tables to 'user'.
