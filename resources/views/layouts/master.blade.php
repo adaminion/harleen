@@ -15,25 +15,32 @@
       min-height: 100%;
     }
     body {
+      background-color: #34495e;
       margin-top: 60px;
-      margin-bottom: 60px;
+      margin-bottom: 180px;
     }
     .footer {
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 60px;
+      height: 180px;
       background-color: #fff;
     }
     body > .container {
       padding: 60px 15px 0;
     }
     .container .text-muted {
-      margin: 20px 0;
+      margin: 15px 0;
     }
     .footer > .container {
       padding-right: 15px;
       padding-left: 15px;
+    }
+    .footer > .container > img {
+      margin-top: 30px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
   @yield('css')
@@ -57,7 +64,7 @@
         @elseif (request()->user()->role === 'administrator')
           <a class="navbar-brand" href="{{ url('/') }}">Administrator</a>
         @elseif (request()->user()->role === 'developer')
-          <a class="navbar-brand" href="{{ url('/') }}">We GUCCI, boys!</a>
+          <a class="navbar-brand" href="{{ url('/') }}">DEV MODE</a>
         @endif
       </div>
 
@@ -98,8 +105,15 @@
   @yield('content')
 
   <footer class="footer">
-    <div class="container">
-      <p class="text-muted">&#64; 2011 - {{ date('Y') }} SKK Migas.</p>
+    <div class="container text-center">
+      <img src="{{ asset('img/logo-skkmigas.png') }}" class="img-responsive"
+           alt="Logo SKK Migas" width="10%">
+      <p class="text-muted">
+        Copyright &copy; {{ date('Y') }} SKK Migas.
+        <a href="#">Site Map</a> |
+        <a href="#">Contact Us</a> |
+        <a href="#">Terms</a>
+      </p>
     </div>
   </footer>
 
