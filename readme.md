@@ -25,3 +25,6 @@
 - Fixed footer with Bootstrap.
 - Fixed footer height size.
 - Changed body background color to be darker.
+
+## Changelog 0.2
+- Added ContractorController.
