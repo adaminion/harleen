@@ -86,16 +86,38 @@
                 <li><a href="{{ url('discovery') }}">Discovery Well</a></li>
               </ul>
             </li>
-          @elseif (request()->user()->role === 'administrator')
-            <li><a href="{{ url('resources') }}">Resources</a></li>
-            <li><a href="{{ url('account') }}">Account</a></li>
-          @elseif (request()->user()->role === 'developer')
-            <li><a href="{{ url('resources') }}">Resources</a></li>
-            <li><a href="{{ url('database') }}">Database</a></li>
-            <li><a href="{{ url('account') }}">Account</a></li>
           @endif
 
-          <li><a href="{{ url('logout') }}">Logout</a></li>
+          @if (request()->user()->role === 'administrator' || request()->user()->role === 'developer')
+            <li>
+              <a href="{{ url('resources') }}">
+              <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
+              Resources
+              </a>
+            </li>
+            <li>
+              <a href="{{ url('account') }}">
+              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+              Account
+              </a>
+            </li>
+          @endif
+
+          @if (request()->user()->role === 'developer')
+            <li>
+              <a href="{{ url('database') }}">
+              <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+              Database
+              </a>
+            </li>
+          @endif
+
+          <li>
+            <a href="{{ url('logout') }}">
+              <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+              Logout
+            </a>
+          </li>
 
         </ul>
       </div>

@@ -47,3 +47,4 @@
 - Added Resources.php in Quinn.
 - Updated ResourcesController index to get montageTable from Resources.php.
 - Changed montagaTable to workingAreaTotal and added basinSeparator param.
+- Added icon on navbar menu.
