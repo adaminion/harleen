@@ -85,6 +85,10 @@
         url: 'account/reset/all',
         type: 'POST',
         dataType: 'text',
+        success: function(response) {
+          $.unblockUI();
+          window.location.href = response
+        },
         complete: function(xhr, status) {
           $.unblockUI();
         }

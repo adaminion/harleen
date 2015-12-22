@@ -53,3 +53,4 @@
 - Added POST route to account/reset/all.
 - Moved test user after GeneralSeeder and ResourcesSeeder.
 - Added Maatwebsite/Excel to support Excel.
+- Added exportNewUserPass in AccountController to download newly created username and password and bind with account/reset/all/export.

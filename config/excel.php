@@ -31,7 +31,7 @@ return array(
         */
         'settings' => array(
 
-            'memoryCacheSize' => '32MB',
+            'memoryCacheSize' => '128MB',
             'cacheTime'       => 600
 
         ),
@@ -58,15 +58,15 @@ return array(
     ),
 
     'properties' => array(
-        'creator'        => 'Maatwebsite',
-        'lastModifiedBy' => 'Maatwebsite',
+        'creator'        => 'SKK Migas',
+        'lastModifiedBy' => 'SKK Migas',
         'title'          => 'Spreadsheet',
-        'description'    => 'Default spreadsheet export',
+        'description'    => 'Published by SKK Migas',
         'subject'        => 'Spreadsheet export',
-        'keywords'       => 'maatwebsite, excel, export',
+        'keywords'       => 'skkmigas',
         'category'       => 'Excel',
-        'manager'        => 'Maatwebsite',
-        'company'        => 'Maatwebsite',
+        'manager'        => 'SKK Migas',
+        'company'        => 'SKK Migas',
     ),
 
     /*
@@ -106,7 +106,7 @@ return array(
     |
     */
 
-    'creator'    => 'Maatwebsite',
+    'creator'    => 'SKK Migas',
 
     'csv'        => array(
         /*

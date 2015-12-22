@@ -24,5 +24,6 @@ Route::get('database', 'DatabaseController@index');
 
 Route::get('account', 'AccountController@index');
 Route::post('account/reset/all', 'AccountController@resetAllUserPass');
+Route::get('account/reset/all/export', 'AccountController@exportNewUserPass');
 
 Route::get('resources', 'ResourcesController@index');
