@@ -38,3 +38,4 @@
 - Changed RedirectIfAuthenticated middleware to check for role.
 - Added RoutesAuthenticate to authenticate in routes level.
 - Applied RoutesAuthenticate middleware to DeveloperController.
+- Added account/reset/all route to AccountController@resetAllUserPass.

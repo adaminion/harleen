@@ -21,3 +21,4 @@ Route::get('database', 'DatabaseController@index');
 Route::get('contractor', 'ContractorController@index');
 
 Route::get('account', 'AccountController@index');
+Route::get('account/reset/all', 'AccountController@resetAllUserPass');
