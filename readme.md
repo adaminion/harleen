@@ -41,3 +41,5 @@
 - Added account/reset/all route to AccountController @ resetAllUserPass.
 - Added ResourcesController and related views.
 - Added test administrator user in DatabaseSeeder.
+- Added resources table in Resources views.
+- Added jQuery DataTables library.
