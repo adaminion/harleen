@@ -52,3 +52,4 @@
 - Fixed resetAllUserPass resetting developer and administrator user password.
 - Added POST route to account/reset/all.
 - Moved test user after GeneralSeeder and ResourcesSeeder.
+- Added Maatwebsite/Excel to support Excel.
