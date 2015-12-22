@@ -23,6 +23,6 @@ Route::get('developer', 'DeveloperController@index');
 Route::get('database', 'DatabaseController@index');
 
 Route::get('account', 'AccountController@index');
-Route::get('account/reset/all', 'AccountController@resetAllUserPass');
+Route::post('account/reset/all', 'AccountController@resetAllUserPass');
 
 Route::get('resources', 'ResourcesController@index');

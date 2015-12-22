@@ -15,7 +15,7 @@
       min-height: 100%;
     }
     body {
-      background-color: #ecf0f1;
+      background-color: #f7f7f7;
       margin-top: 60px;
       margin-bottom: 150px;
     }
@@ -59,12 +59,19 @@
           <span class="icon-bar"></span>
         </button>
 
+
         @if (request()->user()->role === 'contractor')
-          <a class="navbar-brand" href="{{ url('/') }}">Contractor</a>
+          <strong>
+            <a class="navbar-brand" href="{{ url('/') }}">Contractor</a>
+          </strong>
         @elseif (request()->user()->role === 'administrator')
-          <a class="navbar-brand" href="{{ url('/') }}">Administrator</a>
+          <strong>
+            <a class="navbar-brand" href="{{ url('/') }}">Administrator</a>
+          </strong>
         @elseif (request()->user()->role === 'developer')
-          <a class="navbar-brand" href="{{ url('/') }}">Dev.</a>
+          <strong>
+            <a class="navbar-brand" href="{{ url('/') }}">Dev.</a>
+          </strong>
         @endif
       </div>
 
@@ -73,7 +80,9 @@
 
           @if (request()->user()->role === 'contractor')
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
                 Resources <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">

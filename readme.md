@@ -48,3 +48,7 @@
 - Updated ResourcesController index to get montageTable from Resources.php.
 - Changed montagaTable to workingAreaTotal and added basinSeparator param.
 - Added icon on navbar menu.
+- Added BlockUi library.
+- Fixed resetAllUserPass resetting developer and administrator user password.
+- Added POST route to account/reset/all.
+- Moved test user after GeneralSeeder and ResourcesSeeder.

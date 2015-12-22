@@ -13,6 +13,7 @@
     body {
       padding-top: 40px;
       padding-bottom: 40px;
+      background-color: #f7f7f7;
     }
     .form-login {
       max-width: 330px;

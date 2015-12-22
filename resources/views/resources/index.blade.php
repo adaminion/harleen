@@ -14,7 +14,7 @@
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-xs-5">
+        <div class="col-xs-2">
           <div class="form-group">
             <label for="rps-year">RPS year</label>
             <select id="rps-year" name="rps-year" class="form-control">

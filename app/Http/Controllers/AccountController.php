@@ -33,7 +33,10 @@ class AccountController extends Controller
      */
     public function resetAllUserPass()
     {
-        $working_areas = DB::table('user')->select('working_area_id')
+        set_time_limit(0);
+
+        $working_areas = DB::table('user')
+            ->select('working_area_id')
             ->where('role', '=', 'contractor')
             ->get();
 
@@ -53,10 +56,12 @@ class AccountController extends Controller
     private function createUserPass($working_area_id)
     {
         $password = createRandomString();
-        DB::table('user')->where('working_area_id', $working_area_id)->update([
-            'username' => createRandomString(),
-            'password' => Hash::make($password),
-            'enc_password' => Crypt::encrypt($password)
-        ]);
+        DB::table('user')
+            ->where('working_area_id', $working_area_id)
+            ->update([
+                'username' => createRandomString(),
+                'password' => Hash::make($password),
+                'enc_password' => Crypt::encrypt($password)
+            ]);
     }
 }

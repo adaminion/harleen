@@ -15,6 +15,9 @@ class DatabaseSeeder extends Seeder
         // no mass assigned rule
         Model::unguard();
 
+        $this->call(GeneralSeeder::class);
+        $this->call(ResourcesSeeder::class);
+
         DB::table('user')->insert([
             'username' => 'dev',
             'password' => bcrypt('a'),
@@ -27,13 +30,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'administrator',
         ]);
 
+        // TODO: delete this upon production
         DB::table('user')->insert([
+            'working_area_id' => 'WK1001',
             'username' => 'wk1001',
             'password' => bcrypt('a'),
             'role' => 'contractor',
         ]);
 
-        $this->call(GeneralSeeder::class);
-        $this->call(ResourcesSeeder::class);
     }
 }
