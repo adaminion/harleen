@@ -855,6 +855,7 @@ class CreateInitialTables extends Migration
         Schema::drop('postdrill');
         Schema::drop('discovery');
         Schema::drop('drillable');
+        Schema::drop('recap_lead');
         Schema::drop('lead');
         Schema::drop('play');
 
