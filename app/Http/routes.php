@@ -15,10 +15,14 @@ Route::get('/', 'Auth\AuthController@getLogin');
 Route::post('login', 'Auth\AuthController@postLogin');
 Route::get('logout', 'Auth\AuthController@getLogout');
 
+Route::get('contractor', 'ContractorController@index');
+
+Route::get('administrator', 'AdministratorController@index');
+
 Route::get('developer', 'DeveloperController@index');
 Route::get('database', 'DatabaseController@index');
 
-Route::get('contractor', 'ContractorController@index');
-
 Route::get('account', 'AccountController@index');
 Route::get('account/reset/all', 'AccountController@resetAllUserPass');
+
+Route::get('resources', 'ResourcesController@index');

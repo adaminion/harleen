@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class AdministratorController extends Controller
+class ResourcesController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:administrator');
+        $this->middleware('role:developer,administrator');
     }
 
     public function index()
     {
-        return view('administrator.index');
+        return view('resources.index');
     }
 }
