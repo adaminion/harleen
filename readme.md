@@ -43,3 +43,6 @@
 - Added test administrator user in DatabaseSeeder.
 - Added resources table in Resources views.
 - Added jQuery DataTables library.
+- Added Quinn namespace to hold any business related logic.
+- Added Resources.php in Quinn.
+- Updated ResourcesController index to get montageTable from Resources.php.

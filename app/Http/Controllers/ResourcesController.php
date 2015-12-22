@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Quinn\Resources;
+
 class ResourcesController extends Controller
 {
     public function __construct()
@@ -17,6 +19,7 @@ class ResourcesController extends Controller
 
     public function index()
     {
-        return view('resources.index');
+        $resources = Resources::montageTable();
+        return view('resources.index', ['resources' => $resources]);
     }
 }

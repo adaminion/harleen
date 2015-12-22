@@ -29,6 +29,20 @@
           </tr>
         </thead>
         <tbody>
+          @foreach ($resources as $data)
+          <tr>
+            <td></td>
+            <td></td>
+            <td>{{ $data->working_area_name }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          @endforeach
         </tbody>
       </table>
     </div>
@@ -37,10 +51,13 @@
 @endsection
 
 @section('js')
-<script type="javascript" src="{{ asset('js/datatables.min.js') }}"></script>
-<script type="javascript">
+<script src="{{ asset('js/datatables.min.js') }}"></script>
+<script>
   $(document).ready(function() {
     $('#resources-table').DataTable({
+      'oLanguage': {
+        'sSearch': 'Filter '
+      },
       'paging': false,
       'aoColumns': [
         {'bVisible': false},
@@ -53,6 +70,7 @@
         null,
         null,
         null,
+      ]
     });
   });
 </script>
