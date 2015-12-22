@@ -42,7 +42,7 @@
       margin-left: auto;
       margin-right: auto;
     }
-    h1 > .page-title {
+    h1 > .main-title {
       color: #34459e;
     }
   </style>
