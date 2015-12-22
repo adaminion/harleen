@@ -32,3 +32,4 @@
 - Added recapitulation migration in initial tables.
 - Changed on Lead and drillable seeder to use nameCleaner on closure name.
 - Added nullable on Lead and Drillable migration structure name.
+- Added DatabaseController and related views.

@@ -15,7 +15,7 @@
       min-height: 100%;
     }
     body {
-      background-color: #78909C;
+      background-color: #ecf0f1;
       margin-top: 60px;
       margin-bottom: 150px;
     }
@@ -91,7 +91,7 @@
             <li><a href="{{ url('account') }}">Account</a></li>
           @elseif (request()->user()->role === 'developer')
             <li><a href="{{ url('resources') }}">Resources</a></li>
-            <li><a href="{{ url('developer/database') }}">Database</a></li>
+            <li><a href="{{ url('database') }}">Database</a></li>
             <li><a href="{{ url('account') }}">Account</a></li>
           @endif
 
