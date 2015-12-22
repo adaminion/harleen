@@ -46,3 +46,4 @@
 - Added Quinn namespace to hold any business related logic.
 - Added Resources.php in Quinn.
 - Updated ResourcesController index to get montageTable from Resources.php.
+- Changed montagaTable to workingAreaTotal and added basinSeparator param.

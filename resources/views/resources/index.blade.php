@@ -13,11 +13,21 @@
       </div>
     </div>
     <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-5">
+          <div class="form-group">
+            <label for="rps-year">RPS year</label>
+            <select id="rps-year" name="rps-year" class="form-control">
+              <option value="2015">2015</option>
+            </select>
+          </div>
+        </div>
+      </div>
       <table id="resources-table" class="table table-striped table-bordered">
         <thead>
           <tr>
             <th>Basin Order</th>
-            <th>Basin (west to east)</th>
+            <th>Basin</th>
             <th>Working area</th>
             <th>Play</th>
             <th>Lead</th>
@@ -31,14 +41,14 @@
         <tbody>
           @foreach ($resources as $data)
           <tr>
-            <td></td>
-            <td></td>
+            <td>{{ $data->sequence }}</td>
+            <td>{!! $data->basin !!}</td>
             <td>{{ $data->working_area_name }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ $data->play }}</td>
+            <td>{{ $data->lead }}</td>
+            <td>{{ $data->drillable }}</td>
+            <td>{{ $data->postdrill }}</td>
+            <td>{{ $data->discovery }}</td>
             <td></td>
             <td></td>
           </tr>

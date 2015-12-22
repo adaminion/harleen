@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,7 +20,7 @@ class ResourcesController extends Controller
 
     public function index()
     {
-        $resources = Resources::montageTable();
-        return view('resources.index', ['resources' => $resources]);
+        return view('resources.index',
+            ['resources' => Resources::workingAreaTotal('<br/>')]);
     }
 }
