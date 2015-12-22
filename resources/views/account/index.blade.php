@@ -77,7 +77,7 @@
 
       $.ajaxSetup({
         headers: {
-          'X-CSRF-Token': $('input[name=_token]').val()
+          'X-CSRF-Token': $('input[name=_token]').val();
         }
       });
 
@@ -87,7 +87,7 @@
         dataType: 'text',
         success: function(response) {
           $.unblockUI();
-          window.location.href = response
+          window.location.href = response;
         },
         complete: function(xhr, status) {
           $.unblockUI();
