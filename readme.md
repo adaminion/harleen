@@ -27,4 +27,8 @@
 - Changed body background color to be darker.
 
 ## Changelog 0.2
+- Upgraded to Laravel 5.2.
 - Added ContractorController.
+- Added recapitulation migration in initial tables.
+- Changed on Lead and drillable seeder to use nameCleaner on closure name.
+- Added nullable on Lead and Drillable migration structure name.

@@ -462,6 +462,61 @@ class CreateInitialTables extends Migration
             $table->boolean('is_pinned')->default(false);
         });
 
+        /**
+         * Lead Oil, Lead Gas, dan Ekivalen tidak dimasukkan
+         * karena dapat dihitung langsung. Play sudah dihubungkan
+         * langsung dengan lead_id masing-masing.
+         */
+        Schema::create('recap_lead', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('lead_id');
+            $table->foreign('lead_id')->references('id')->on('lead');
+            $table->unsignedInteger('contractor_working_area_id');
+            $table->foreign('contractor_working_area_id')
+                ->references('id')->on('contractor_working_area');
+
+            $table->char('rps_year', 4);
+            $table->string('structure_name', 100)->nullable();
+            $table->string('closure_name', 100);
+            $table->float('area_p90')->nullable();
+            $table->float('area_p50')->nullable();
+            $table->float('area_p10')->nullable();
+            $table->float('net_pay_p90')->nullable();
+            $table->float('net_pay_p50')->nullable();
+            $table->float('net_pay_p10')->nullable();
+            $table->float('por_p90')->nullable();
+            $table->float('por_p50')->nullable();
+            $table->float('por_p10')->nullable();
+            $table->float('sat_p90')->nullable();
+            $table->float('sat_p50')->nullable();
+            $table->float('sat_p10')->nullable();
+            $table->float('ooip_p90')->nullable();
+            $table->float('ooip_p50')->nullable();
+            $table->float('ooip_p10')->nullable();
+            $table->float('ogip_p90')->nullable();
+            $table->float('ogip_p50')->nullable();
+            $table->float('ogip_p10')->nullable();
+            $table->float('boi')->nullable();
+            $table->float('bgi')->nullable();
+            $table->float('accumulation_oil')->nullable();
+            $table->float('accumulation_gas')->nullable();
+            $table->float('recovery_oil')->nullable();
+            $table->float('recovery_gas')->nullable();
+            $table->float('success_ratio')->nullable();
+            $table->float('stoip_p90')->nullable();
+            $table->float('stoip_p50')->nullable();
+            $table->float('stoip_p10')->nullable();
+            $table->float('igip_p90')->nullable();
+            $table->float('igip_p50')->nullable();
+            $table->float('igip_p10')->nullable();
+            $table->float('source_rock')->nullable();
+            $table->float('reservoir')->nullable();
+            $table->float('trap')->nullable();
+            $table->float('dynamic')->nullable();
+            $table->float('gcf')->nullable();
+            $table->float('rci')->nullable();
+        });
+
         Schema::create('drillable', function (Blueprint $table) {
             $table->increments('id');
             $table->string('working_area_id', 15);
@@ -475,7 +530,7 @@ class CreateInitialTables extends Migration
 
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
-            $table->string('structure_name', 100);
+            $table->string('structure_name', 100)->nullable();
             $table->string('closure_name', 100);
             $table->string('clarified', 100);
             $table->date('initiate');
