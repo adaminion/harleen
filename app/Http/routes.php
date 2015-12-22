@@ -19,3 +19,5 @@ Route::get('developer', 'DeveloperController@index');
 Route::get('database', 'DatabaseController@index');
 
 Route::get('contractor', 'ContractorController@index');
+
+Route::get('account', 'AccountController@index');

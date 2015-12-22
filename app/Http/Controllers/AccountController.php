@@ -14,7 +14,7 @@ class AccountController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('auth.role:developer,administrator');
+        $this->middleware('role:developer,administrator');
     }
 
     public function index()
