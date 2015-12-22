@@ -35,3 +35,5 @@
 - Added DatabaseController and related views.
 - Added AccountController and related views.
 - Added helpers.php file.
+- Changed RedirectIfAuthenticated middleware to check for role.
+- Added RoutesAuthenticate to authenticate in routes level.
