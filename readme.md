@@ -37,3 +37,4 @@
 - Added helpers.php file.
 - Changed RedirectIfAuthenticated middleware to check for role.
 - Added RoutesAuthenticate to authenticate in routes level.
+- Applied RoutesAuthenticate middleware to DeveloperController.
