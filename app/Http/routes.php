@@ -27,3 +27,5 @@ Route::post('account/reset/all', 'AccountController@resetAllUserPass');
 Route::get('account/reset/all/export', 'AccountController@exportNewUserPass');
 
 Route::get('resources', 'ResourcesController@index');
+Route::get('resources/summary/wk/{working_area_id}',
+    'ResourcesController@summaryWorkingArea');

@@ -42,6 +42,9 @@
       margin-left: auto;
       margin-right: auto;
     }
+    h1 > .page-title {
+      color: #34459e;
+    }
   </style>
   @yield('css')
 </head>

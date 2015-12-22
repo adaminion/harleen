@@ -17,6 +17,7 @@ class Resources
     {
         $data = DB::table('working_area as wk')
             ->select([
+                'wk.id as working_area_id',
                 'basin.sequence',
                 'wk.working_area_name',
                 DB::raw("GROUP_CONCAT(bwk.basin_name SEPARATOR '$basinSeparator')

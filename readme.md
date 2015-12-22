@@ -54,3 +54,4 @@
 - Moved test user after GeneralSeeder and ResourcesSeeder.
 - Added Maatwebsite/Excel to support Excel.
 - Added exportNewUserPass in AccountController to download newly created username and password and bind with account/reset/all/export.
+- Added summaryWorkingArea in ResourcesController act as montage for working area.

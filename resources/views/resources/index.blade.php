@@ -43,7 +43,11 @@
           <tr>
             <td>{{ $data->sequence }}</td>
             <td>{!! $data->basin !!}</td>
-            <td>{{ $data->working_area_name }}</td>
+            <td>
+              <a href='{{ url("resources/summary/wk/$data->working_area_id") }}'>
+                {{ $data->working_area_name }}
+              </a>
+            </td>
             <td>{{ $data->play }}</td>
             <td>{{ $data->lead }}</td>
             <td>{{ $data->drillable }}</td>
