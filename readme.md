@@ -55,3 +55,6 @@
 - Added Maatwebsite/Excel to support Excel.
 - Added exportNewUserPass in AccountController to download newly created username and password and bind with account/reset/all/export.
 - Added summaryWorkingArea in ResourcesController act as montage for working area.
+
+## Changelog 0.3
+- Updated summary working area page.

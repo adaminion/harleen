@@ -2,6 +2,7 @@
 
 @section('content')
   <div class="container-fluid">
-    <h1 class="page-title text-center">{{ $data['working_area_name'] }}</h1>
+    <h3 class="text-center">{{ $data['working_area_name'] }}</h3>
+    <h4 class="text-center">{{ $data['contractor'] }}</h4>
   </div>
 @endsection

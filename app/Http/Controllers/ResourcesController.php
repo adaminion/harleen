@@ -40,9 +40,13 @@ class ResourcesController extends Controller
     {
         $data = [];
         $data['working_area_name'] = DB::table('working_area')
-            ->select('working_area_name')
             ->where('id', '=', $working_area_id)
-            ->first()->working_area_name;
+            ->value('working_area_name');
+
+        $data['contractor'] = DB::table('contractor_working_area as cwa')
+            ->leftJoin('contractor', 'cwa.contractor_id', '=', 'contractor.id')
+            ->where('cwa.working_area_id', '=', $working_area_id)
+            ->value('contractor_name');
 
         return view('resources.summary', ['data' => $data]);
     }
