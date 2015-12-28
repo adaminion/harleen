@@ -26,16 +26,6 @@ class CreateInitialTables extends Migration
             $table->date('end_date')->nullable();
         });
 
-        Schema::create('hist_working_area', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('working_area_id', 15);
-            $table->foreign('working_area_id')->references('id')->on('working_area');
-
-            $table->char('rps_year', 4);
-            $table->float('area_current');
-            $table->string('stage_current');
-        });
-
         // PSC tables.
         Schema::create('contractor', function (Blueprint $table) {
             $table->increments('id');
@@ -53,7 +43,9 @@ class CreateInitialTables extends Migration
             $table->foreign('contractor_id')->references('id')->on('contractor');
 
             $table->char('rps_year', 4);
-            $table->float('interest');
+            $table->float('area_current');
+            $table->string('stage_current');
+            $table->float('interest')->nullable();
             $table->boolean('is_operator')->default(false);
         });
 
@@ -348,6 +340,7 @@ class CreateInitialTables extends Migration
             $table->unsignedInteger('gcf_id');
             $table->foreign('gcf_id')->references('id')->on('gcf');
 
+            $table->char('rps_year', 4);
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
             $table->string('remark', 100)->nullable();
@@ -374,6 +367,21 @@ class CreateInitialTables extends Migration
             $table->boolean('is_editing')->default(false);
         });
 
+        Schema::create('re_play', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('working_area_id', 15);
+            $table->foreign('working_area_id')->references('id')->on('working_area');
+            $table->unsignedInteger('contractor_working_area_id');
+            $table->foreign('contractor_working_area_id')
+                ->references('id')->on('contractor_working_area');
+            $table->unsignedInteger('play_id');
+            $table->foreign('play_id')->references('id')->on('play');
+
+            $table->char('rps_year', 4);
+            $table->string('play_name');
+            // TODO: Lengkapi atribut
+        });
+
         Schema::create('lead', function (Blueprint $table) {
             $table->increments('id');
             $table->string('working_area_id', 15);
@@ -383,6 +391,7 @@ class CreateInitialTables extends Migration
             $table->unsignedInteger('gcf_id');
             $table->foreign('gcf_id')->references('id')->on('gcf');
 
+            $table->char('rps_year', 4);
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
             $table->string('structure_name', 100);
@@ -467,13 +476,15 @@ class CreateInitialTables extends Migration
          * karena dapat dihitung langsung. Play sudah dihubungkan
          * langsung dengan lead_id masing-masing.
          */
-        Schema::create('recap_lead', function (Blueprint $table) {
+        Schema::create('re_lead', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('lead_id');
             $table->foreign('lead_id')->references('id')->on('lead');
             $table->unsignedInteger('contractor_working_area_id');
             $table->foreign('contractor_working_area_id')
                 ->references('id')->on('contractor_working_area');
+            $table->unsignedInteger('re_play_id');
+            $table->foreign('re_play_id')->references('id')->on('re_play');
 
             $table->char('rps_year', 4);
             $table->string('structure_name', 100)->nullable();
@@ -528,6 +539,7 @@ class CreateInitialTables extends Migration
             $table->unsignedInteger('gcf_id');
             $table->foreign('gcf_id')->references('id')->on('gcf');
 
+            $table->char('rps_year', 4);
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
             $table->string('structure_name', 100)->nullable();
@@ -647,6 +659,7 @@ class CreateInitialTables extends Migration
             $table->unsignedInteger('gcf_id');
             $table->foreign('gcf_id')->references('id')->on('gcf');
 
+            $table->char('rps_year', 4);
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
             $table->string('structure_name', 100);
@@ -682,6 +695,7 @@ class CreateInitialTables extends Migration
             $table->unsignedInteger('gcf_id');
             $table->foreign('gcf_id')->references('id')->on('gcf');
 
+            $table->char('rps_year', 4);
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
             $table->string('structure_name', 100);
@@ -855,8 +869,9 @@ class CreateInitialTables extends Migration
         Schema::drop('postdrill');
         Schema::drop('discovery');
         Schema::drop('drillable');
-        Schema::drop('recap_lead');
+        Schema::drop('re_lead');
         Schema::drop('lead');
+        Schema::drop('re_play');
         Schema::drop('play');
 
         Schema::drop('gcf');

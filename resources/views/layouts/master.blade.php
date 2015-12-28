@@ -59,7 +59,6 @@
           <span class="icon-bar"></span>
         </button>
 
-
         @if (request()->user()->role === 'contractor')
           <strong>
             <a class="navbar-brand" href="{{ url('/') }}">Contractor</a>
