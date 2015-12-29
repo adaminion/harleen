@@ -61,7 +61,7 @@
 
         @if (request()->user()->role === 'contractor')
           <strong>
-            <a class="navbar-brand" href="{{ url('/') }}">Contractor</a>
+            <a class="navbar-brand" href="{{ url('/') }}">{{ createNavTitle(request()->user()->working_area_id) }}</a>
           </strong>
         @elseif (request()->user()->role === 'administrator')
           <strong>

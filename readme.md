@@ -61,3 +61,4 @@
 - Deleted hist_working_area table.
 - Created re_play table.
 - Created re_lead table.
+- Added helper createNavTitle.

@@ -5,7 +5,7 @@
  * minus identical character and number, default length of
  * returned string are 8.
  *
- * @return string
+ * @return  string
  */
 function createRandomString()
 {
@@ -25,7 +25,7 @@ function createRandomString()
  * Quick and dirty conversion from Object to Array, this is dangerous
  * only used for query return AND only for 1-deep level.
  *
- * @param object $data
+ * @param  object $data
  * @return array
  */
 function objectToArray($data)
@@ -35,4 +35,24 @@ function objectToArray($data)
     }
 
     return $data;
+}
+
+/**
+ * Membuat judul navbar untuk kontraktor.
+ *
+ * @param  string $wkid
+ * @return string
+ */
+function createNavTitle($wkid)
+{
+    $working_area_name = DB::table('working_area')
+        ->where('id', '=', $wkid)
+        ->value('working_area_name');
+
+    $contractor_name = DB::table('contractor_working_area as cwa')
+        ->leftJoin('contractor', 'cwa.contractor_id', '=', 'contractor.id')
+        ->where('cwa.working_area_id', '=', $wkid)
+        ->value('contractor.contractor_name');
+
+    return $working_area_name . ' - ' . $contractor_name;
 }
