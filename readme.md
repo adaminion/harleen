@@ -61,4 +61,7 @@
 - Deleted hist_working_area table.
 - Created re_play table.
 - Created re_lead table.
-- Added helper createNavTitle.
+- Added helper function createNavTitle.
+- Added PlayController.
+- Added helper function createPlayName.
+- Added Play Index page.

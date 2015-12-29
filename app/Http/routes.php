@@ -17,6 +17,8 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 
 Route::get('contractor', 'ContractorController@index');
 
+Route::get('play', 'PlayController@index');
+
 Route::get('administrator', 'AdministratorController@index');
 
 Route::get('developer', 'DeveloperController@index');
