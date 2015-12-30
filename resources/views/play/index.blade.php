@@ -16,7 +16,9 @@
         <table id="resources-table" class="table table-striped table-bordered">
           <thead>
             <tr>
+              @if (request()->user()->working_area_id === 'WK1047')
               <th>Basin</th>
+              @endif
               <th>Play name</th>
               <th>Action</th>
             </tr>
@@ -24,7 +26,9 @@
           <tbody>
             @foreach ($data as $play)
             <tr>
+              @if (request()->user()->working_area_id === 'WK1047')
               <td>{{ $play->basin_name }}</td>
+              @endif
               <td>{{ createPlayName($play->litho, $play->formation, $play->formation_lvl, $play->age_period, $play->age_epoch, $play->env, $play->trap) }}</td>
               <td>
                 <a href="#" class="btn btn-xs btn-primary">View</a>

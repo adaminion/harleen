@@ -65,3 +65,4 @@
 - Added PlayController.
 - Added helper function createPlayName.
 - Added Play Index page.
+- Added only Pertamina EP that show basin column for any resources index.
