@@ -29,7 +29,7 @@
               @if (request()->user()->working_area_id === 'WK1047')
               <td>{{ $play->basin_name }}</td>
               @endif
-              <td>{{ createPlayName($play->litho, $play->formation, $play->formation_lvl, $play->age_period, $play->age_epoch, $play->env, $play->trap) }}</td>
+              <td>{{ $play->name }}</td>
               <td>
                 <a href="#" class="btn btn-xs btn-primary">View</a>
                 <a href="#" class="btn btn-xs btn-success">Update</a>
@@ -59,6 +59,7 @@
       'oLanguage': {
         'sSearch': 'Filter '
       },
+      'aaSorting': [],
     });
   });
 </script>

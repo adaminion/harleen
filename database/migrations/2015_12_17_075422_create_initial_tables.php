@@ -75,7 +75,7 @@ class CreateInitialTables extends Migration
             $table->string('category', 100);
             $table->text('description');
             $table->string('path');
-            $table->dateTime('deleted_at');
+            $table->softDeletes();
             $table->text('delete_reason');
         });
 
@@ -361,7 +361,7 @@ class CreateInitialTables extends Migration
 
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
             $table->boolean('is_editing')->default(false);
@@ -463,7 +463,7 @@ class CreateInitialTables extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('upgrade_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
@@ -563,7 +563,7 @@ class CreateInitialTables extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('upgrade_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -641,7 +641,7 @@ class CreateInitialTables extends Migration
 
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
         });
@@ -676,7 +676,7 @@ class CreateInitialTables extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('upgrade_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -712,7 +712,7 @@ class CreateInitialTables extends Migration
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
             $table->dateTime('upgrade_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -746,7 +746,7 @@ class CreateInitialTables extends Migration
 
             $table->dateTime('created_at');
             $table->dateTime('updated_at')->nullable();
-            $table->dateTime('deleted_at')->nullable();
+            $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
         });

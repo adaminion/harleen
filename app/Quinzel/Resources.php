@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Quinn;
+namespace App\Quinzel;
 
 use DB;
 

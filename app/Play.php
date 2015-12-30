@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Play extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'play';
 
     protected $guarded = [
@@ -21,7 +24,7 @@ class Play extends Model
         'is_editing',
     ];
 
-    public $timestamps = false;
+    protected $dates = ['deleted_at'];
 
     /**
      * Mengambil wilayah kerja yang memiliki Play tersebut.
@@ -38,8 +41,8 @@ class Play extends Model
      *
      * @return  Gcf
      */
-    public function Gcfs()
+    public function gcf()
     {
-        return $this->hasOne('App\Gcf');
+        return $this->belongsTo('App\Gcf');
     }
 }

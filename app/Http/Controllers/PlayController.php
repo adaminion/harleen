@@ -7,32 +7,36 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Quinzel\PlayRepository;
+
 class PlayController extends Controller
 {
-    public function __construct()
+    /**
+     * PlayRepository instance.
+     *
+     * @var PlayRepository
+     */
+    protected $plays;
+
+    /**
+     * Buat controller instance baru.
+     *
+     * @param  PlayRepository
+     * @return void
+     */
+    public function __construct(PlayRepository $plays)
     {
         $this->middleware('auth');
         $this->middleware('role:contractor');
+
+        $this->plays = $plays;
     }
 
     public function index()
     {
-        $data = DB::table('play')
-            ->select([
-                'play.basin_name',
-                'gcf.res_litho as litho',
-                'gcf.res_formation as formation',
-                'gcf.res_formation_level as formation_lvl',
-                'gcf.res_age_period as age_period',
-                'gcf.res_age_epoch as age_epoch',
-                'gcf.res_dep_env as env',
-                'gcf.trp_type as trap'
-            ])
-            ->leftJoin('gcf', 'play.gcf_id', '=', 'gcf.id')
-            ->where('working_area_id', '=', request()->user()->working_area_id)
-            ->get();
-
-        return view('play.index', ['data' => $data]);
+        return view('play.index', [
+            'data' => $this->plays->index(request()->user())
+        ]);
     }
 
     public function create()

@@ -17,8 +17,8 @@ class Gcf extends Model
      *
      * @return  Play
      */
-    public function plays()
+    public function play()
     {
-        return $this->belongsTo('App\Gcf');
+        return $this->hasOne('App\Play');
     }
 }

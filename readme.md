@@ -43,8 +43,8 @@
 - Added test administrator user in DatabaseSeeder.
 - Added resources table in Resources views.
 - Added jQuery DataTables library.
-- Added Quinn namespace to hold any business related logic.
-- Added Resources.php in Quinn.
+- Added Quinzel namespace to hold any business related logic.
+- Added Resources.php in Quinzel.
 - Updated ResourcesController index to get montageTable from Resources.php.
 - Changed montagaTable to workingAreaTotal and added basinSeparator param.
 - Added icon on navbar menu.
@@ -69,3 +69,7 @@
 - Added Play create action and views.
 - Added GCF shared form.
 - Added model WorkingArea, Contractor, Play, Gcf.
+- Added PlayRepository in Quinzel.
+- Changed all deleted_at columns with native migration method softDeletes.
+- Added aaSorting to retain default sort order from server.
+- Added index method in PlayRepository.
