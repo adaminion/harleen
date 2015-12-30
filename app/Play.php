@@ -27,6 +27,31 @@ class Play extends Model
     protected $dates = ['deleted_at'];
 
     /**
+     * Nama cantik buat form Play.
+     *
+     * @var Array
+     */
+    public $nice = [
+        'basin_name' => 'Basin',
+        'province_name' => 'Province',
+        'remark' => 'Remark',
+        'analog_to' => 'Analog to',
+        'analog_distance' => 'Analog distance',
+        'shore' => 'Shore',
+        'terrain' => 'Terrain',
+        'nearby_field' => 'Nearby field',
+        'nearby_infra' => 'Nearby infrastructure',
+        's2_year' => 'Acquisition year',
+        's2_crossline' => 'Total crossline',
+        's2_line_distance' => 'Parallel intervall distance',
+        'chem_sample' => 'Total sample',
+        'chem_depth' => 'Range depth',
+        'grav_acreage' => 'Survey acreage',
+        'grav_depth' => 'Range depth',
+        'resi_acreage' => 'Survey acreage',
+    ];
+
+    /**
      * Mengambil wilayah kerja yang memiliki Play tersebut.
      *
      * @return  WorkingArea

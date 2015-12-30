@@ -12,6 +12,10 @@ class Gcf extends Model
 
     public $timestamps = false;
 
+    public $nice = [
+        'src_data' => 'Proven or analog'
+    ];
+
     /**
      * Play yang memiliki GCF tersebut.
      *

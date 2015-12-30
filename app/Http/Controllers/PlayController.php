@@ -7,6 +7,7 @@ use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Play;
 use App\Quinzel\PlayRepository;
 
 class PlayController extends Controller
@@ -41,6 +42,17 @@ class PlayController extends Controller
 
     public function create()
     {
-        return view('play.create');
+        return view('play.create', ['model' => Play::with('gcf')]);
+    }
+
+    public function store(Request $request)
+    {
+        dd($request);
+        $this->validate($request, [
+            'basin_name' => 'required',
+            'src_data' => 'required'
+        ]);
+
+        return false;
     }
 }

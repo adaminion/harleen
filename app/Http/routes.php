@@ -19,6 +19,7 @@ Route::get('contractor', 'ContractorController@index');
 
 Route::get('play', 'PlayController@index');
 Route::get('play/create', 'PlayController@create');
+Route::post('play/store', 'PlayController@store');
 
 Route::get('administrator', 'AdministratorController@index');
 

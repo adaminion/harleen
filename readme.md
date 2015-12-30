@@ -74,3 +74,4 @@
 - Added aaSorting to retain default sort order from server.
 - Added index method in PlayRepository.
 - Added LaravelCollective html package.
+- Created shared.components directory to hold any custom form components.
