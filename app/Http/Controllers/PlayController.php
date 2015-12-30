@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
 use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Play;
 use App\Quinzel\PlayRepository;
 
@@ -47,11 +47,23 @@ class PlayController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
-        $this->validate($request, [
-            'basin_name' => 'required',
-            'src_data' => 'required'
-        ]);
+        $a = [
+            'play' => [
+                'basin_name' => 'FUCK',
+            ],
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'play.basin_name' => 'required',
+            'gcf.basin_name' => 'required',
+            'gcf.src_data' => 'required'
+        ])->setAttributeNames(['play.basin_name' => 'a']);
+
+        if ($validator->fails()) {
+            return redirect('play/create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         return false;
     }

@@ -6,7 +6,8 @@
   </div>
 
   <div class="panel-body">
-    {{ Form::text('play[basin_name]') }}
+    {{ Form::text('basin_name') }}
+    {{ Form::text('gcf[basin_name]')}}
     {{ Form::text('gcf[src_data]')}}
   </div>
 </div>
