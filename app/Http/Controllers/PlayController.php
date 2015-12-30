@@ -47,12 +47,6 @@ class PlayController extends Controller
 
     public function store(Request $request)
     {
-        $a = [
-            'play' => [
-                'basin_name' => 'FUCK',
-            ],
-        ];
-
         $validator = Validator::make($request->all(), [
             'play.basin_name' => 'required',
             'gcf.basin_name' => 'required',
