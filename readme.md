@@ -66,3 +66,6 @@
 - Added helper function createPlayName.
 - Added Play Index page.
 - Added only Pertamina EP that show basin column for any resources index.
+- Added Play create action and views.
+- Added GCF shared form.
+- Added model WorkingArea, Contractor, Play, Gcf.

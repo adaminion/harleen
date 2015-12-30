@@ -42,6 +42,9 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .page-title {
+      margin-bottom: 40px;
+    }
   </style>
   @yield('css')
 </head>
