@@ -34,4 +34,9 @@ class PlayController extends Controller
 
         return view('play.index', ['data' => $data]);
     }
+
+    public function create()
+    {
+        return view('play.create');
+    }
 }

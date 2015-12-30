@@ -39,6 +39,13 @@
             @endforeach
           </tbody>
         </table>
+
+        <div class="text-center">
+          <a href="{{ url('play/create') }}" class="btn btn-primary">
+            Create new Play
+          </a>
+        </div>
+
       </div>
     </div>
   </div>
