@@ -82,5 +82,8 @@
 - Added LaravelCollective html package.
 - Created shared.components directory to hold any custom form components.
 - Changed required english error message.
-- Created PlayFormRequest, GcfFormRequest.
+- Created PlayFormRequest.
 - Added isRequired in Request base class.
+
+## Changelog 0.4
+- Created text.blade.php form components.

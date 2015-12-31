@@ -45,6 +45,16 @@
     .page-title {
       margin-bottom: 40px;
     }
+    label {
+      font-weight: normal !important;
+    }
+    .form-group .control-label.required {
+      font-weight: bold !important;
+    }
+    .form-group .control-label.required:after {
+      content: "*";
+      color: red;
+    }
   </style>
   @yield('css')
 </head>

@@ -12,7 +12,7 @@ abstract class Request extends FormRequest
      * @param  array $attribute
      * @return boolean
      */
-    public function isRequired($attribute)
+    public function isRequirede($attribute)
     {
         if (in_array($attribute, array_keys($this->rules()))) {
             if (strpos($this->rules()[$attribute], 'required') !== false) {

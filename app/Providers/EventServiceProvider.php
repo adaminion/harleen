@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Form;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,11 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot($events);
 
-        //
+        Form::component('bsText', 'shared.components.text', [
+            'name',
+            'label',
+            'required' => false,
+            'unit' => false
+        ]);
     }
 }

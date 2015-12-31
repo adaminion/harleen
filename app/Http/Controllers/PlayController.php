@@ -22,27 +22,17 @@ class PlayController extends Controller
     protected $repository;
 
     /**
-     * PlayFormRequest instance.
-     *
-     * @var PlayFormRequest
-     */
-    protected $formRequest;
-
-    protected $validator;
-
-    /**
      * Buat controller instance baru.
      *
      * @param  PlayRepository
      * @return void
      */
-    public function __construct(PlayRepository $repository, PlayFormRequest $form)
+    public function __construct(PlayRepository $repository)
     {
         $this->middleware('auth');
         $this->middleware('role:contractor');
 
         $this->repository = $repository;
-        $this->formRequest = $form;
     }
 
     public function index()
@@ -54,13 +44,10 @@ class PlayController extends Controller
 
     public function create()
     {
-        return view('play.create', [
-            'mPlay' => new Play,
-            'mGcf' => new Gcf,
-        ]);
+        return view('play.form', ['model' => new Play]);
     }
 
-    public function store(Request $request)
+    public function store(PlayFormRequest $request)
     {
         $validator = Validator::make($request->all(), [
             'play.basin_name' => 'required',

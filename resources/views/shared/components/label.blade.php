@@ -1,1 +1,0 @@
-<label for="{{ $name }}" class="col-md-2 control-label"
