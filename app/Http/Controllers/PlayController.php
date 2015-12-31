@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Validator;
 use DB;
 use App\Http\Requests;
+use App\Http\Requests\PlayFormRequest;
 use App\Http\Controllers\Controller;
 use App\Play;
+use App\Gcf;
 use App\Quinzel\PlayRepository;
 
 class PlayController extends Controller
@@ -17,7 +19,16 @@ class PlayController extends Controller
      *
      * @var PlayRepository
      */
-    protected $plays;
+    protected $repository;
+
+    /**
+     * PlayFormRequest instance.
+     *
+     * @var PlayFormRequest
+     */
+    protected $formRequest;
+
+    protected $validator;
 
     /**
      * Buat controller instance baru.
@@ -25,24 +36,28 @@ class PlayController extends Controller
      * @param  PlayRepository
      * @return void
      */
-    public function __construct(PlayRepository $plays)
+    public function __construct(PlayRepository $repository, PlayFormRequest $form)
     {
         $this->middleware('auth');
         $this->middleware('role:contractor');
 
-        $this->plays = $plays;
+        $this->repository = $repository;
+        $this->formRequest = $form;
     }
 
     public function index()
     {
         return view('play.index', [
-            'data' => $this->plays->index(request()->user())
+            'data' => $this->repository->index(request()->user())
         ]);
     }
 
     public function create()
     {
-        return view('play.create', ['model' => Play::with('gcf')]);
+        return view('play.create', [
+            'mPlay' => new Play,
+            'mGcf' => new Gcf,
+        ]);
     }
 
     public function store(Request $request)

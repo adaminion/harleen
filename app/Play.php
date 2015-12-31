@@ -19,8 +19,6 @@ class Play extends Model
         'created_at',
         'updated_at',
         'deleted_at',
-        'update_reason',
-        'delete_reason',
         'is_editing',
     ];
 
@@ -49,6 +47,8 @@ class Play extends Model
         'grav_acreage' => 'Survey acreage',
         'grav_depth' => 'Range depth',
         'resi_acreage' => 'Survey acreage',
+        'update_reason' => 'Update reason',
+        'delete_reason' => 'Delete reason',
     ];
 
     /**
