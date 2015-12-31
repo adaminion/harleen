@@ -54,7 +54,7 @@ class Play extends Model
     /**
      * Mengambil wilayah kerja yang memiliki Play tersebut.
      *
-     * @return  WorkingArea
+     * @return  belongsTo
      */
     public function workingAreas()
     {
@@ -64,7 +64,7 @@ class Play extends Model
     /**
      * GCF yang dimiliki oleh Play.
      *
-     * @return  Gcf
+     * @return  belongsTo
      */
     public function gcf()
     {

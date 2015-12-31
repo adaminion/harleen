@@ -86,4 +86,7 @@
 - Added isRequired in Request base class.
 
 ## Changelog 0.4
+- Added form components registration in boot method.
 - Created text.blade.php form components.
+- Created select.blade.php form components.
+- Added allBasin as helper function.

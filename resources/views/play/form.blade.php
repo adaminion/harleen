@@ -21,7 +21,7 @@
       </div>
       <div class="panel-body">
 
-        {{ Form::bsText('basin_name', 'Basin name', true, 'Km') }}
+        {{ Form::bsSelect('basin_name', 'Basin name', allBasin(), true, 'Km') }}
 
       </div>
     </div>

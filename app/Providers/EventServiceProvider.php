@@ -35,5 +35,13 @@ class EventServiceProvider extends ServiceProvider
             'required' => false,
             'unit' => false
         ]);
+
+        Form::component('bsSelect', 'shared.components.select', [
+            'name',
+            'label',
+            'choice',
+            'required' => false,
+            'unit' => false
+        ]);
     }
 }

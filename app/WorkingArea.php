@@ -20,9 +20,20 @@ class WorkingArea extends Model
     public $timestamps = false;
 
     /**
+     * Wilayah kerja dapat berada dibanyak basin, meskipun hanya WK Indonesia
+     * saja yang berada dibanyak basin.
+     *
+     * @return  belongsToMany
+     */
+    public function basins()
+    {
+        return $this->belongsToMany('App\Basin', 'basin_working_area');
+    }
+
+    /**
      * Wilayah kerja dimiliki oleh banyak kontraktor dengan satu operator.
      *
-     * @return  Contractor
+     * @return  belongsToMany
      */
     public function contractors()
     {
@@ -32,7 +43,7 @@ class WorkingArea extends Model
     /**
      * Wilayah kerja memiliki banyak Play.
      *
-     * @return  Play
+     * @return  hasMany
      */
     public function plays()
     {
