@@ -51,7 +51,7 @@ class PlayController extends Controller
             'play.basin_name' => 'required',
             'gcf.basin_name' => 'required',
             'gcf.src_data' => 'required'
-        ])->setAttributeNames(['play.basin_name' => 'a']);
+        ]);
 
         if ($validator->fails()) {
             return redirect('play/create')

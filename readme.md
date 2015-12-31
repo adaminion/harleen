@@ -81,3 +81,4 @@
 - Added index method in PlayRepository.
 - Added LaravelCollective html package.
 - Created shared.components directory to hold any custom form components.
+- Changed required english error message.
