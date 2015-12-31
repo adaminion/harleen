@@ -4,7 +4,7 @@
 - [ ] Add intermediate table attributes of contractor_working_area.
 - [ ] Create Play store method.
 - [x] Find way to bind nice name with multiple model while error.
-- [ ] Associate each model attributes with nice name.
+- [ ] Migrate terrain with miles to km in seeder.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.

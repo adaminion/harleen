@@ -48,5 +48,9 @@ class EventServiceProvider extends ServiceProvider
         Form::component('province', 'shared.components.province', ['name' => 'province_name']);
         Form::component('analogTo', 'shared.components.analogTo', ['name' => 'analog_to']);
         Form::component('analogDistance', 'shared.components.analogDistance', ['name' => 'analog_distance']);
+        Form::component('shore', 'shared.components.shore', ['name' => 'shore']);
+        Form::component('terrain', 'shared.components.terrain', ['name' => 'terrain']);
+        Form::component('nearbyField', 'shared.components.nearbyField', ['name' => 'nearby_field']);
+        Form::component('nearbyInfra', 'shared.components.nearbyInfra', ['name' => 'nearby_infra']);
     }
 }

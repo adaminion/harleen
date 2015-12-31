@@ -1,4 +1,4 @@
 {{
-  Form::bsSelect('basin_name', 'Basin',
+  Form::bsSelect($name, 'Basin',
     App\Basin::all()->lists('basin_name', 'basin_name'), true)
 }}

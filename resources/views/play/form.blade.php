@@ -25,6 +25,10 @@
         {{ Form::province() }}
         {{ Form::analogTo() }}
         {{ Form::analogDistance() }}
+        {{ Form::shore() }}
+        {{ Form::terrain() }}
+        {{ Form::nearbyField() }}
+        {{ Form::nearbyInfra() }}
 
       </div>
     </div>
