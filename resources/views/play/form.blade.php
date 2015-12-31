@@ -21,7 +21,10 @@
       </div>
       <div class="panel-body">
 
-        {{ Form::bsSelect('basin_name', 'Basin name', allBasin(), true, 'Km') }}
+        {{ Form::basin() }}
+        {{ Form::province() }}
+        {{ Form::analogTo() }}
+        {{ Form::analogDistance() }}
 
       </div>
     </div>

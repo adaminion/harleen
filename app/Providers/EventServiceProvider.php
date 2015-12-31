@@ -43,5 +43,10 @@ class EventServiceProvider extends ServiceProvider
             'required' => false,
             'unit' => false
         ]);
+
+        Form::component('basin', 'shared.components.basin', ['name' => 'basin_name']);
+        Form::component('province', 'shared.components.province', ['name' => 'province_name']);
+        Form::component('analogTo', 'shared.components.analogTo', ['name' => 'analog_to']);
+        Form::component('analogDistance', 'shared.components.analogDistance', ['name' => 'analog_distance']);
     }
 }

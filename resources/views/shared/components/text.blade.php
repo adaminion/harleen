@@ -1,16 +1,16 @@
 <div class="form-group">
   @if ($required)
-  <label for="{{ $name }}" class="col-md-2 control-label required">
+  <label for="{{ $name }}" class="col-md-3 control-label required">
   @else
-  <label for="{{ $name }}" class="col-md-2 control-label">
+  <label for="{{ $name }}" class="col-md-3 control-label">
   @endif
     {{ $label }}
   </label>
 
   @if ($errors->has($name))
-  <div class="col-md-3 has-feedback has-error">
+  <div class="col-md-4 has-feedback has-error">
   @else
-  <div class="col-md-3">
+  <div class="col-md-4">
   @endif
     <div class="input-group">
       {{ Form::text($name, null, ['class' => 'form-control'])}}

@@ -89,4 +89,5 @@
 - Added form components registration in boot method.
 - Created text.blade.php form components.
 - Created select.blade.php form components.
-- Added allBasin as helper function.
+- Added sugar coat components.
+- Added Province model.

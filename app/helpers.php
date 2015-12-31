@@ -59,16 +59,6 @@ function createNavTitle($wkid)
 }
 
 /**
- * Mengambil seluruh nama basin.
- *
- * @return array
- */
-function allBasin()
-{
-    return App\Basin::all()->lists('basin_name', 'basin_name');
-}
-
-/**
  * Membuat nama Play dari data reservoir dan trap yang diberikan.
  *
  * @param  string $litho
