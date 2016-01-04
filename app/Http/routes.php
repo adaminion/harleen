@@ -34,4 +34,4 @@ Route::get('resources', 'ResourcesController@index');
 Route::get('resources/summary/wk/{working_area_id}',
     'ResourcesController@summaryWorkingArea');
 
-Route::get('system/year', 'SystemController@yearIndex');
+Route::get('system/year', 'SystemController@year');

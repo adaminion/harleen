@@ -1,6 +1,5 @@
 <?php
 
-use Carbon;
 use Illuminate\Database\Seeder;
 
 class GeneralSeeder extends Seeder

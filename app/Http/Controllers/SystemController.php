@@ -9,8 +9,8 @@ use App\Http\Controllers\Controller;
 
 class SystemController extends Controller
 {
-    public function yearIndex()
+    public function year()
     {
-        return view('system.yearIndex');
+        return view('system.year');
     }
 }

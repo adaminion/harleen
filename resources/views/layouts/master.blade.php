@@ -55,6 +55,16 @@
       content: "*";
       color: red;
     }
+    .card-main {
+      font-size: 40px;
+      text-align: center;
+      padding: 2px 1px 2px 1px;
+      margin: 2px 1px 2px 1px;
+    }
+    .card-center {
+      text-align: center;
+      padding: 5px 10px 5px 10px;
+    }
   </style>
   @yield('css')
 </head>
