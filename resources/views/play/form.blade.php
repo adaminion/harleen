@@ -7,12 +7,15 @@
   </div>
 
   {{ Form::model($model, ['url' => 'play/store', 'class' => 'form-horizontal']) }}
-    @if (count($errors) > 0)
-      @foreach ($errors->all() as $error)
-        {{$error}}
-      @endforeach
-    @endif
 
+    @if (App::environment('local'))
+    <div class="panel panel-info">
+      <div class="panel-heading">Dev Toolbox</div>
+      <div class="panel-body">
+        <a id="devPlaySampleInput" href="#" class="btn btn-success">Sample</a>
+      </div>
+    </div>
+    @endif
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title">
@@ -96,8 +99,16 @@
 
     @include('shared.gcf')
 
-    {{ Form::submit('Create new Play', ['class' => 'btn btn-primary']) }}
+    <div class="text-center" style="margin-bottom: 15px;">
+      {{ Form::submit($submitButtonText, ['class' => 'btn btn-primary']) }}
+    </div>
 
   {{ Form::close() }}
 </div>
+@endsection
+
+@section('js')
+@if (App::environment('local'))
+<script src="{{ asset('js/dev.js') }}"></script>
+@endif
 @endsection

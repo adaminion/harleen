@@ -44,23 +44,14 @@ class PlayController extends Controller
 
     public function create()
     {
-        return view('play.form', ['model' => new Play]);
+        return view('play.form', [
+            'model' => new Play,
+            'submitButtonText' => 'Save new Play'
+        ]);
     }
 
     public function store(PlayFormRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'play.basin_name' => 'required',
-            'gcf.basin_name' => 'required',
-            'gcf.src_data' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return redirect('play/create')
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         return false;
     }
 }

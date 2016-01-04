@@ -105,3 +105,4 @@
 - Web .htaccess compress.
 - Fixed Dynamic options pathway multiple migrations.
 - Finished GCF form.
+- Added dev.js debugging tools.
