@@ -12,14 +12,21 @@
   @else
   <div class="col-md-4">
   @endif
+
+    @if ($unit)
     <div class="input-group">
+    @endif
+
       {{ Form::text($name, null, ['class' => 'form-control'])}}
 
       @if ($unit)
       <div class="input-group-addon">{{ $unit }}</div>
       @endif
 
+    @if ($unit)
     </div>
+    @endif
+
     @if ($errors->has($name))
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>

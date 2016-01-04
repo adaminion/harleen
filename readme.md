@@ -89,7 +89,12 @@
 ## Changelog 0.4
 - Added form components registration in boot method.
 - Created text.blade.php form components.
+- Created textarea.blade.php form components.
 - Created select.blade.php form components.
-- Added sugar coat components.
+- Created number.blade.php form components.
+- Added view sugar components in shared.
 - Added Province model.
 - Added local driver '2011'.
+- Added actionName in helpers function.
+- Created Formation model.
+- Exported GCF class group from Fenrir.

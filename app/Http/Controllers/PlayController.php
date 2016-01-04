@@ -10,7 +10,7 @@ use App\Http\Requests\PlayFormRequest;
 use App\Http\Controllers\Controller;
 use App\Play;
 use App\Gcf;
-use App\Quinzel\PlayRepository;
+use App\Quinzel\Repository\PlayRepository;
 
 class PlayController extends Controller
 {

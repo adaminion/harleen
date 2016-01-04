@@ -104,3 +104,14 @@ function createPlayName($litho, $formation, $formationLvl, $agePeriod, $ageEpoch
 
     return $name;
 }
+
+/**
+ * Mengambil nama action yang telah dipanggil sebelumnya.
+ *
+ * @return  string
+ */
+function actionName()
+{
+    return substr(Route::currentRouteAction(),
+        strpos(Route::currentRouteAction(), '@') + 1);
+}

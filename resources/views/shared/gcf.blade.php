@@ -5,6 +5,22 @@
     </div>
   </div>
   <div class="panel-body">
-    GCF
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          Source Rock
+        </div>
+      </div>
+      <div class="panel-body">
+        {{
+          Form::bsSelect('src_data', 'Proven or analog', [
+            'Proven' => 'Proven',
+            'Analog' => 'Analog',
+          ])
+        }}
+      </div>
+    </div>
+
   </div>
 </div>

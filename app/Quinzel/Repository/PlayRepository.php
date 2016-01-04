@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Quinzel;
+namespace App\Quinzel\Repository;
 
 use App\User;
 use App\Play;

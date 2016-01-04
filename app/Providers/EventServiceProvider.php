@@ -36,6 +36,21 @@ class EventServiceProvider extends ServiceProvider
             'unit' => false
         ]);
 
+        Form::component('bsNumber', 'shared.components.number', [
+            'name',
+            'label',
+            'required' => false,
+            'unit' => false
+        ]);
+
+        Form::component('bsTextarea', 'shared.components.textarea', [
+            'name',
+            'label',
+            'required' => false,
+            'cols' => 60,
+            'rows' => 4
+        ]);
+
         Form::component('bsSelect', 'shared.components.select', [
             'name',
             'label',
@@ -44,13 +59,15 @@ class EventServiceProvider extends ServiceProvider
             'unit' => false
         ]);
 
-        Form::component('basin', 'shared.components.basin', ['name' => 'basin_name']);
-        Form::component('province', 'shared.components.province', ['name' => 'province_name']);
-        Form::component('analogTo', 'shared.components.analogTo', ['name' => 'analog_to']);
-        Form::component('analogDistance', 'shared.components.analogDistance', ['name' => 'analog_distance']);
-        Form::component('shore', 'shared.components.shore', ['name' => 'shore']);
-        Form::component('terrain', 'shared.components.terrain', ['name' => 'terrain']);
-        Form::component('nearbyField', 'shared.components.nearbyField', ['name' => 'nearby_field']);
-        Form::component('nearbyInfra', 'shared.components.nearbyInfra', ['name' => 'nearby_infra']);
+        // Sugar components
+        Form::component('basin', 'shared.sugar.basin', ['name' => 'basin_name']);
+        Form::component('province', 'shared.sugar.province', ['name' => 'province_name']);
+        Form::component('analogTo', 'shared.sugar.analogTo', ['name' => 'analog_to']);
+        Form::component('analogDistance', 'shared.sugar.analogDistance', ['name' => 'analog_distance']);
+        Form::component('shore', 'shared.sugar.shore', ['name' => 'shore']);
+        Form::component('terrain', 'shared.sugar.terrain', ['name' => 'terrain']);
+        Form::component('nearbyField', 'shared.sugar.nearbyField', ['name' => 'nearby_field']);
+        Form::component('nearbyInfra', 'shared.sugar.nearbyInfra', ['name' => 'nearby_infra']);
+        Form::component('remark', 'shared.sugar.remark', ['name' => 'remark']);
     }
 }
