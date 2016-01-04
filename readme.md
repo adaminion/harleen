@@ -106,3 +106,8 @@
 - Fixed Dynamic options pathway multiple migrations.
 - Finished GCF form.
 - Added dev.js debugging tools.
+- Removed glyphicon from navbar menu.
+- Added sys_year table to hold rps year record.
+- Created views.card to for card-type partial views.
+- Added helper function getActiveRPSYear.
+- Created SystemController to manage RPS year, notification, and other system functionality as well.

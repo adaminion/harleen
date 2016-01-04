@@ -1,5 +1,6 @@
 <?php
 
+use Carbon;
 use Illuminate\Database\Seeder;
 
 class GeneralSeeder extends Seeder
@@ -860,5 +861,12 @@ class GeneralSeeder extends Seeder
                 'working_area_id' => $archipelago['working_area_id']
             ]);
         }
+
+        DB::table('sys_year')->insert([
+            'rps_year' => '2015',
+            'begin' => '2015-05-01',
+            'end' => '2016-05-01',
+            'is_active' => 1
+        ]);
     }
 }

@@ -94,7 +94,6 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                  role="button" aria-haspopup="true" aria-expanded="false">
-                <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
                 Resources <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
@@ -110,35 +109,24 @@
           @endif
 
           @if (request()->user()->role === 'administrator' || request()->user()->role === 'developer')
-            <li>
-              <a href="{{ url('resources') }}">
-              <span class="glyphicon glyphicon-tint" aria-hidden="true"></span>
-              Resources
+            <li><a href="{{ url('resources') }}">Resources</a></li>
+            <li><a href="{{ url('account') }}">Account</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 role="button" aria-haspopup="true" aria-expanded="false">
+                System <span class="caret"></span>
               </a>
-            </li>
-            <li>
-              <a href="{{ url('account') }}">
-              <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-              Account
-              </a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('system/year') }}">RPS Year</a></li>
+              </ul>
             </li>
           @endif
 
           @if (request()->user()->role === 'developer')
-            <li>
-              <a href="{{ url('database') }}">
-              <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-              Database
-              </a>
-            </li>
+            <li><a href="{{ url('database') }}">Database</a></li>
           @endif
 
-          <li>
-            <a href="{{ url('logout') }}">
-              <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-              Logout
-            </a>
-          </li>
+          <li><a href="{{ url('logout') }}">Logout</a></li>
 
         </ul>
       </div>

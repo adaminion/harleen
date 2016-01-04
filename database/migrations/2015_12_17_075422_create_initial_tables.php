@@ -839,6 +839,14 @@ class CreateInitialTables extends Migration
             $table->unsignedInteger('discovery_id');
             $table->foreign('discovery_id')->references('id')->on('discovery');
         });
+
+        Schema::create('sys_year', function (Blueprint $table) {
+            $table->increments('id');
+            $table->char('rps_year', 4);
+            $table->date('begin');
+            $table->date('end');
+            $table->boolean('is_active');
+        });
     }
 
     /**
@@ -880,5 +888,7 @@ class CreateInitialTables extends Migration
 
         Schema::drop('hist_working_area');
         Schema::drop('working_area');
+
+        Schema::drop('sys_year');
     }
 }

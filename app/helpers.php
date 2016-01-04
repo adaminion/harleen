@@ -126,3 +126,13 @@ function controllerName()
     return current(explode('Controller',
         explode("\\", Route::currentRouteAction())[3]));
 }
+
+/**
+ * Mengambil tahun RPS berjalan.
+ */
+function getActiveRPSYear()
+{
+    return DB::table('sys_year')
+        ->where('is_active', '=', 1)
+        ->first();
+}
