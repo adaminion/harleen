@@ -6,6 +6,7 @@
 - [x] Find way to bind nice name with multiple model while error.
 - [ ] Migrate terrain with miles to km in seeder.
 - [ ] Migrate rps_year for each resources.
+- [ ] Compress fat assets.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
@@ -101,3 +102,6 @@
 - Exported GCF class group from Fenrir.
 - Created twoSelect.blade.php form components.
 - GCF form now will check if controller name is Play or not.
+- Web .htaccess compress.
+- Fixed Dynamic options pathway multiple migrations.
+- Finished GCF form.

@@ -37,7 +37,7 @@
     $requiredReservoir = false;
   }
 ?>
-{{ controllerName()}}
+
 <div class="panel panel-primary">
   <div class="panel-heading">
     <div class="panel-title">
@@ -63,13 +63,13 @@
         {{
           Form::twoSelect('Source formation',
             'src_formation', $formation, false, false,
-            'src_formation_level', $formationLevel, false, false)
+            'src_formation_level', $formationLevel)
         }}
 
         {{
           Form::twoSelect('Source age',
             'src_age_period', $age, false, false,
-            'src_age_epoch', $ageEpoch, false, false)
+            'src_age_epoch', $ageEpoch)
         }}
 
         {{
@@ -109,7 +109,7 @@
           ])
         }}
       </div>
-    </div>
+    </div> {{-- Source Rock --}}
 
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -133,7 +133,7 @@
         {{
           Form::twoSelect('Reservoir formation',
             'res_formation', $formation, $requiredReservoir, false,
-            'res_formation_level', $formationLevel, false, false)
+            'res_formation_level', $formationLevel)
         }}
 
         {{
@@ -172,7 +172,130 @@
             App\Quinzel\Gcf\Reservoir::factorOptions('secondary'))
         }}
       </div>
-    </div>
+    </div> {{-- Reservoir --}}
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          Trap
+        </div>
+      </div>
+      <div class="panel-body">
+        {{
+          Form::bsSelect('trp_data', 'Proven or analog', [
+            'Proven' => 'Proven',
+            'Analog' => 'Analog'
+          ], true)
+        }}
+
+        {{
+          Form::bsSelect('trp_type', 'Trapping type',
+            App\Quinzel\Gcf\Trap::factorOptions('trapType'), true)
+        }}
+
+        {{
+          Form::twoSelect('Trapping age',
+            'trp_age_period', $age, false, false,
+            'trp_age_epoch', $ageEpoch)
+        }}
+
+        {{
+          Form::bsSelect('trp_geometry', 'Trapping geometry',
+            App\Quinzel\Gcf\Trap::factorOptions('geometry'))
+        }}
+
+        {{
+          Form::bsSelect('trp_seal_type', 'Sealing type',
+            App\Quinzel\Gcf\Trap::factorOptions('sealType'))
+        }}
+
+        {{
+          Form::bsSelect('trp_seal_distribution', 'Sealing distribution',
+            App\Quinzel\Gcf\Trap::factorOptions('distribution'))
+        }}
+
+        {{
+          Form::bsSelect('trp_seal_continuity', 'Sealing continuity',
+            App\Quinzel\Gcf\Trap::factorOptions('continuity'))
+        }}
+
+        {{
+          Form::twoSelect('Sealing age',
+            'trp_seal_age_period', $age, false, false,
+            'trp_seal_age_epoch', $ageEpoch)
+        }}
+
+        {{
+          Form::twoSelect('Sealing formation',
+            'trp_seal_formation', $formation, false, false,
+            'trp_seal_formation_level', $formationLevel)
+        }}
+
+        {{
+          Form::bsSelect('trp_closure', 'Closure type',
+            App\Quinzel\Gcf\Trap::factorOptions('closure'))
+        }}
+      </div>
+    </div> {{-- Trap --}}
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">
+          Dynamic
+        </div>
+      </div>
+      <div class="panel-body">
+        {{
+          Form::bsSelect('dyn_data', 'Proven or analog', [
+            'Proven' => 'Proven',
+            'Analog' => 'Analog'
+          ], true)
+        }}
+
+        {{
+          Form::bsSelect('dyn_authenticate', 'Authenticate migration',
+            App\Quinzel\Gcf\Dynamic::factorOptions('migration'))
+        }}
+
+        {{
+          Form::bsSelect('dyn_kitchen', 'Trap position due to kitchen',
+            App\Quinzel\Gcf\Dynamic::factorOptions('kitchen'))
+        }}
+
+        {{
+          Form::bsSelect('dyn_tectonic', 'Tectonic order',
+            App\Quinzel\Gcf\Dynamic::factorOptions('tectonic'))
+        }}
+
+        {{
+          Form::twoSelect('Tectonic regime (earliest)',
+            'dyn_regime_early_period', $age, false, false,
+            'dyn_regime_early_epoch', $ageEpoch)
+        }}
+
+        {{
+          Form::twoSelect('Tectonic regime (latest)',
+            'dyn_regime_late_period', $age, false, false,
+            'dyn_regime_late_epoch', $ageEpoch)
+        }}
+
+        {{
+          Form::bsSelect('dyn_preservation', 'Segregation post entrapment',
+            App\Quinzel\Gcf\Dynamic::factorOptions('preservation'))
+        }}
+
+        {{
+          Form::bsSelect('dyn_pathway', 'Migration pathway',
+            App\Quinzel\Gcf\Dynamic::factorOptions('pathway'))
+        }}
+
+        {{
+          Form::twoSelect('Estimate migration age',
+            'dyn_age_period', $age, false, false,
+            'dyn_age_epoch', $ageEpoch)
+        }}
+      </div>
+    </div> {{-- Dynamic --}}
 
   </div>
 </div>

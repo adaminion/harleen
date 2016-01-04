@@ -66,7 +66,6 @@ class Dynamic extends AbstractCategory
         'pathway' => [
             'Vertical' => 0.7,
             'Horizontal' => 0.8,
-            'Multiple Direction' => 1,
             'Multiple Directions' => 1,
         ]
     ];
@@ -81,7 +80,7 @@ class Dynamic extends AbstractCategory
         'tectonic' => [],
         'preservation' => [],
         'pathway' => [
-            'Multiple Directions' => 'Multiple Direction'
+            'Multiple Direction' => 'Multiple Directions'
         ]
     ];
 
