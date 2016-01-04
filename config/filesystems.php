@@ -48,6 +48,11 @@ return [
             'root'   => storage_path('app'),
         ],
 
+        '2011' => [
+            'driver' => 'local',
+            'root'   => 'C:/Users/Adam/Desktop/Storage Center/Archive/Arsip Sumberdaya/2011/Data Source'
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',

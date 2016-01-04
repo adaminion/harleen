@@ -21,7 +21,10 @@
       </div>
       <div class="panel-body">
 
+        @if (request()->user()->working_area_id === 'WK1047')
         {{ Form::basin() }}
+        @endif
+
         {{ Form::province() }}
         {{ Form::analogTo() }}
         {{ Form::analogDistance() }}
@@ -34,7 +37,7 @@
     </div>
 
     @include('shared.gcf')
-   {{ Form::submit('Create new Play', ['class' => 'btn btn-primary']) }}
+  {{ Form::submit('Create new Play', ['class' => 'btn btn-primary']) }}
 
   {{ Form::close() }}
 </div>

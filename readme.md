@@ -5,6 +5,7 @@
 - [ ] Create Play store method.
 - [x] Find way to bind nice name with multiple model while error.
 - [ ] Migrate terrain with miles to km in seeder.
+- [ ] Migrate rps_year for each resources.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
@@ -91,3 +92,4 @@
 - Created select.blade.php form components.
 - Added sugar coat components.
 - Added Province model.
+- Added local driver '2011'.
