@@ -108,10 +108,21 @@ function createPlayName($litho, $formation, $formationLvl, $agePeriod, $ageEpoch
 /**
  * Mengambil nama action yang telah dipanggil sebelumnya.
  *
- * @return  string
+ * @return string
  */
 function actionName()
 {
     return substr(Route::currentRouteAction(),
         strpos(Route::currentRouteAction(), '@') + 1);
+}
+
+/**
+ * Mengambil nama controller dan menghilangkan string 'Controller'
+ *
+ * @return string
+ */
+function controllerName()
+{
+    return current(explode('Controller',
+        explode("\\", Route::currentRouteAction())[3]));
 }

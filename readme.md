@@ -95,6 +95,9 @@
 - Added view sugar components in shared.
 - Added Province model.
 - Added local driver '2011'.
-- Added actionName in helpers function.
+- Added helper function actionName.
+- Added helper function controllerName.
 - Created Formation model.
 - Exported GCF class group from Fenrir.
+- Created twoSelect.blade.php form components.
+- GCF form now will check if controller name is Play or not.

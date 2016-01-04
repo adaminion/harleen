@@ -46,12 +46,14 @@ abstract class AbstractCategory
     /**
      * Mengambil kumpulan opsi untuk faktor tertentu
      *
-     * @param  array $factor
+     * @param  string $factor
      * @raturn array
      */
-    public static function getFactorOptions($factor)
+    public static function factorOptions($factor)
     {
-        return array_keys($this->options[$factor]);
+        $options = array_keys(static::$options[$factor]);
+
+        return array_combine($options, $options);
     }
 
     /**

@@ -58,7 +58,17 @@ class EventServiceProvider extends ServiceProvider
             'unit' => false
         ]);
 
-        Form::component('manySelect', 'shared.components.manySelect', ['input']);
+        Form::component('twoSelect', 'shared.components.twoSelect', [
+            'label',
+            'nameA',
+            'choiceA',
+            'requiredA' => false,
+            'unitA' => false,
+            'nameB',
+            'choiceB',
+            'requiredB' => false,
+            'unitB' => false,
+        ]);
 
         // Sugar components
         Form::component('basin', 'shared.sugar.basin', ['name' => 'basin_name']);
