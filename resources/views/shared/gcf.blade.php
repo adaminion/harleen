@@ -16,8 +16,18 @@
         {{
           Form::bsSelect('src_data', 'Proven or analog', [
             'Proven' => 'Proven',
-            'Analog' => 'Analog',
-          ])
+            'Analog' => 'Analog'])
+        }}
+
+        {{
+          Form::bsSelect('src_formation', 'Source formation',
+            App\Formation::all()->lists('formation_name', 'formation_name'))
+        }}
+        
+        {{
+          Form::bsSelect('src_formation_level', 'Proven or analog', [
+            'Proven' => 'Proven',
+            'Analog' => 'Analog'])
         }}
       </div>
     </div>

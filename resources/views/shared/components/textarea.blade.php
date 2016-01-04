@@ -14,7 +14,7 @@
   @endif
     <div class="input-group">
 
-      {{ Form::textarea($name, null, ['class' => 'form-control', 'rows' => $rows, 'cols' => $cols]) }}
+      {{ Form::textarea($name, null, ['class' => 'form-control', 'rows' => $rows]) }}
 
     </div>
 

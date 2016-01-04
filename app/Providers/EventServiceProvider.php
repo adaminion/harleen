@@ -47,7 +47,6 @@ class EventServiceProvider extends ServiceProvider
             'name',
             'label',
             'required' => false,
-            'cols' => 60,
             'rows' => 4
         ]);
 
@@ -58,6 +57,8 @@ class EventServiceProvider extends ServiceProvider
             'required' => false,
             'unit' => false
         ]);
+
+        Form::component('manySelect', 'shared.components.manySelect', ['input']);
 
         // Sugar components
         Form::component('basin', 'shared.sugar.basin', ['name' => 'basin_name']);
