@@ -7,7 +7,7 @@
     {{ $label }}
   </label>
 
-  @if ($errors->has($name))
+  @if ($errors->has(squareToDot($name)))
   <div class="col-md-4 has-feedback has-error">
   @else
   <div class="col-md-4">
@@ -18,11 +18,11 @@
 
     </div>
 
-    @if ($errors->has($name))
+    @if ($errors->has(squareToDot($name)))
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first($name) }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name)) }}</p>
     @endif
   </div>
 </div>
