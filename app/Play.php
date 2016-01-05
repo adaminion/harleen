@@ -52,6 +52,18 @@ class Play extends Model
     ];
 
     /**
+     * Set mutator untuk setiap save Play atau update?
+     *
+     * @return void
+     */
+    public function setRpsYearAttribute()
+    {
+        $this->attributes['rps_year'] = DB::table('sys_year')
+            ->where('is_active', '=', 1)
+            ->value('rps_year');
+    }
+
+    /**
      * Mengambil wilayah kerja yang memiliki Play tersebut.
      *
      * @return  belongsTo

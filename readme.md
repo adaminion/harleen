@@ -111,3 +111,4 @@
 - Created views.card to for card-type partial views.
 - Added helper function getActiveRPSYear.
 - Created SystemController to manage RPS year, notification, and other system functionality as well.
+- Added mutator for Play rps_year.
