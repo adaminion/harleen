@@ -6,7 +6,7 @@
     <h1>Create New Play</h1>
   </div>
 
-  {{ Form::model($model, ['url' => 'play/store', 'class' => 'form-horizontal']) }}
+  {{ Form::model(['play' => $play, 'gcf' => $gcf], ['url' => 'play/store', 'class' => 'form-horizontal']) }}
 
     @if (App::environment('local'))
     <div class="panel panel-info">
@@ -35,6 +35,10 @@
         {{ Form::nearbyField('play[nearby_field]') }}
         {{ Form::nearbyInfra('play[nearby_infra]') }}
         {{ Form::remark('play[remark]') }}
+
+        @if (actionName() === 'update')
+        {{ Form::bsTextarea('play[update_reason]', 'Update reason', true) }}
+        @endif
       </div>
     </div>
 

@@ -33,19 +33,19 @@ class ResourcesController extends Controller
     /**
      * Perlihatkan summary (montage) untuk wilayah kerja yang ditentukan.
      *
-     * @param  string $working_area_id
+     * @param  string $workingAreaId
      * @return View
      */
-    public function summaryWorkingArea($working_area_id)
+    public function summaryWorkingArea($workingAreaId)
     {
         $data = [];
         $data['working_area_name'] = DB::table('working_area')
-            ->where('id', '=', $working_area_id)
+            ->where('id', '=', $workingAreaId)
             ->value('working_area_name');
 
         $data['contractor'] = DB::table('contractor_working_area as cwa')
             ->leftJoin('contractor', 'cwa.contractor_id', '=', 'contractor.id')
-            ->where('cwa.working_area_id', '=', $working_area_id)
+            ->where('cwa.workingAreaId', '=', $workingAreaId)
             ->value('contractor_name');
 
         return view('resources.summary', ['data' => $data]);

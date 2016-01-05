@@ -129,10 +129,24 @@ function controllerName()
 
 /**
  * Mengambil tahun RPS berjalan.
+ *
+ * @return array
  */
 function getActiveRPSYear()
 {
     return DB::table('sys_year')
         ->where('is_active', '=', 1)
         ->first();
+}
+
+/**
+ * Merubah name input html "parent[child]" menjadi "parent.child"
+ *
+ * @param  string $name
+ * @return string
+ */
+function squareToDot($name)
+{
+    $name = str_replace('[', '.', $name);
+    return str_replace(']', '', $name);
 }

@@ -32,7 +32,7 @@
               <td>{{ $play->name }}</td>
               <td>
                 <a href="#" class="btn btn-xs btn-primary">View</a>
-                <a href="#" class="btn btn-xs btn-success">Update</a>
+                <a href="{{ url('play/update/'.$play->id) }}" class="btn btn-xs btn-success">Update</a>
                 <a href="#" class="btn btn-xs btn-danger">Delete</a>
               </td>
             </tr>

@@ -114,3 +114,4 @@
 - Added mutator for Play rps_year.
 - Changed how field addressed as array of data.
 - Added store method in PlayController.
+- Fixed error message not shown when using array input.

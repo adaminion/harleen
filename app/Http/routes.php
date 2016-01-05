@@ -19,6 +19,7 @@ Route::get('contractor', 'ContractorController@index');
 
 Route::get('play', 'PlayController@index');
 Route::get('play/create', 'PlayController@create');
+Route::get('play/update/{playId}', 'PlayController@update');
 Route::post('play/store', 'PlayController@store');
 
 Route::get('administrator', 'AdministratorController@index');
@@ -31,7 +32,7 @@ Route::post('account/reset/all', 'AccountController@resetAllUserPass');
 Route::get('account/reset/all/export', 'AccountController@exportNewUserPass');
 
 Route::get('resources', 'ResourcesController@index');
-Route::get('resources/summary/wk/{working_area_id}',
+Route::get('resources/summary/wk/{workingAreaId}',
     'ResourcesController@summaryWorkingArea');
 
 Route::get('system/year', 'SystemController@year');

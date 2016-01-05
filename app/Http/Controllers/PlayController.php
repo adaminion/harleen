@@ -45,8 +45,21 @@ class PlayController extends Controller
     public function create()
     {
         return view('play.form', [
-            'model' => new Play,
+            'play' => new Play,
+            'gcf' => new Gcf,
             'submitButtonText' => 'Save new Play'
+        ]);
+    }
+
+    public function update($playId)
+    {
+        $play = Play::find($playId);
+        $gcf = Gcf::find($play->gcf_id);
+
+        return view('play.form', [
+            'play' => $play,
+            'gcf' => $gcf,
+            'submitButtonText' => 'Update Play'
         ]);
     }
 
