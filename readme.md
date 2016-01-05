@@ -116,3 +116,5 @@
 - Added store method in PlayController.
 - Fixed error message not shown when using array input.
 - Finished create and update Play features.
+- Added order number in Play index.
+- Changed PlayRepository collections sort data.

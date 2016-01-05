@@ -12,8 +12,8 @@ class PlayRepository
         $plays = Play::withTrashed()
             ->with('gcf')
             ->where('working_area_id', $user->working_area_id)
-            ->get()
-            ->sortByDesc('updated_at');
+            ->orderBy('updated_at', 'created_at')
+            ->get();
 
         return $plays->each(function ($item, $key) {
             $item->name = createPlayName(
