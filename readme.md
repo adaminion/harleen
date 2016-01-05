@@ -7,6 +7,7 @@
 - [ ] Migrate terrain with miles to km in seeder.
 - [ ] Migrate rps_year for each resources.
 - [ ] Compress fat assets.
+- [ ] Create authorization for Play.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
