@@ -54,7 +54,7 @@
       </div>
       <div class="panel-body">
         {{
-          Form::bsSelect('src_data', 'Proven or analog', [
+          Form::bsSelect('gcf[src_data]', 'Proven or analog', [
             'Proven' => 'Proven',
             'Analog' => 'Analog'
           ], true)
@@ -62,48 +62,48 @@
 
         {{
           Form::twoSelect('Source formation',
-            'src_formation', $formation, false, false,
-            'src_formation_level', $formationLevel)
+            'gcf[src_formation]', $formation, false, false,
+            'gcf[src_formation_level]', $formationLevel)
         }}
 
         {{
           Form::twoSelect('Source age',
-            'src_age_period', $age, false, false,
-            'src_age_epoch', $ageEpoch)
+            'gcf[src_age_period]', $age, false, false,
+            'gcf[src_age_epoch]', $ageEpoch)
         }}
 
         {{
-          Form::bsSelect('src_kerogen', 'Kerogen type',
+          Form::bsSelect('gcf[src_kerogen]', 'Kerogen type',
             App\Quinzel\Gcf\SourceRock::factorOptions('kerogen'))
         }}
 
         {{
-          Form::bsSelect('src_toc', 'Capacity (TOC)',
+          Form::bsSelect('gcf[src_capacity]', 'Capacity (TOC)',
             App\Quinzel\Gcf\SourceRock::factorOptions('toc'))
         }}
 
         {{
-          Form::bsSelect('src_hfu', 'Heatflow unit',
+          Form::bsSelect('gcf[src_heatflow]', 'Heatflow unit',
             App\Quinzel\Gcf\SourceRock::factorOptions('hfu'))
         }}
 
         {{
-          Form::bsSelect('src_distribution', 'Distribution',
+          Form::bsSelect('gcf[src_distribution]', 'Distribution',
             App\Quinzel\Gcf\SourceRock::factorOptions('distribution'))
         }}
 
         {{
-          Form::bsSelect('src_continuity', 'Continuity',
+          Form::bsSelect('gcf[src_continuity]', 'Continuity',
             App\Quinzel\Gcf\SourceRock::factorOptions('continuity'))
         }}
 
         {{
-          Form::bsSelect('src_maturity', 'Maturity',
+          Form::bsSelect('gcf[src_maturity]', 'Maturity',
             App\Quinzel\Gcf\SourceRock::factorOptions('maturity'))
         }}
 
         {{
-          Form::bsSelect('src_other', 'Other source rock', [
+          Form::bsSelect('gcf[src_other]', 'Other source rock', [
             'Yes' => 'Yes',
             'No' => 'No'
           ])
@@ -119,56 +119,56 @@
       </div>
       <div class="panel-body">
         {{
-          Form::bsSelect('res_data', 'Proven or analog', [
+          Form::bsSelect('gcf[res_data]', 'Proven or analog', [
             'Proven' => 'Proven',
             'Analog' => 'Analog'
           ], true)
         }}
 
         {{
-          Form::bsSelect('res_litho', 'Lithology',
+          Form::bsSelect('gcf[res_litho]', 'Lithology',
             App\Quinzel\Gcf\Reservoir::factorOptions('lithology'), $requiredReservoir)
         }}
 
         {{
           Form::twoSelect('Reservoir formation',
-            'res_formation', $formation, $requiredReservoir, false,
-            'res_formation_level', $formationLevel)
+            'gcf[res_formation]', $formation, $requiredReservoir, false,
+            'gcf[res_formation_level]', $formationLevel)
         }}
 
         {{
           Form::twoSelect('Reservoir age',
-            'res_age_period', $age, $requiredReservoir, false,
-            'res_age_epoch', $ageEpoch, true, false)
+            'gcf[res_age_period]', $age, $requiredReservoir, false,
+            'gcf[res_age_epoch]', $ageEpoch, true, false)
         }}
 
         {{
-          Form::bsSelect('res_dep_env', 'Depositional environment',
+          Form::bsSelect('gcf[res_dep_env]', 'Depositional environment',
             App\Quinzel\Gcf\Reservoir::factorOptions('environment'), $requiredReservoir)
         }}
 
         {{
-          Form::bsSelect('res_dep_set', 'Depositional setting',
+          Form::bsSelect('gcf[res_dep_set]', 'Depositional setting',
             App\Quinzel\Gcf\Reservoir::factorOptions('setting'))
         }}
 
         {{
-          Form::bsSelect('res_distribution', 'Reservoir distribution',
+          Form::bsSelect('gcf[res_distribution]', 'Reservoir distribution',
             App\Quinzel\Gcf\Reservoir::factorOptions('distribution'))
         }}
 
         {{
-          Form::bsSelect('res_continuity', 'Reservoir continuity',
+          Form::bsSelect('gcf[res_continuity]', 'Reservoir continuity',
             App\Quinzel\Gcf\Reservoir::factorOptions('continuity'))
         }}
 
         {{
-          Form::bsSelect('res_primary', 'Average primary porosity',
+          Form::bsSelect('gcf[res_primary]', 'Average primary porosity',
             App\Quinzel\Gcf\Reservoir::factorOptions('primary'), false, '%')
         }}
 
         {{
-          Form::bsSelect('res_second', 'Secondary porosity',
+          Form::bsSelect('gcf[res_second]', 'Secondary porosity',
             App\Quinzel\Gcf\Reservoir::factorOptions('secondary'))
         }}
       </div>
@@ -182,57 +182,57 @@
       </div>
       <div class="panel-body">
         {{
-          Form::bsSelect('trp_data', 'Proven or analog', [
+          Form::bsSelect('gcf[trp_data]', 'Proven or analog', [
             'Proven' => 'Proven',
             'Analog' => 'Analog'
           ], true)
         }}
 
         {{
-          Form::bsSelect('trp_type', 'Trapping type',
+          Form::bsSelect('gcf[trp_type]', 'Trapping type',
             App\Quinzel\Gcf\Trap::factorOptions('trapType'), true)
         }}
 
         {{
           Form::twoSelect('Trapping age',
-            'trp_age_period', $age, false, false,
-            'trp_age_epoch', $ageEpoch)
+            'gcf[trp_age_period]', $age, false, false,
+            'gcf[trp_age_epoch]', $ageEpoch)
         }}
 
         {{
-          Form::bsSelect('trp_geometry', 'Trapping geometry',
+          Form::bsSelect('gcf[trp_geometry]', 'Trapping geometry',
             App\Quinzel\Gcf\Trap::factorOptions('geometry'))
         }}
 
         {{
-          Form::bsSelect('trp_seal_type', 'Sealing type',
+          Form::bsSelect('gcf[trp_seal_type]', 'Sealing type',
             App\Quinzel\Gcf\Trap::factorOptions('sealType'))
         }}
 
         {{
-          Form::bsSelect('trp_seal_distribution', 'Sealing distribution',
+          Form::bsSelect('gcf[trp_seal_distribution]', 'Sealing distribution',
             App\Quinzel\Gcf\Trap::factorOptions('distribution'))
         }}
 
         {{
-          Form::bsSelect('trp_seal_continuity', 'Sealing continuity',
+          Form::bsSelect('gcf[trp_seal_continuity]', 'Sealing continuity',
             App\Quinzel\Gcf\Trap::factorOptions('continuity'))
         }}
 
         {{
           Form::twoSelect('Sealing age',
-            'trp_seal_age_period', $age, false, false,
-            'trp_seal_age_epoch', $ageEpoch)
+            'gcf[trp_seal_age_period]', $age, false, false,
+            'gcf[trp_seal_age_epoch]', $ageEpoch)
         }}
 
         {{
           Form::twoSelect('Sealing formation',
-            'trp_seal_formation', $formation, false, false,
-            'trp_seal_formation_level', $formationLevel)
+            'gcf[trp_seal_formation]', $formation, false, false,
+            'gcf[trp_seal_formation_level]', $formationLevel)
         }}
 
         {{
-          Form::bsSelect('trp_closure', 'Closure type',
+          Form::bsSelect('gcf[trp_closure]', 'Closure type',
             App\Quinzel\Gcf\Trap::factorOptions('closure'))
         }}
       </div>
@@ -246,53 +246,53 @@
       </div>
       <div class="panel-body">
         {{
-          Form::bsSelect('dyn_data', 'Proven or analog', [
+          Form::bsSelect('gcf[dyn_data]', 'Proven or analog', [
             'Proven' => 'Proven',
             'Analog' => 'Analog'
           ], true)
         }}
 
         {{
-          Form::bsSelect('dyn_authenticate', 'Authenticate migration',
+          Form::bsSelect('gcf[dyn_authenticate]', 'Authenticate migration',
             App\Quinzel\Gcf\Dynamic::factorOptions('migration'))
         }}
 
         {{
-          Form::bsSelect('dyn_kitchen', 'Trap position due to kitchen',
+          Form::bsSelect('gcf[dyn_kitchen]', 'Trap position due to kitchen',
             App\Quinzel\Gcf\Dynamic::factorOptions('kitchen'))
         }}
 
         {{
-          Form::bsSelect('dyn_tectonic', 'Tectonic order',
+          Form::bsSelect('gcf[dyn_tectonic]', 'Tectonic order',
             App\Quinzel\Gcf\Dynamic::factorOptions('tectonic'))
         }}
 
         {{
           Form::twoSelect('Tectonic regime (earliest)',
-            'dyn_regime_early_period', $age, false, false,
-            'dyn_regime_early_epoch', $ageEpoch)
+            'gcf[dyn_regime_early_period]', $age, false, false,
+            'gcf[dyn_regime_early_epoch]', $ageEpoch)
         }}
 
         {{
           Form::twoSelect('Tectonic regime (latest)',
-            'dyn_regime_late_period', $age, false, false,
-            'dyn_regime_late_epoch', $ageEpoch)
+            'gcf[dyn_regime_late_period]', $age, false, false,
+            'gcf[dyn_regime_late_epoch]', $ageEpoch)
         }}
 
         {{
-          Form::bsSelect('dyn_preservation', 'Segregation post entrapment',
+          Form::bsSelect('gcf[dyn_preservation]', 'Segregation post entrapment',
             App\Quinzel\Gcf\Dynamic::factorOptions('preservation'))
         }}
 
         {{
-          Form::bsSelect('dyn_pathway', 'Migration pathway',
+          Form::bsSelect('gcf[dyn_pathway]', 'Migration pathway',
             App\Quinzel\Gcf\Dynamic::factorOptions('pathway'))
         }}
 
         {{
           Form::twoSelect('Estimate migration age',
-            'dyn_age_period', $age, false, false,
-            'dyn_age_epoch', $ageEpoch)
+            'gcf[dyn_age_period]', $age, false, false,
+            'gcf[dyn_age_epoch]', $ageEpoch)
         }}
       </div>
     </div> {{-- Dynamic --}}

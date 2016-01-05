@@ -112,3 +112,5 @@
 - Added helper function getActiveRPSYear.
 - Created SystemController to manage RPS year, notification, and other system functionality as well.
 - Added mutator for Play rps_year.
+- Changed how field addressed as array of data.
+- Added store method in PlayController.

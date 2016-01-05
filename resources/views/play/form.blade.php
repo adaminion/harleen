@@ -24,17 +24,17 @@
       </div>
       <div class="panel-body">
         @if (request()->user()->working_area_id === 'WK1047')
-        {{ Form::basin() }}
+        {{ Form::basin('play[basin_name]') }}
         @endif
 
-        {{ Form::province() }}
-        {{ Form::analogTo() }}
-        {{ Form::analogDistance() }}
-        {{ Form::shore() }}
-        {{ Form::terrain() }}
-        {{ Form::nearbyField() }}
-        {{ Form::nearbyInfra() }}
-        {{ Form::remark() }}
+        {{ Form::province('play[province_name]') }}
+        {{ Form::analogTo('play[analog_to]') }}
+        {{ Form::analogDistance('play[analog_distance]') }}
+        {{ Form::shore('play[shore]') }}
+        {{ Form::terrain('play[terrain]') }}
+        {{ Form::nearbyField('play[nearby_field]') }}
+        {{ Form::nearbyInfra('play[nearby_infra]') }}
+        {{ Form::remark('play[remark]') }}
       </div>
     </div>
 
@@ -53,9 +53,9 @@
           </div>
         </div>
         <div class="panel-body">
-          {{ Form::bsText('s2_year', 'Acquisition year') }}
-          {{ Form::bsNumber('s2_crossline', 'Total seismic crossline') }}
-          {{ Form::bsNumber('s2_line_distance', 'Seismic intervall distance', false, 'Km') }}
+          {{ Form::bsText('play[s2_year]', 'Acquisition year') }}
+          {{ Form::bsNumber('play[s2_crossline]', 'Total seismic crossline') }}
+          {{ Form::bsNumber('play[s2_line_distance]', 'Seismic intervall distance', false, 'Km') }}
         </div>
       </div> {{-- 2D Seismic --}}
 
@@ -66,8 +66,8 @@
           </div>
         </div>
         <div class="panel-body">
-          {{ Form::bsText('chem_sample', 'Total sample') }}
-          {{ Form::bsNumber('chem_depth', 'Survey range depth', false, 'Feet') }}
+          {{ Form::bsText('play[chem_sample]', 'Total sample') }}
+          {{ Form::bsNumber('play[chem_depth]', 'Survey range depth', false, 'Feet') }}
         </div>
       </div> {{-- Geochemistry --}}
 
@@ -78,8 +78,8 @@
           </div>
         </div>
         <div class="panel-body">
-          {{ Form::bsNumber('grav_acreage', 'Survey acreage', false, 'Acre') }}
-          {{ Form::bsNumber('grav_depth', 'Survey range depth', false, 'Feet') }}
+          {{ Form::bsNumber('play[grav_acreage]', 'Survey acreage', false, 'Acre') }}
+          {{ Form::bsNumber('play[grav_depth]', 'Survey range depth', false, 'Feet') }}
         </div>
       </div> {{-- Gravity --}}
 
@@ -90,7 +90,7 @@
           </div>
         </div>
         <div class="panel-body">
-          {{ Form::bsNumber('resi_acreage', 'Survey acreage', false, 'Acre') }}
+          {{ Form::bsNumber('play[resi_acreage]', 'Survey acreage', false, 'Acre') }}
         </div>
       </div> {{-- Resistivity --}}
 

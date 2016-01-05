@@ -52,6 +52,13 @@ class PlayController extends Controller
 
     public function store(PlayFormRequest $request)
     {
-        return false;
+        $gcf = new Gcf($request['gcf']);
+        $gcf->save();
+        $play = new Play($request['play']);
+        $play->working_area_id = $request->user()->working_area_id;
+        $play->gcf_id = $gcf->id;
+        $play->save();
+
+        return redirect('play');
     }
 }

@@ -25,26 +25,26 @@ class PlayFormRequest extends Request
     public function rules()
     {
         return [
-            'basin_name' => 'sometimes|required',
-            'province_name' => 'required',
-            'analog_to' => 'required',
-            'analog_distance' => 'required',
-            'shore' => 'required',
-            'terrain' => 'required',
-            'nearby_field' => 'required',
-            'nearby_infra' => 'required',
-            'update_reason' => 'sometimes|required',
-            'delete_reason' => 'sometimes|required',
-            'src_data' => 'required',
-            'res_data' => 'required',
-            'res_litho' => 'required',
-            'res_formation' => 'required',
-            'res_age_period' => 'required',
-            'res_age_epoch' => 'required',
-            'res_dep_env' => 'required',
-            'trp_data' => 'required',
-            'trp_type' => 'required',
-            'dyn_data' => 'required'
+            'play.basin_name' => 'sometimes|required',
+            'play.province_name' => 'required',
+            'play.analog_to' => 'required',
+            'play.analog_distance' => 'required',
+            'play.shore' => 'required',
+            'play.terrain' => 'required',
+            'play.nearby_field' => 'required',
+            'play.nearby_infra' => 'required',
+            'play.update_reason' => 'sometimes|required',
+            'play.delete_reason' => 'sometimes|required',
+            'gcf.src_data' => 'required',
+            'gcf.res_data' => 'required',
+            'gcf.res_litho' => 'required',
+            'gcf.res_formation' => 'required',
+            'gcf.res_age_period' => 'required',
+            'gcf.res_age_epoch' => 'required',
+            'gcf.res_dep_env' => 'required',
+            'gcf.trp_data' => 'required',
+            'gcf.trp_type' => 'required',
+            'gcf.dyn_data' => 'required'
         ];
     }
 }
