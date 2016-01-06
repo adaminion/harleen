@@ -93,6 +93,9 @@ class PlayController extends Controller
         $play->gcf_id = $gcf->id;
         $play->save();
 
+        session()->flash('success',
+            'Play successfully created, thank you very much!');
+
         return redirect('play');
     }
 
@@ -131,6 +134,9 @@ class PlayController extends Controller
 
         $play->update($request['play']);
         $gcf->update($request['gcf']);
+
+        session()->flash('success',
+            'Play successfully updated, thank you very much!');
 
         return redirect('play');
     }

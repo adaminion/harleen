@@ -6,6 +6,11 @@
 
 @section('content')
   <div class="container">
+
+    @if (session()->has('success'))
+    @include('shared.alert')
+    @endif
+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title">
