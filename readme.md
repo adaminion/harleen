@@ -120,3 +120,5 @@
 - Added order number in Play index.
 - Changed PlayRepository collections sort data.
 - Finished view Play features.
+- Created error page for 404.
+- Created authorization for Play update and view.

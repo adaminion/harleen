@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
+use Gate;
 use App\Http\Requests;
 use App\Http\Requests\PlayFormRequest;
 use App\Http\Controllers\Controller;
@@ -47,6 +48,9 @@ class PlayController extends Controller
         $play = Play::find($playId);
         $gcf = Gcf::find($play->gcf_id);
 
+        if (Gate::denies('play', $play)) {
+            abort(404);
+        }
         return view('play.form', [
             'play' => $play,
             'gcf' => $gcf
@@ -67,6 +71,10 @@ class PlayController extends Controller
         $play = Play::find($playId);
         $gcf = Gcf::find($play->gcf_id);
 
+        if (Gate::denies('play', $play)) {
+            abort(404);
+        }
+
         return view('play.form', [
             'play' => $play,
             'gcf' => $gcf,
@@ -76,9 +84,10 @@ class PlayController extends Controller
 
     public function store(PlayFormRequest $request)
     {
-        $gcf = new Gcf($request['gcf']);
-        $gcf->save();
         $play = new Play($request['play']);
+        $gcf = new Gcf($request['gcf']);
+
+        $gcf->save();
         $play->working_area_id = $request->user()->working_area_id;
         $play->gcf_id = $gcf->id;
         $play->save();
