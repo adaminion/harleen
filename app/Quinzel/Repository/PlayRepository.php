@@ -7,11 +7,10 @@ use App\Play;
 
 class PlayRepository
 {
-    public function index(User $user)
+    public function index($workingAreaId)
     {
-        $plays = Play::withTrashed()
-            ->with('gcf')
-            ->where('working_area_id', $user->working_area_id)
+        $plays = Play::with('gcf')
+            ->where('working_area_id', $workingAreaId)
             ->orderBy('updated_at', 'created_at')
             ->get();
 

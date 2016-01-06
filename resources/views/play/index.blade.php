@@ -17,7 +17,7 @@
           <thead>
             <tr>
               <th>#</th>
-              @if (request()->user()->working_area_id === 'WK1047')
+              @if ($workingAreaId === 'WK1047')
               <th>Basin</th>
               @endif
               <th>Play name</th>
@@ -28,14 +28,14 @@
             @foreach ($data as $index => $play)
             <tr>
               <td>{{ $index+1 }}</td>
-              @if (request()->user()->working_area_id === 'WK1047')
+              @if ($workingAreaId === 'WK1047')
               <td>{{ $play->basin_name }}</td>
               @endif
               <td>{{ $play->name }}</td>
               <td>
-                <a href="{{ url('play/view/' . $play->id) }}" class="btn btn-xs btn-primary">View</a>
-                <a href="{{ url('play/update/' . $play->id) }}" class="btn btn-xs btn-success">Update</a>
-                <a href="{{ url('play/delete/' . $play->id) }}" class="btn btn-xs btn-danger">Delete</a>
+                <a href="{{ url('play', [$play->id]) }}" class="btn btn-xs btn-primary">View</a>
+                <a href="{{ url('play', [$play->id, 'edit']) }}" class="btn btn-xs btn-success">Update</a>
+                <a href="{{ url('play', [$play->id, 'destroy']) }}" class="btn btn-xs btn-danger">Delete</a>
               </td>
             </tr>
             @endforeach

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Province extends Model
 {
     protected $table = 'province';
+    public $incrementing = false;
     public $timestamps = false;
 
     /**

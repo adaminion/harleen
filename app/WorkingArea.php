@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class WorkingArea extends Model
 {
     protected $table = 'working_area';
+    public $incrementing = false;
 
     protected $fillable = [
         'working_area_name',

@@ -2,12 +2,16 @@
 
 ## Todo
 - [ ] Add intermediate table attributes of contractor_working_area.
-- [ ] Create Play store method.
+- [x] Create Play store method.
 - [x] Find way to bind nice name with multiple model while error.
 - [ ] Migrate terrain with miles to km in seeder.
-- [ ] Migrate rps_year for each resources.
+- [ ] Insert rps_year for each migrated resources.
 - [ ] Compress fat assets.
-- [ ] Create authorization for Play.
+- [x] Create authorization for Play.
+- [ ] Change how update reason up in edit form.
+
+## Bugs
+- [x] Because InitialViewShare set to global, cause unauthenticated user error when login.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
@@ -122,3 +126,9 @@
 - Finished view Play features.
 - Created error page for 404.
 - Created authorization for Play update and view.
+- Changed play route into group and call middlware auth before.
+- Changed mostly all play controller action.
+- Created InitialViewShare middleware to initialize any view share method.
+- Fixed unauthenticate user can view all routes.
+- Added incrementing to false for any table that not used integer as PK.
+- Changed created_at and updated_at to use nullableTimestamps.

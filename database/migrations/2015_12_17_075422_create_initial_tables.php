@@ -61,7 +61,7 @@ class CreateInitialTables extends Migration
             $table->string('enc_password', 60);
             $table->rememberToken();
             $table->string('role')->default('contractor', 100);
-            $table->timestamps();
+            $table->nullableTimestamps();
 
             $table->boolean('is_active')->default(true);
         });
@@ -359,8 +359,7 @@ class CreateInitialTables extends Migration
             $table->string('grav_depth', 100)->nullable();
             $table->string('resi_acreage', 100)->nullable();
 
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
+            $table->nullableTimestamps();
             $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -460,10 +459,9 @@ class CreateInitialTables extends Migration
             $table->string('oter_year', 100)->nullable();
             $table->text('oter_remark')->nullable();
 
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('upgrade_at')->nullable();
+            $table->nullableTimestamps();
             $table->softDeletes();
+            $table->dateTime('upgrade_at')->nullable();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
@@ -560,10 +558,9 @@ class CreateInitialTables extends Migration
             $table->float('sat_p50');
             $table->float('sat_p10')->nullable();
 
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('upgrade_at')->nullable();
+            $table->nullableTimestamps();
             $table->softDeletes();
+            $table->dateTime('upgrade_at')->nullable();
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -639,8 +636,7 @@ class CreateInitialTables extends Migration
             $table->string('gas_gravity', 100)->nullable();
             $table->string('condensate_gravity', 100)->nullable();
 
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
+            $table->nullableTimestamps();
             $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -673,10 +669,9 @@ class CreateInitialTables extends Migration
             $table->string('nearby_infra', 100);
             $table->text('remark')->nullable();
 
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('upgrade_at')->nullable();
+            $table->nullableTimestamps();
             $table->softDeletes();
+            $table->dateTime('upgrade_at')->nullable();
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -709,10 +704,9 @@ class CreateInitialTables extends Migration
             $table->string('nearby_infra', 100);
             $table->text('remark')->nullable();
 
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
-            $table->dateTime('upgrade_at')->nullable();
+            $table->nullableTimestamps();
             $table->softDeletes();
+            $table->dateTime('upgrade_at')->nullable();
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
@@ -744,8 +738,7 @@ class CreateInitialTables extends Migration
             $table->string('gradient_pressure', 100)->nullable();
             $table->string('reservoir_temp', 100)->nullable();
 
-            $table->dateTime('created_at');
-            $table->dateTime('updated_at')->nullable();
+            $table->nullableTimestamps();
             $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();

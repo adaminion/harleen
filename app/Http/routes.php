@@ -17,11 +17,15 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 
 Route::get('contractor', 'ContractorController@index');
 
-Route::get('play', 'PlayController@index');
-Route::get('play/create', 'PlayController@create');
-Route::get('play/view/{playId}', 'PlayController@read');
-Route::get('play/update/{playId}', 'PlayController@update');
-Route::post('play/store', 'PlayController@store');
+Route::group(['prefix' => 'play', 'middleware' => 'auth'], function() {
+    Route::get('/', 'PlayController@index');
+    Route::get('/create', 'PlayController@create');
+    Route::post('/', 'PlayController@store');
+    Route::get('{id}', 'PlayController@show');
+    Route::get('{id}/edit', 'PlayController@edit');
+    Route::put('{id}', 'PlayController@update');
+    Route::delete('{id}', 'PlayController@destroy');
+});
 
 Route::get('administrator', 'AdministratorController@index');
 

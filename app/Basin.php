@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Basin extends Model
 {
     protected $table = 'basin';
+    public $incrementing = false;
     public $timestamps = false;
 
     /**

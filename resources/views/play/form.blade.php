@@ -6,7 +6,10 @@
     <h1>Create New Play</h1>
   </div>
 
-  {{ Form::model(['play' => $play, 'gcf' => $gcf], ['url' => 'play/store', 'class' => 'form-horizontal']) }}
+  {{
+    Form::model(['play' => $play, 'gcf' => $gcf],
+      ['url' => $url, 'method' => $method, 'class' => 'form-horizontal'])
+  }}
 
     @if (App::environment('local'))
     <div class="panel panel-info">
@@ -103,7 +106,7 @@
 
     @include('shared.gcf')
 
-    @if (actionName() !== 'read')
+    @if (isset($submitButtonText))
     <div class="text-center" style="margin-bottom: 15px;">
       {{ Form::submit($submitButtonText, ['class' => 'btn btn-primary']) }}
     </div>
