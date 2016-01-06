@@ -19,6 +19,7 @@ Route::get('contractor', 'ContractorController@index');
 
 Route::get('play', 'PlayController@index');
 Route::get('play/create', 'PlayController@create');
+Route::get('play/view/{playId}', 'PlayController@read');
 Route::get('play/update/{playId}', 'PlayController@update');
 Route::post('play/store', 'PlayController@store');
 

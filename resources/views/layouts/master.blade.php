@@ -151,9 +151,6 @@
            alt="Logo SKK Migas" width="10%">
       <p class="text-muted">
         Copyright &copy; {{ date('Y') }} SKK Migas.
-        <a href="#">Site Map</a> &middot;
-        <a href="#">Contact Us</a> &middot;
-        <a href="#">Terms</a>
       </p>
     </div>
   </footer>

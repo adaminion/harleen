@@ -119,3 +119,4 @@
 - Finished create and update Play features.
 - Added order number in Play index.
 - Changed PlayRepository collections sort data.
+- Finished view Play features.

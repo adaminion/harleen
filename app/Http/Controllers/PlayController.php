@@ -42,6 +42,17 @@ class PlayController extends Controller
         ]);
     }
 
+    public function read($playId)
+    {
+        $play = Play::find($playId);
+        $gcf = Gcf::find($play->gcf_id);
+
+        return view('play.form', [
+            'play' => $play,
+            'gcf' => $gcf
+        ]);
+    }
+
     public function create()
     {
         return view('play.form', [

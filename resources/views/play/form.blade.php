@@ -103,9 +103,11 @@
 
     @include('shared.gcf')
 
+    @if (actionName() !== 'read')
     <div class="text-center" style="margin-bottom: 15px;">
       {{ Form::submit($submitButtonText, ['class' => 'btn btn-primary']) }}
     </div>
+    @endif
 
   {{ Form::close() }}
 </div>
