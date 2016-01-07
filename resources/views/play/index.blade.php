@@ -8,7 +8,7 @@
   <div class="container">
 
     @if (session()->has('success'))
-    @include('shared.alert')
+    @include('shared.notification.success')
     @endif
 
     <div class="panel panel-primary">

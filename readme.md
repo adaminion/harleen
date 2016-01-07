@@ -132,3 +132,6 @@
 - Fixed unauthenticate user can view all routes.
 - Added incrementing to false for any table that not used integer as PK.
 - Changed created_at and updated_at to use nullableTimestamps.
+
+## Changelog 0.5
+- Moved all alert and modal to shared/notification.
