@@ -146,7 +146,8 @@ class PlayController extends Controller
     public function destroy($id)
     {
         // TODO: Check if play can be deleted.
-        Play::find($id)->delete();
+        $play = Play::findOrFail($id);
+        $play->delete();
 
         return redirect('play');
     }

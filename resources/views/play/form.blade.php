@@ -1,24 +1,26 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
-  <div class="text-center page-title">
-    <h1>Create New Play</h1>
-  </div>
+  <div class="container">
+    <div class="text-center page-title">
+      <h1>Create New Play</h1>
+    </div>
 
-  {{
-    Form::model(['play' => $play, 'gcf' => $gcf],
-      ['url' => $url, 'method' => $method, 'class' => 'form-horizontal'])
-  }}
+    {{
+      Form::model(['play' => $play, 'gcf' => $gcf],
+        ['url' => $url, 'method' => $method,
+          'class' => 'form-horizontal', 'id' => 'form-main'])
+    }}
 
     @if (App::environment('local'))
-    <div class="panel panel-info">
-      <div class="panel-heading">Dev Toolbox</div>
-      <div class="panel-body">
-        <a id="devPlaySampleInput" href="#" class="btn btn-success">Sample</a>
+      <div class="panel panel-info">
+        <div class="panel-heading">Dev Toolbox</div>
+        <div class="panel-body">
+          <a id="devPlaySampleInput" href="#" class="btn btn-success">Sample</a>
+        </div>
       </div>
-    </div>
     @endif
+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title">
@@ -27,7 +29,7 @@
       </div>
       <div class="panel-body">
         @if (request()->user()->working_area_id === 'WK1047')
-        {{ Form::basin('play[basin_name]') }}
+          {{ Form::basin('play[basin_name]') }}
         @endif
 
         {{ Form::province('play[province_name]') }}
@@ -40,7 +42,7 @@
         {{ Form::remark('play[remark]') }}
 
         @if (actionName() === 'update')
-        {{ Form::bsTextarea('play[update_reason]', 'Update reason', true) }}
+          {{ Form::bsTextarea('play[update_reason]', 'Update reason', true) }}
         @endif
       </div>
     </div>
@@ -107,17 +109,19 @@
     @include('shared.gcf')
 
     @if (isset($submitButtonText))
-    <div class="text-center" style="margin-bottom: 15px;">
-      {{ Form::submit($submitButtonText, ['class' => 'btn btn-primary']) }}
-    </div>
+      <div class="text-center" style="margin-bottom: 15px;">
+        {{ Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'id' => 'submit-button']) }}
+      </div>
     @endif
 
-  {{ Form::close() }}
-</div>
+    {{ Form::close() }}
+  </div>
 @endsection
 
-@section('js')
-@if (App::environment('local'))
-<script src="{{ asset('js/dev.js') }}"></script>
-@endif
-@endsection
+@push('js')
+  @if (App::environment('local'))
+    <script src="{{ asset('js/dev.js') }}"></script>
+  @endif
+
+  <script src="{{ asset('js/form.js') }}"></script>
+@endpush

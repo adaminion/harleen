@@ -135,3 +135,5 @@
 
 ## Changelog 0.5
 - Moved all alert and modal to shared/notification.
+- Added form.js to help form functionality in general.
+- Changed yield for javascript and css to stack.

@@ -1,14 +1,13 @@
 @extends('layouts.master')
 
-@section('css')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}">
-@endsection
+@push('css')
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}">
+@endpush
 
 @section('content')
   <div class="container">
-
     @if (session()->has('success'))
-    @include('shared.notification.success')
+      @include('shared.notification.success')
     @endif
 
     <div class="panel panel-primary">
@@ -22,27 +21,31 @@
           <thead>
             <tr>
               <th>#</th>
+
               @if ($workingAreaId === 'WK1047')
-              <th>Basin</th>
+                <th>Basin</th>
               @endif
+
               <th>Play name</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($data as $index => $play)
-            <tr>
-              <td>{{ $index+1 }}</td>
-              @if ($workingAreaId === 'WK1047')
-              <td>{{ $play->basin_name }}</td>
-              @endif
-              <td>{{ $play->name }}</td>
-              <td>
-                <a href="{{ url('play', [$play->id]) }}" class="btn btn-xs btn-primary">View</a>
-                <a href="{{ url('play', [$play->id, 'edit']) }}" class="btn btn-xs btn-success">Update</a>
-                <a href="{{ url('play', [$play->id, 'destroy']) }}" class="btn btn-xs btn-danger">Delete</a>
-              </td>
-            </tr>
+              <tr>
+                <td>{{ $index+1 }}</td>
+
+                @if ($workingAreaId === 'WK1047')
+                  <td>{{ $play->basin_name }}</td>
+                @endif
+
+                <td>{{ $play->name }}</td>
+                <td>
+                  <a href="{{ url('play', [$play->id]) }}" class="btn btn-xs btn-primary">View</a>
+                  <a href="{{ url('play', [$play->id, 'edit']) }}" class="btn btn-xs btn-success">Update</a>
+                  <a href="#" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                </td>
+              </tr>
             @endforeach
           </tbody>
         </table>
@@ -56,18 +59,21 @@
       </div>
     </div>
   </div>
+
+  @include('shared.notification.delete', [
+    'title' => 'You are about to delete Play'])
 @endsection
 
-@section('js')
-<script src="{{ asset('js/datatables.min.js') }}"></script>
-<script>
-  $(document).ready(function() {
-    $('#resources-table').DataTable({
-      'oLanguage': {
-        'sSearch': 'Filter '
-      },
-      'aaSorting': [],
+@push('js')
+  <script src="{{ asset('js/datatables.min.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+      $('#resources-table').DataTable({
+        'oLanguage': {
+          'sSearch': 'Filter '
+        },
+        'aaSorting': [],
+      });
     });
-  });
-</script>
-@endsection
+  </script>
+@endpush

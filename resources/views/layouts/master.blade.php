@@ -66,7 +66,7 @@
       padding: 5px 10px 5px 10px;
     }
   </style>
-  @yield('css')
+  @stack('css')
 </head>
 
 <body>
@@ -157,6 +157,6 @@
 
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-  @yield('js')
+  @stack('js')
 </body>
 </html>

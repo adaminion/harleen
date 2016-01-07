@@ -53,47 +53,47 @@
   </div>
 @endsection
 
-@section('js')
-<script src="{{ asset('js/blockui.min.js') }}"></script>
-<script>
-  $(document).ready(function() {
-    $('#btn-reset').click(function() {
-      $('#modal-reset').modal('toggle');
-      $.blockUI({
-        css: {
-          border: 'none',
-          opacity: 1,
-          backgroundColor: '#34495e',
-          color: '#fff',
-          left: 0,
-          width: '100%',
-          paddingLeft: '10%',
-          paddingBottom: '17px',
-          textAlign: 'left',
-        },
-        message: '<h2>A moment.<br/>Resetting all user and password.</h2>',
-        baseZ: 2000
-      });
+@push('js')
+  <script src="{{ asset('js/blockui.min.js') }}"></script>
+  <script>
+    $(document).ready(function() {
+      $('#btn-reset').click(function() {
+        $('#modal-reset').modal('toggle');
+        $.blockUI({
+          css: {
+            border: 'none',
+            opacity: 1,
+            backgroundColor: '#34495e',
+            color: '#fff',
+            left: 0,
+            width: '100%',
+            paddingLeft: '10%',
+            paddingBottom: '17px',
+            textAlign: 'left',
+          },
+          message: '<h2>A moment.<br/>Resetting all user and password.</h2>',
+          baseZ: 2000
+        });
 
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-Token': $('input[name=_token]').val();
-        }
-      });
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-Token': $('input[name=_token]').val();
+          }
+        });
 
-      $.ajax({
-        url: 'account/reset/all',
-        type: 'POST',
-        dataType: 'text',
-        success: function(response) {
-          $.unblockUI();
-          window.location.href = response;
-        },
-        complete: function(xhr, status) {
-          $.unblockUI();
-        }
+        $.ajax({
+          url: 'account/reset/all',
+          type: 'POST',
+          dataType: 'text',
+          success: function(response) {
+            $.unblockUI();
+            window.location.href = response;
+          },
+          complete: function(xhr, status) {
+            $.unblockUI();
+          }
+        });
       });
     });
-  });
-</script>
-@endsection
+  </script>
+@endpush
