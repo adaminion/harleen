@@ -41,7 +41,7 @@
         {{ Form::nearbyInfra('play[nearby_infra]') }}
         {{ Form::remark('play[remark]') }}
 
-        @if (actionName() === 'update')
+        @if (actionName() === 'edit')
           {{ Form::bsTextarea('play[update_reason]', 'Update reason', true) }}
         @endif
       </div>

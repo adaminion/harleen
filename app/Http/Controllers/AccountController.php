@@ -24,13 +24,12 @@ class AccountController extends Controller
     }
 
     /**
-     * Using createUserPass() method, we will reset all KKKS
-     * user and password, what we mean by KKKS area any user
-     * with role of 'contractor'.
+     * Menggunakan method createUserPass(), kita akan mereset seluruh
+     * username dan password yang memiliki wilayah kerja (WKID).
      *
      * TODO: Using carbon to update updated_at column.
      *
-     * @return string
+     * @return string AJAX text
      */
     public function resetAllUserPass()
     {
@@ -56,7 +55,7 @@ class AccountController extends Controller
      * sumber username diambil dari flash session, sehingga jika flash
      * session kosong, maka akan return false.
      *
-     * @return Excel
+     * @return redirect
      */
     public function exportNewUserPass()
     {
@@ -77,10 +76,10 @@ class AccountController extends Controller
     }
 
     /**
-     * Reset username and password of Working Area.
+     * Reset username dan password seluruh wilayah kerja.
      *
-     * @param string $working_area_id
-     * @return void
+     * @param  string $working_area_id
+     * @return array
      */
     private function createUserPass($working_area_id)
     {
@@ -89,7 +88,7 @@ class AccountController extends Controller
         $wkName = DB::table('working_area')
             ->select(['working_area_name'])
             ->where('id', '=', $working_area_id)
-            ->first()->working_area_name;
+            ->value('working_area_name');
 
         DB::table('user')
             ->where('working_area_id', $working_area_id)

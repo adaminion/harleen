@@ -8,11 +8,13 @@
 - [ ] Insert rps_year for each migrated resources.
 - [ ] Compress fat assets.
 - [x] Create authorization for Play.
-- [ ] Change how update reason up in edit form.
+- [x] Change how update reason up in edit form.
+- [ ] When Play update update all linked resources GCF.
+- [ ] Complete delete Play process.
 
 ## Issues
-- [FIXED] Because InitialViewShare set to global, cause unauthenticated user error when login.
-- [FIXED] Mutator Play rps_year still not working.
+- FIXED Because InitialViewShare set to global, cause unauthenticated user error when login.
+- FIXED Mutator Play rps_year still not working.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
@@ -140,3 +142,5 @@
 - Added Laracasts/Javascript ~2.0.
 - Fixed account index javascript not send csrf_token.
 - Added delete modal detail for Play.
+- Changed update_reason form field to show only when action name is 'edit'.
+- Added PlayRepository with find resources.
