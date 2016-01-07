@@ -88,73 +88,70 @@
 
     $("a[name='button-delete']").click(function(e) {
       $.harleen.id = e.currentTarget.id;
-      $.harleen.name = $('#pn' + e.currentTarget.id).text();
+      $.harleen.name = $("#pn" + e.currentTarget.id).text();
 
       $.ajax({
-        header: {'csrftoken': '{{ csrf_token() }}'},
-        url: '{{ url('play/child') }}',
-        data: {id: $.harleen.id, '_token': '{{ csrf_token() }}'},
-        type: 'post',
-        dataType: 'json',
+        header: {"csrftoken": "{{ csrf_token() }}"},
+        url: "{{ url("play/child") }}",
+        data: {
+          id: $.harleen.id,
+          _token: "{{ csrf_token() }}"
+        },
+        type: "post",
+        dataType: "json",
         success: function(data) {
-          msg = '<p style="text-align:center;">'
-            + '<strong>' + $.harleen.name + '</strong></p>';
+          msg = "<p style='text-align:center;'>"
+            + "<strong>" + $.harleen.name + "</strong></p>";
 
           if (! $.isEmptyObject(data)) {
-            msg = msg + '<hr/><p>'
-              + 'But, looks like this Play already linked with other resources. '
-              + 'Either you change the Play of all linked resources, '
-              + '<strong>OR</strong> you may still delete this Play with '
-              + 'consequences that <strong>linked resources will also be deleted'
-              + '</strong>, and these are list of linked resources :'
-              + '</p><hr/>';
+            msg = msg + "<hr/><p>" + "{!! trans('crud.play.child') !!}" + "</p><hr/>";
 
             if (! $.isEmptyObject(data.lead)) {
-              msg = msg + '<div style="margin-left: 20px;">'
-                + '<strong>Lead</strong><ul>';
+              msg = msg + "<div style='margin-left: 20px;'>"
+                + "<strong>Lead</strong><ul>";
 
               $.each(data.lead, function(i, val) {
-                msg = msg + '<li>' + val.closure_name + '</li>'
+                msg = msg + "<li>" + val.closure_name + "</li>"
               });
 
-              msg = msg + '</ul></div>';
+              msg = msg + "</ul></div>";
             }
 
             if (! $.isEmptyObject(data.drillable)) {
-              msg = msg + '<div style="margin-left: 20px;">'
-                + '<strong>Drillable</strong><ul>';
+              msg = msg + "<div style='margin-left: 20px;'>"
+                + "<strong>Drillable</strong><ul>";
 
               $.each(data.drillable, function(i, val) {
-                msg = msg + '<li>' + val.closure_name + '</li>'
+                msg = msg + "<li>" + val.closure_name + "</li>"
               });
 
-              msg = msg + '</ul></div>';
+              msg = msg + "</ul></div>";
             }
 
             if (! $.isEmptyObject(data.postdrill)) {
-              msg = msg + '<div style="margin-left: 20px;">'
-                + '<strong>Postdrill</strong><ul>';
+              msg = msg + "<div style='margin-left: 20px;'>"
+                + "<strong>Postdrill</strong><ul>";
 
               $.each(data.postdrill, function(i, val) {
-                msg = msg + '<li>' + val.structure_name + '</li>'
+                msg = msg + "<li>" + val.structure_name + "</li>"
               });
 
-              msg = msg + '</ul></div>';
+              msg = msg + "</ul></div>";
             }
 
             if (! $.isEmptyObject(data.discovery)) {
-              msg = msg + '<div style="margin-left: 20px;">'
-                + '<strong>Discovery</strong><ul>';
+              msg = msg + "<div style='margin-left: 20px;'>"
+                + "<strong>Discovery</strong><ul>";
 
               $.each(data.discovery, function(i, val) {
-                msg = msg + '<li>' + val.structure_name + '</li>'
+                msg = msg + "<li>" + val.structure_name + "</li>"
               });
 
-              msg = msg + '</ul></div>';
+              msg = msg + "</ul></div>";
             }
           }
 
-          // Menghapus isian delete-msg
+          // Menghapus isian delete-msg sebelumnya
           $('#delete-msg').text('');
           $('#delete-msg').append(msg);
 
@@ -164,6 +161,26 @@
           alert('Sorry, there is some problem in our end');
         },
       });
-    })
+    });
+
+    $("#delete-yes").click(function(e) {
+      $.ajax({
+        header: {"csrftoken": "{{ csrf_token() }}"},
+        url: "play/destroy",
+        data: {
+          _token: "{{ csrf_token() }}",
+          id: $.harleen.id,
+          reason: $("#delete-reason").val()
+        },
+        type: "post",
+        dataType: "text",
+        success: function(data) {
+          $("#delete-modal").modal("hide");
+        },
+        error: function (xhr, status, errorThrown) {
+          alert('Sorry, there is some problem in our end');
+        },
+      });
+    });
   </script>
 @endpush

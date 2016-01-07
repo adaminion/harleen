@@ -144,13 +144,20 @@ class PlayController extends Controller
         return redirect('play');
     }
 
-    public function destroy($id)
+    // TODO: Check if play can be deleted.
+    public function destroy()
     {
-        // TODO: Check if play can be deleted.
-        $play = Play::findOrFail($id);
+        $play = Play::findOrFail(request('id'));
+
+        if (Gate::denies('update-play', $play)) {
+            abort(404);
+        }
+
+        $play->delete_reason = request('reason');
+        $play->save();
         $play->delete();
 
-        return redirect('play');
+        return 'done';
     }
 
     public function findLeadProspect()

@@ -19,12 +19,12 @@ Route::get('contractor', 'ContractorController@index');
 
 Route::group(['prefix' => 'play', 'middleware' => 'auth'], function() {
     Route::get('/', 'PlayController@index');
-    Route::get('/create', 'PlayController@create');
+    Route::get('create', 'PlayController@create');
     Route::post('/', 'PlayController@store');
     Route::get('{id}', 'PlayController@show');
     Route::get('{id}/edit', 'PlayController@edit');
     Route::put('{id}', 'PlayController@update');
-    Route::delete('{id}', 'PlayController@destroy');
+    Route::post('destroy', 'PlayController@destroy');
     Route::post('child', 'PlayController@findLeadProspect');
 });
 

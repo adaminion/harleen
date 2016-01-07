@@ -11,10 +11,12 @@
 - [x] Change how update reason up in edit form.
 - [ ] When Play update update all linked resources GCF.
 - [ ] Complete delete Play process.
+- [ ] Add success message when done deleting.
 
 ## Issues
 - FIXED Because InitialViewShare set to global, cause unauthenticated user error when login.
 - FIXED Mutator Play rps_year still not working.
+- Delete play process create another same record.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
@@ -144,3 +146,4 @@
 - Added delete modal detail for Play.
 - Changed update_reason form field to show only when action name is 'edit'.
 - Added PlayRepository with find resources.
+- Created lang/en/crud.php to write additional long text within CRUD operation.
