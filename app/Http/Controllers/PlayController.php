@@ -88,13 +88,16 @@ class PlayController extends Controller
                 ->value('basin_name');
         }
 
-        $gcf->save();
         $play->working_area_id = $this->workingAreaId;
         $play->gcf_id = $gcf->id;
+        $play->rps_year = DB::table('sys_year')
+            ->where('is_active', '=', 1)
+            ->value('rps_year');
+
+        $gcf->save();
         $play->save();
 
-        session()->flash('success',
-            'Play successfully created, thank you very much!');
+        session()->flash('success', 'Play successfully created');
 
         return redirect('play');
     }
@@ -135,8 +138,7 @@ class PlayController extends Controller
         $play->update($request['play']);
         $gcf->update($request['gcf']);
 
-        session()->flash('success',
-            'Play successfully updated, thank you very much!');
+        session()->flash('success', 'Play successfully updated');
 
         return redirect('play');
     }

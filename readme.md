@@ -10,8 +10,9 @@
 - [x] Create authorization for Play.
 - [ ] Change how update reason up in edit form.
 
-## Bugs
-- [x] Because InitialViewShare set to global, cause unauthenticated user error when login.
+## Issues
+- [FIXED] Because InitialViewShare set to global, cause unauthenticated user error when login.
+- [FIXED] Mutator Play rps_year still not working.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
@@ -116,7 +117,6 @@
 - Created views.card to for card-type partial views.
 - Added helper function getActiveRPSYear.
 - Created SystemController to manage RPS year, notification, and other system functionality as well.
-- Added mutator for Play rps_year.
 - Changed how field addressed as array of data.
 - Added store method in PlayController.
 - Fixed error message not shown when using array input.
