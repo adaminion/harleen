@@ -9,7 +9,8 @@
       </div>
 
       <div class="modal-body">
-
+        <div id="delete-msg"></div>
+        <hr/>
         <div id="delete-form" class="form-group">
           <label for="delete-reason" class="control-label required">Reason for deletion</label>
           <textarea id="delete-reason" class="form-control" rows="4"></textarea>

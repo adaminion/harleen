@@ -10,6 +10,7 @@ use App\Http\Requests;
 use App\Http\Requests\PlayFormRequest;
 use App\Http\Controllers\Controller;
 use App\Quinzel\Repository\PlayRepository;
+use JavaScript;
 
 use App\Play;
 use App\Gcf;
@@ -150,5 +151,31 @@ class PlayController extends Controller
         $play->delete();
 
         return redirect('play');
+    }
+
+    public function findLeadProspect()
+    {
+        $id = request('id');
+
+        $lead = $this->repo->findLead($id, $this->workingAreaId);
+        $drillable = $this->repo->findDrillable($id, $this->workingAreaId);
+        $postdrill = $this->repo->findPostdrill($id, $this->workingAreaId);
+        $discovery = $this->repo->findDiscovery($id, $this->workingAreaId);
+
+        if ($lead->isEmpty()
+            && $drillable->isEmpty()
+            && $postdrill->isEmpty()
+            && $discovery->isEmpty()
+        ) {
+            // Return null
+            return '{}';
+        }
+
+        return [
+            'lead' => $lead,
+            'drillable' => $drillable,
+            'postdrill' => $postdrill,
+            'discovery' => $discovery
+        ];
     }
 }

@@ -39,12 +39,20 @@
                   <td>{{ $play->basin_name }}</td>
                 @endif
 
-                <td>{{ $play->name }}</td>
+                <td id="pn{{ $play->id }}">{{ $play->name }}</td>
+
                 <td>
-                  <a href="{{ url('play', [$play->id]) }}" class="btn btn-xs btn-primary">View</a>
-                  <a href="{{ url('play', [$play->id, 'edit']) }}" class="btn btn-xs btn-success">Update</a>
-                  <a href="#" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#delete-modal">Delete</a>
+                  <a href="{{ url('play', [$play->id]) }}"
+                     class="btn btn-xs btn-primary">View</a>
+
+                  <a href="{{ url('play', [$play->id, 'edit']) }}"
+                     class="btn btn-xs btn-success">Update</a>
+
+                  <a id="{{ $play->id }}" name="button-delete" href="#"
+                     class="btn btn-xs btn-danger" data-toggle="modal"
+                     data-target="#delete-modal">Delete</a>
                 </td>
+
               </tr>
             @endforeach
           </tbody>
@@ -67,6 +75,8 @@
 @push('js')
   <script src="{{ asset('js/datatables.min.js') }}"></script>
   <script>
+    $.harleen = {};
+
     $(document).ready(function() {
       $('#resources-table').DataTable({
         'oLanguage': {
@@ -75,5 +85,85 @@
         'aaSorting': [],
       });
     });
+
+    $("a[name='button-delete']").click(function(e) {
+      $.harleen.id = e.currentTarget.id;
+      $.harleen.name = $('#pn' + e.currentTarget.id).text();
+
+      $.ajax({
+        header: {'csrftoken': '{{ csrf_token() }}'},
+        url: '{{ url('play/child') }}',
+        data: {id: $.harleen.id, '_token': '{{ csrf_token() }}'},
+        type: 'post',
+        dataType: 'json',
+        success: function(data) {
+          msg = '<p style="text-align:center;">'
+            + '<strong>' + $.harleen.name + '</strong></p>';
+
+          if (! $.isEmptyObject(data)) {
+            msg = msg + '<hr/><p>'
+              + 'But, looks like this Play already linked with other resources. '
+              + 'Either you change the Play of all linked resources, '
+              + '<strong>OR</strong> you may still delete this Play with '
+              + 'consequences that <strong>linked resources will also be deleted'
+              + '</strong>, and these are list of linked resources :'
+              + '</p><hr/>';
+
+            if (! $.isEmptyObject(data.lead)) {
+              msg = msg + '<div style="margin-left: 20px;">'
+                + '<strong>Lead</strong><ul>';
+
+              $.each(data.lead, function(i, val) {
+                msg = msg + '<li>' + val.closure_name + '</li>'
+              });
+
+              msg = msg + '</ul></div>';
+            }
+
+            if (! $.isEmptyObject(data.drillable)) {
+              msg = msg + '<div style="margin-left: 20px;">'
+                + '<strong>Drillable</strong><ul>';
+
+              $.each(data.drillable, function(i, val) {
+                msg = msg + '<li>' + val.closure_name + '</li>'
+              });
+
+              msg = msg + '</ul></div>';
+            }
+
+            if (! $.isEmptyObject(data.postdrill)) {
+              msg = msg + '<div style="margin-left: 20px;">'
+                + '<strong>Postdrill</strong><ul>';
+
+              $.each(data.postdrill, function(i, val) {
+                msg = msg + '<li>' + val.structure_name + '</li>'
+              });
+
+              msg = msg + '</ul></div>';
+            }
+
+            if (! $.isEmptyObject(data.discovery)) {
+              msg = msg + '<div style="margin-left: 20px;">'
+                + '<strong>Discovery</strong><ul>';
+
+              $.each(data.discovery, function(i, val) {
+                msg = msg + '<li>' + val.structure_name + '</li>'
+              });
+
+              msg = msg + '</ul></div>';
+            }
+          }
+
+          // Menghapus isian delete-msg
+          $('#delete-msg').text('');
+          $('#delete-msg').append(msg);
+
+          $('#delete-modal').modal();
+        },
+        error: function (xhr, status, errorThrown) {
+          alert('Sorry, there is some problem in our end');
+        },
+      });
+    })
   </script>
 @endpush

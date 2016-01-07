@@ -137,3 +137,6 @@
 - Moved all alert and modal to shared/notification.
 - Added form.js to help form functionality in general.
 - Changed yield for javascript and css to stack.
+- Added Laracasts/Javascript ~2.0.
+- Fixed account index javascript not send csrf_token.
+- Added delete modal detail for Play.

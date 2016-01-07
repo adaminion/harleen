@@ -25,6 +25,7 @@ Route::group(['prefix' => 'play', 'middleware' => 'auth'], function() {
     Route::get('{id}/edit', 'PlayController@edit');
     Route::put('{id}', 'PlayController@update');
     Route::delete('{id}', 'PlayController@destroy');
+    Route::post('child', 'PlayController@findLeadProspect');
 });
 
 Route::get('administrator', 'AdministratorController@index');

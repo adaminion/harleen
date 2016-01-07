@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-  {!! csrf_field() !!}
   <div class="modal fade" id="modal-reset" tabindex="-1" role="dialog"
        aria-labelled="modal-reset-label">
     <div class="modal-dialog" role="document">
@@ -75,14 +74,10 @@
           baseZ: 2000
         });
 
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-Token': $('input[name=_token]').val();
-          }
-        });
-
         $.ajax({
+          header: {'csrftoken': '{{ csrf_token() }}'},
           url: 'account/reset/all',
+          data: {'_token': '{{ csrf_token() }}'},
           type: 'POST',
           dataType: 'text',
           success: function(response) {

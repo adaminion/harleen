@@ -54,7 +54,7 @@ class Play extends Model
     /**
      * Mengambil wilayah kerja yang memiliki Play tersebut.
      *
-     * @return  belongsTo
+     * @return belongsTo
      */
     public function workingAreas()
     {
@@ -62,9 +62,19 @@ class Play extends Model
     }
 
     /**
+     * Play dapat memiliki banyak Lead.
+     *
+     * @return hasMany
+     */
+    public function leads()
+    {
+        return $this->hasMany('App\Lead');
+    }
+
+    /**
      * GCF yang dimiliki oleh Play.
      *
-     * @return  belongsTo
+     * @return belongsTo
      */
     public function gcf()
     {
