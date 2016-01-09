@@ -45,17 +45,9 @@ function objectToArray($data)
  */
 function createNavTitle($wkid)
 {
-    $working_area_name = DB::table('working_area')
+    return DB::table('working_area')
         ->where('id', '=', $wkid)
         ->value('working_area_name');
-
-    $contractor_name = DB::table('contractor_working_area as cwa')
-        ->leftJoin('contractor', 'cwa.contractor_id', '=', 'contractor.id')
-        ->where('cwa.working_area_id', '=', $wkid)
-        ->where('cwa.is_operator', '=', 1)
-        ->value('contractor.contractor_name');
-
-    return $working_area_name . ' - ' . $contractor_name;
 }
 
 /**
