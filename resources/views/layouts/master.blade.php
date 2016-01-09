@@ -116,6 +116,9 @@
                 <li><a href="{{ url('discovery') }}">Discovery Well</a></li>
               </ul>
             </li>
+            <li><a href="#">Summary</a></li>
+            <li><a href="#">Upload</a></li>
+            <li><a href="#">Documentation</a></li>
           @endif
 
           @if (request()->user()->role === 'administrator' || request()->user()->role === 'developer')
