@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator;
 use DB;
 use Gate;
 use App\Http\Requests;
 use App\Http\Requests\PlayFormRequest;
 use App\Http\Controllers\Controller;
 use App\Quinzel\Repository\PlayRepository;
-use JavaScript;
 
 use App\Play;
 use App\Gcf;

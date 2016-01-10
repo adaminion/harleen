@@ -35,4 +35,14 @@ class Lead extends Model
     {
         return $this->belongsTo('App\Play');
     }
+
+    /**
+     * GCF yang dimiliki oleh Lead.
+     *
+     * @return belongsTo
+     */
+    public function gcf()
+    {
+        return $this->belongsTo('App\Gcf');
+    }
 }

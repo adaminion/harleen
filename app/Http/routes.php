@@ -28,6 +28,17 @@ Route::group(['prefix' => 'play', 'middleware' => 'auth'], function() {
     Route::post('child', 'PlayController@findLeadProspect');
 });
 
+Route::group(['prefix' => 'lead', 'middleware' => 'auth'], function() {
+    Route::get('/', 'LeadController@index');
+    Route::get('create', 'LeadController@create');
+    Route::post('/', 'LeadController@store');
+    Route::get('{id}', 'LeadController@show');
+    Route::get('{id}/edit', 'LeadController@edit');
+    Route::put('{id}', 'LeadController@update');
+    Route::post('destroy', 'LeadController@destroy');
+    Route::post('child', 'LeadController@findLeadProspect');
+});
+
 Route::get('administrator', 'AdministratorController@index');
 
 Route::get('developer', 'DeveloperController@index');
