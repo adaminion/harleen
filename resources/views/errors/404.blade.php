@@ -1,45 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page not found</title>
+  <link rel="icon" href="{{ asset('favicon.ico') }}">
+  <title>You seems lost</title>
 
   <style>
-    html, body {
-      height: 100%;
-    }
-
     body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      color: #B0BEC5;
-      display: table;
-      font-weight: 100;
+      margin: 40px auto;
+      max-width: 650px;
+      font-family: -apple-system,".SFNSText-Regular","San Francisco","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
     }
-
-    .container {
+    .div-center {
       text-align: center;
-      display: table-cell;
-      vertical-align: middle;
-    }
-
-    .content {
-      text-align: center;
-      display: inline-block;
-    }
-
-    .title {
-      font-size: 72px;
-      margin-bottom: 40px;
+      padding-top: 10px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="content">
-      <div class="title">Page not found.</div>
-      <p><a href="{{ url('/') }}">back to home</a></p>
-    </div>
+  <div class="div-center">
+    <img src="{{ asset('img/logo-skkmigas.png') }}" alt="SKK Migas"
+         class="img-responsive center-block">
+    <h3>Revitalisasi Pelaporan Sumberdaya</h3>
+    <hr/>
+    <h2>ERROR 404: Page not found</h2>
+    <br/>
+    <h2>You seems lost&#63;</h2>
+    <p><a href="{{ url('/') }}">back to home</a></p>
   </div>
 </body>
 </html>

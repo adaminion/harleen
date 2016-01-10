@@ -10,6 +10,13 @@
       @include('shared.notification.success')
     @endif
 
+    <div id="delete-alert" class="alert alert-success alert-dismissible hidden" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Play successfully deleted, thank you!</strong>
+    </div>
+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title">
@@ -152,10 +159,11 @@
           }
 
           // Menghapus isian delete-msg sebelumnya
-          $('#delete-msg').text('');
-          $('#delete-msg').append(msg);
+          $("#delete-reason").val('');
+          $("#delete-msg").text("");
+          $("#delete-msg").append(msg);
 
-          $('#delete-modal').modal();
+          $("#delete-modal").modal();
         },
         error: function (xhr, status, errorThrown) {
           alert('Sorry, there is some problem in our end');
@@ -176,6 +184,7 @@
         dataType: "text",
         success: function(data) {
           $("#delete-modal").modal("hide");
+          $("#delete-alert").removeClass("hidden");
         },
         error: function (xhr, status, errorThrown) {
           alert('Sorry, there is some problem in our end');

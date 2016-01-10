@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         parent::registerPolicies($gate);
 
-        $gate->define('update-play', function ($user, $play) {
+        $gate->define('access-play', function ($user, $play) {
             return $user->working_area_id === $play->working_area_id;
         });
     }

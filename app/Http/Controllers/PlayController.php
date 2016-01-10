@@ -57,6 +57,11 @@ class PlayController extends Controller
     public function show($id)
     {
         $play = Play::findOrFail($id);
+
+        if (Gate::denies('access-play', $play)) {
+            abort(404);
+        }
+
         $gcf = Gcf::find($play->gcf_id);
 
         return view('play.form', [
@@ -85,14 +90,13 @@ class PlayController extends Controller
         $play->rps_year = DB::table('sys_year')
             ->where('is_active', '=', 1)
             ->value('rps_year');
-
-        $gcf = new Gcf($request['gcf']);
-
         if ($this->workingAreaId !== 'WK1047') {
             $play->basin_name = DB::table('basin_working_area')
                 ->where('working_area_id', '=', $this->workingAreaId)
                 ->value('basin_name');
         }
+
+        $gcf = new Gcf($request['gcf']);
 
         DB::transaction(function() use ($play, $gcf) {
             $gcf->save();
@@ -100,18 +104,19 @@ class PlayController extends Controller
             $play->save();
         });
 
-        session()->flash('success', 'Play successfully created');
+        session()->flash('success', 'Play successfully created, thank you!');
         return redirect('play');
     }
 
     public function edit($id)
     {
         $play = Play::findOrFail($id);
-        $gcf = Gcf::find($play->gcf_id);
 
-        if (Gate::denies('update-play', $play)) {
+        if (Gate::denies('access-play', $play)) {
             abort(404);
         }
+
+        $gcf = Gcf::find($play->gcf_id);
 
         return view('play.form', [
             'play' => $play,
@@ -125,11 +130,12 @@ class PlayController extends Controller
     public function update(PlayFormRequest $request, $id)
     {
         $play = Play::findOrFail($id);
-        $gcf = Gcf::findOrFail($play->gcf_id);
 
-        if (Gate::denies('update-play', $play)) {
+        if (Gate::denies('access-play', $play)) {
             abort(404);
         }
+
+        $gcf = Gcf::findOrFail($play->gcf_id);
 
         if ($this->workingAreaId !== 'WK1047') {
             $play->basin_name = DB::table('basin_working_area')
@@ -142,29 +148,38 @@ class PlayController extends Controller
             $gcf->update($request['gcf']);
         });
 
-        session()->flash('success', 'Play successfully updated');
+        session()->flash('success', 'Play successfully updated, thank you!');
         return redirect('play');
     }
 
-    // TODO: Check if play can be deleted.
+    /**
+     * AJAX call, delete play_id yang sesuai.
+     *
+     * return string
+     */
     public function destroy()
     {
         $play = Play::findOrFail(request('id'));
 
-        if (Gate::denies('update-play', $play)) {
+        if (Gate::denies('access-play', $play)) {
             abort(404);
         }
 
-        $play->delete_reason = request('reason');
-
         DB::transaction(function() use ($play) {
+            $play->delete_reason = request('reason');
             $play->save();
             $play->delete();
         });
 
-        return 'done';
+        return 'destroyed';
     }
 
+    /**
+     * AJAX call, mencari Lead atau Prospect yang mempunyai Play ID
+     * yang sesuai.
+     *
+     * @return array
+     */
     public function findLeadProspect()
     {
         $id = request('id');
@@ -179,7 +194,7 @@ class PlayController extends Controller
             && $postdrill->isEmpty()
             && $discovery->isEmpty()
         ) {
-            // Return null
+            // Return null javascript object
             return '{}';
         }
 

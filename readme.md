@@ -163,3 +163,5 @@
 - Added PlayRepository with find resources.
 - Created lang/en/crud.php to write additional long text within CRUD operation.
 - Use transaction for store, update, and destroy.
+- Deleted column is_editing in database migration.
+- Changed 404 and 503 pages.

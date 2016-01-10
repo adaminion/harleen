@@ -1,47 +1,28 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Be right back.</title>
+<head>
+  <link rel="icon" href="{{ asset('favicon.ico') }}">
+  <title>In maintenance, be right back</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
-            </div>
-        </div>
-    </body>
+  <style>
+    body {
+      margin:40px auto;
+      max-width:650px;
+      font-family:-apple-system,".SFNSText-Regular","San Francisco","Roboto","Segoe UI","Helvetica Neue","Lucida Grande",sans-serif;
+    }
+    .div-center {
+      text-align: center;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="div-center">
+    <img src="{{ asset('img/logo-skkmigas.png') }}" alt="SKK Migas"
+         class="img-responsive center-block">
+    <h3>Revitalisasi Pelaporan Sumberdaya</h3>
+    <hr/>
+    <h2>Be right back</h2>
+  </div>
+</body>
 </html>
