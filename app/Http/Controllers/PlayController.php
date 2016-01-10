@@ -167,10 +167,12 @@ class PlayController extends Controller
 
         DB::transaction(function() use ($play) {
             $play->delete_reason = request('reason');
+            $play->timestamps = false;
             $play->save();
             $play->delete();
         });
 
+        session()->flash('success', 'Play successfully deleted, thank you!');
         return 'destroyed';
     }
 

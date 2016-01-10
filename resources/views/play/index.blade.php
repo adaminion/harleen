@@ -10,13 +10,6 @@
       @include('shared.notification.success')
     @endif
 
-    <div id="delete-alert" class="alert alert-success alert-dismissible hidden" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <strong>Play successfully deleted, thank you!</strong>
-    </div>
-
     <div class="panel panel-primary">
       <div class="panel-heading">
         <div class="panel-title">
@@ -184,7 +177,7 @@
         dataType: "text",
         success: function(data) {
           $("#delete-modal").modal("hide");
-          $("#delete-alert").removeClass("hidden");
+          location.reload();
         },
         error: function (xhr, status, errorThrown) {
           alert('Sorry, there is some problem in our end');
