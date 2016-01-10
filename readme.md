@@ -1,22 +1,37 @@
 # Harleen
 
 ## Todo
-- [ ] Add intermediate table attributes of contractor_working_area.
+### Play
 - [x] Create Play store method.
-- [x] Find way to bind nice name with multiple model while error.
-- [ ] Migrate terrain with miles to km in seeder.
-- [ ] Insert rps_year for each migrated resources.
-- [ ] Compress fat assets.
 - [x] Create authorization for Play.
-- [x] Change how update reason up in edit form.
-- [ ] When Play update update all linked resources GCF.
+- [x] Change how update reason up in Play edit form.
 - [ ] Complete delete Play process.
+- [ ] When updating, update all linked resources GCF.
 - [ ] Add success message when done deleting.
+- [ ] Use save transaction to database operation.
+- [ ] Disable timstamps, assign these columns manually.
+
+### Others
+- [x] Find way to bind nice name with multiple model while error.
+- [ ] Compress fat assets.
+- [ ] Add intermediate table attributes of contractor_working_area.
+
+### Data Migration
+- [ ] Insert rps_year for each migrated resources.
+- [ ] Migrate terrain with miles to km in seeder.
+- [ ] Insert updated_at with value same as created_at.
+
+### Log
+- [ ] Log query events.
+
+### Before Production
+- [ ] Move all seeder to developer database feature only.
 
 ## Issues
 - FIXED Because InitialViewShare set to global, cause unauthenticated user error when login.
 - FIXED Mutator Play rps_year still not working.
 - Delete play process create another same record.
+- FIXED gcf_id on play not saved.
 
 ## Changelog 0.1
 - Changed database name to 'sumberdaya'.
@@ -147,3 +162,4 @@
 - Changed update_reason form field to show only when action name is 'edit'.
 - Added PlayRepository with find resources.
 - Created lang/en/crud.php to write additional long text within CRUD operation.
+- Use transaction for store, update, and destroy.

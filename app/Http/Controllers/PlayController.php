@@ -81,6 +81,11 @@ class PlayController extends Controller
     public function store(PlayFormRequest $request)
     {
         $play = new Play($request['play']);
+        $play->working_area_id = $this->workingAreaId;
+        $play->rps_year = DB::table('sys_year')
+            ->where('is_active', '=', 1)
+            ->value('rps_year');
+
         $gcf = new Gcf($request['gcf']);
 
         if ($this->workingAreaId !== 'WK1047') {
@@ -89,17 +94,13 @@ class PlayController extends Controller
                 ->value('basin_name');
         }
 
-        $play->working_area_id = $this->workingAreaId;
-        $play->gcf_id = $gcf->id;
-        $play->rps_year = DB::table('sys_year')
-            ->where('is_active', '=', 1)
-            ->value('rps_year');
-
-        $gcf->save();
-        $play->save();
+        DB::transaction(function() use ($play, $gcf) {
+            $gcf->save();
+            $play->gcf_id = $gcf->id;
+            $play->save();
+        });
 
         session()->flash('success', 'Play successfully created');
-
         return redirect('play');
     }
 
@@ -124,7 +125,7 @@ class PlayController extends Controller
     public function update(PlayFormRequest $request, $id)
     {
         $play = Play::findOrFail($id);
-        $gcf = Gcf::find($play->gcf_id);
+        $gcf = Gcf::findOrFail($play->gcf_id);
 
         if (Gate::denies('update-play', $play)) {
             abort(404);
@@ -136,11 +137,12 @@ class PlayController extends Controller
                 ->value('basin_name');
         }
 
-        $play->update($request['play']);
-        $gcf->update($request['gcf']);
+        DB::transaction(function() use ($play, $gcf, $request) {
+            $play->update($request['play']);
+            $gcf->update($request['gcf']);
+        });
 
         session()->flash('success', 'Play successfully updated');
-
         return redirect('play');
     }
 
@@ -154,8 +156,11 @@ class PlayController extends Controller
         }
 
         $play->delete_reason = request('reason');
-        $play->save();
-        $play->delete();
+
+        DB::transaction(function() use ($play) {
+            $play->save();
+            $play->delete();
+        });
 
         return 'done';
     }

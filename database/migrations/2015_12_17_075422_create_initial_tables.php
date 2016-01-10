@@ -363,7 +363,6 @@ class CreateInitialTables extends Migration
             $table->softDeletes();
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
-            $table->boolean('is_editing')->default(false);
         });
 
         Schema::create('re_play', function (Blueprint $table) {
@@ -465,7 +464,6 @@ class CreateInitialTables extends Migration
             $table->text('update_reason')->nullable();
             $table->text('delete_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
-            $table->boolean('is_editing')->default(false);
             $table->boolean('is_pinned')->default(false);
         });
 
@@ -564,7 +562,6 @@ class CreateInitialTables extends Migration
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
-            $table->boolean('is_editing')->default(false);
             $table->boolean('is_pinned')->default(false);
         });
 
@@ -675,7 +672,6 @@ class CreateInitialTables extends Migration
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
-            $table->boolean('is_editing')->default(false);
             $table->boolean('is_pinned')->default(false);
         });
 
@@ -710,7 +706,6 @@ class CreateInitialTables extends Migration
             $table->text('update_reason')->nullable();
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
-            $table->boolean('is_editing')->default(false);
             $table->boolean('is_pinned')->default(false);
         });
 
