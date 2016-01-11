@@ -17,7 +17,7 @@
     <div class="input-group">
     @endif
 
-      {{ Form::number($name, null, ['class' => 'form-control'])}}
+      {{ Form::number($name, null, ['class' => 'form-control', 'min' => '0']) }}
 
       @if ($unit)
       <div class="input-group-addon">{!! $unit !!}</div>

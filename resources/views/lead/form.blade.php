@@ -72,7 +72,7 @@
       </div>
       <div class="panel-body">
 
-        <div class="panel panel-default">
+        <div id="survey-s2-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               2D Seismic
@@ -103,6 +103,30 @@
             {{ Form::seismicImage('lead[s2_image]') }}
           </div>
         </div> {{-- 2D Seismic --}}
+
+        <div id="survey-geo-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Geological Field
+            </div>
+          </div>
+          <div class="panel-body">
+            {{ Form::bsNumber('lead[geo_low]', 'Low estimate', false, 'Acre') }}
+            {{ Form::bsNumber('lead[geo_best]', 'Best estimate', true, 'Acre') }}
+            {{ Form::bsNumber('lead[geo_high]', 'High estimate', false, 'Acre') }}
+            {{ Form::bsText('lead[geo_year]', 'Acquisition year') }}
+            {{
+              Form::bsSelect('lead[geo_method]', 'Survey method', [
+                'Stream Sampling' => 'Stream Sampling',
+                'Random Sampling' => 'Random Sampling'
+              ])
+            }}
+            {{
+              Form::bsNumber('lead[geo_coverage]', 'Total coverage area', false,
+                'Km<sup>2</sup>')
+            }}
+          </div>
+        </div> {{-- Geological Field --}}
 
       </div>
     </div> {{-- Data Availability --}}
