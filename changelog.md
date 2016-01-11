@@ -132,3 +132,6 @@
 - Use transaction for store, update, and destroy.
 - Deleted column is_editing in database migration.
 - Changed 404 and 503 pages.
+- Added jsready stack for javascript that need to be loaded when document ready.
+- Added jquery inputmask.
+- Added Lead index page.

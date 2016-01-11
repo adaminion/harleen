@@ -161,5 +161,11 @@
   <script src="{{ asset('js/jquery.min.js') }}"></script>
   <script src="{{ asset('js/bootstrap.min.js') }}"></script>
   @stack('js')
+
+  <script>
+    $(document).ready(function() {
+      @stack('jsready')
+    });
+  </script>
 </body>
 </html>

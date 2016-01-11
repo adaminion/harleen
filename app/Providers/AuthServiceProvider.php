@@ -29,5 +29,9 @@ class AuthServiceProvider extends ServiceProvider
         $gate->define('access-play', function ($user, $play) {
             return $user->working_area_id === $play->working_area_id;
         });
+
+        $gate->define('access-lead', function ($user, $lead) {
+            return $user->working_area_id === $lead->working_area_id;
+        });
     }
 }

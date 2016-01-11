@@ -130,8 +130,8 @@ $(document).ready(function() {
         $("[name='gcf[src_formation]']").val("Baturaja");
         $("[name='gcf[src_formation_level]']").val("Lower");
         $("[name='gcf[src_kerogen]']").val("I/II");
-        $("[name='gcf[src_toc]']").val("> 4");
-        $("[name='gcf[src_hfu]']").val("> 3.0");
+        $("[name='gcf[src_capacity]']").val("> 4");
+        $("[name='gcf[src_heatflow]']").val("> 3.0");
         $("[name='gcf[src_distribution]']").val("Localized");
         $("[name='gcf[src_continuity]']").val("Bad");
         $("[name='gcf[src_maturity]']").val("Overmature");

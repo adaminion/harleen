@@ -70,6 +70,12 @@ class EventServiceProvider extends ServiceProvider
             'unitB' => false,
         ]);
 
+        Form::component('coord', 'shared.components.coordinate', [
+            'name',
+            'label',
+            'required' => true,
+        ]);
+
         // Sugar components
         Form::component('basin', 'shared.sugar.basin', ['name' => 'basin_name']);
         Form::component('province', 'shared.sugar.province', ['name' => 'province_name']);
