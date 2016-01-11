@@ -98,7 +98,7 @@ class EventServiceProvider extends ServiceProvider
         Form::component('terrain', 'shared.sugar.terrain', ['name']);
         Form::component('nearbyField', 'shared.sugar.nearbyField', ['name']);
         Form::component('nearbyInfra', 'shared.sugar.nearbyInfra', ['name']);
-        Form::component('remark', 'shared.sugar.remark', ['name']);
+        Form::component('remark', 'shared.sugar.remark', ['name', 'required' => false]);
         Form::component('lateMethod', 'shared.sugar.lateMethod', ['name']);
         Form::component('seismicImage', 'shared.sugar.seismicImage', ['name']);
     }

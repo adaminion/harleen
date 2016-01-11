@@ -139,3 +139,4 @@
 - Added date form component.
 - Added data availability (survey) form component.
 - Changed unit to output unescaped in all basic form components.
+- Finished Lead input form.

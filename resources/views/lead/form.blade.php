@@ -72,7 +72,7 @@
       </div>
       <div class="panel-body">
 
-        <div id="survey-s2-panel" class="panel panel-default">
+        <div id="survey-s2-panel" class="panel panel-default hidden">
           <div class="panel-heading">
             <div class="panel-title">
               2D Seismic
@@ -90,10 +90,7 @@
               ])
             }}
             {{ Form::bsNumber('lead[s2_crossline]', 'Total crossline') }}
-            {{
-              Form::bsNumber('lead[s2_coverage]', 'Total coverage area', false,
-                'Km<sup>2</sup>')
-            }}
+            {{ Form::bsNumber('lead[s2_coverage]', 'Total coverage area', false, 'Acre') }}
             {{
               Form::bsNumber('lead[s2_avg_interval]',
                 'Average parallel spacing interval', false, 'Km')
@@ -104,7 +101,7 @@
           </div>
         </div> {{-- 2D Seismic --}}
 
-        <div id="survey-geo-panel" class="panel panel-default">
+        <div id="survey-geo-panel" class="panel panel-default hidden">
           <div class="panel-heading">
             <div class="panel-title">
               Geological Field
@@ -121,14 +118,11 @@
                 'Random Sampling' => 'Random Sampling'
               ])
             }}
-            {{
-              Form::bsNumber('lead[geo_coverage]', 'Total coverage area', false,
-                'Km<sup>2</sup>')
-            }}
+            {{ Form::bsNumber('lead[geo_coverage]', 'Total coverage area', false, 'Acre') }}
           </div>
         </div> {{-- Geological Field --}}
 
-        <div id="survey-geo-panel" class="panel panel-default">
+        <div id="survey-chem-panel" class="panel panel-default hidden">
           <div class="panel-heading">
             <div class="panel-title">
               Geochemistry
@@ -146,6 +140,93 @@
             {{ Form::bsText('lead[chem_composition]', 'Hydrocarbon composition') }}
           </div>
         </div> {{-- Geochemistry --}}
+
+        <div id="survey-grav-panel" class="panel panel-default hidden">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Gravity
+            </div>
+          </div>
+          <div class="panel-body">
+            {{ Form::bsNumber('lead[grav_low]', 'Low estimate', false, 'Acre') }}
+            {{ Form::bsNumber('lead[grav_best]', 'Best estimate', true, 'Acre') }}
+            {{ Form::bsNumber('lead[grav_high]', 'High estimate', false, 'Acre') }}
+            {{ Form::bsText('lead[grav_year]', 'Acquisition year') }}
+            {{
+              Form::bsSelect('lead[grav_method]', 'Survey method', [
+                'Airbones' => 'Airbones',
+                'Surface' => 'Surface',
+                'Other' => 'Other'
+              ])
+            }}
+            {{ Form::bsNumber('lead[grav_coverage]', 'Total coverage area', false, 'Acre') }}
+            {{ Form::bsNumber('lead[grav_penetrate]', 'Depth penetrate range', false, 'Feet') }}
+            {{ Form::bsNumber('lead[grav_recorder]', 'Recorder spacing interval', false, 'Feet') }}
+          </div>
+        </div> {{-- Gravity --}}
+
+        <div id="survey-elec-panel" class="panel panel-default hidden">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Electromagnetic
+            </div>
+          </div>
+          <div class="panel-body">
+            {{ Form::bsNumber('lead[elec_low]', 'Low estimate', false, 'Acre') }}
+            {{ Form::bsNumber('lead[elec_best]', 'Best estimate', true, 'Acre') }}
+            {{ Form::bsNumber('lead[elec_high]', 'High estimate', false, 'Acre') }}
+            {{ Form::bsText('lead[elec_year]', 'Acquisition year') }}
+            {{
+              Form::bsSelect('lead[elec_method]', 'Survey method', [
+                'Airbones' => 'Airbones',
+                'Surface' => 'Surface',
+                'Other' => 'Other'
+              ])
+            }}
+            {{ Form::bsNumber('lead[elec_coverage]', 'Total coverage area', false, 'Acre') }}
+            {{ Form::bsNumber('lead[elec_penetrate]', 'Depth penetrate range', false, 'Feet') }}
+            {{ Form::bsNumber('lead[elec_recorder]', 'Recorder spacing interval', false, 'Feet') }}
+          </div>
+        </div> {{-- Electromagnetic --}}
+
+        <div id="survey-resi-panel" class="panel panel-default hidden">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Resistivity
+            </div>
+          </div>
+          <div class="panel-body">
+            {{ Form::bsNumber('lead[resi_low]', 'Low estimate', false, 'Acre') }}
+            {{ Form::bsNumber('lead[resi_best]', 'Best estimate', true, 'Acre') }}
+            {{ Form::bsNumber('lead[resi_high]', 'High estimate', false, 'Acre') }}
+            {{ Form::bsText('lead[resi_year]', 'Acquisition year') }}
+            {{
+              Form::bsSelect('lead[resi_method]', 'Survey method', [
+                'Airbones' => 'Airbones',
+                'Surface' => 'Surface',
+                'Other' => 'Other'
+              ])
+            }}
+            {{ Form::bsNumber('lead[resi_coverage]', 'Total coverage area', false, 'Acre') }}
+            {{ Form::bsNumber('lead[resi_penetrate]', 'Depth penetrate range', false, 'Feet') }}
+            {{ Form::bsNumber('lead[resi_recorder]', 'Recorder spacing interval', false, 'Feet') }}
+          </div>
+        </div> {{-- Resistivity --}}
+
+        <div id="survey-oter-panel" class="panel panel-default hidden">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Other
+            </div>
+          </div>
+          <div class="panel-body">
+            {{ Form::bsNumber('lead[oter_low]', 'Low estimate', false, 'Acre') }}
+            {{ Form::bsNumber('lead[oter_best]', 'Best estimate', true, 'Acre') }}
+            {{ Form::bsNumber('lead[oter_high]', 'High estimate', false, 'Acre') }}
+            {{ Form::bsText('lead[oter_year]', 'Acquisition year') }}
+            {{ Form::remark('lead[oter_remark]', true) }}
+          </div>
+        </div> {{-- Other --}}
 
       </div>
     </div> {{-- Data Availability --}}

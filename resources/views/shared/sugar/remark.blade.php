@@ -1,1 +1,1 @@
-{{ Form::bsTextarea($name, 'Remark', false) }}
+{{ Form::bsTextarea($name, 'Remark', $required) }}
