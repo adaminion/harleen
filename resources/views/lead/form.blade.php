@@ -50,8 +50,8 @@
           Form::survey('survey', [
             's2' => '2D Seismic',
             'geo' => 'Geological',
-            'grav' => 'Gravity',
             'chem' => 'Geochemistry',
+            'grav' => 'Gravity',
             'elec' => 'Electromagnetic',
             'resi' => 'Resistivity',
             'oter' => 'Other'
@@ -127,6 +127,25 @@
             }}
           </div>
         </div> {{-- Geological Field --}}
+
+        <div id="survey-geo-panel" class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              Geochemistry
+            </div>
+          </div>
+          <div class="panel-body">
+            {{ Form::bsNumber('lead[chem_low]', 'Low estimate', false, 'Acre') }}
+            {{ Form::bsNumber('lead[chem_best]', 'Best estimate', true, 'Acre') }}
+            {{ Form::bsNumber('lead[chem_high]', 'High estimate', false, 'Acre') }}
+            {{ Form::bsText('lead[chem_year]', 'Acquisition year') }}
+            {{ Form::bsNumber('lead[chem_interval]', 'Interval samples range', false, 'Feet') }}
+            {{ Form::bsText('lead[chem_sample]', 'Total samples location') }}
+            {{ Form::bsText('lead[chem_rock]', 'Total rocks sample') }}
+            {{ Form::bsText('lead[chem_fluid]', 'Total fluid sample') }}
+            {{ Form::bsText('lead[chem_composition]', 'Hydrocarbon composition') }}
+          </div>
+        </div> {{-- Geochemistry --}}
 
       </div>
     </div> {{-- Data Availability --}}
