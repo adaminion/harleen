@@ -73,12 +73,20 @@ class EventServiceProvider extends ServiceProvider
         Form::component('coord', 'shared.components.coordinate', [
             'name',
             'label',
+            'type',
             'required' => true,
+        ]);
+
+        Form::component('bsDate', 'shared.components.date', [
+            'name',
+            'label',
+            'required' => false,
         ]);
 
         // Sugar components
         Form::component('basin', 'shared.sugar.basin', ['name' => 'basin_name']);
         Form::component('province', 'shared.sugar.province', ['name' => 'province_name']);
+        Form::component('clarified', 'shared.sugar.clarified', ['name' => 'clarified']);
         Form::component('analogTo', 'shared.sugar.analogTo', ['name' => 'analog_to']);
         Form::component('analogDistance', 'shared.sugar.analogDistance', ['name' => 'analog_distance']);
         Form::component('shore', 'shared.sugar.shore', ['name' => 'shore']);

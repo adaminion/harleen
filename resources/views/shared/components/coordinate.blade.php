@@ -23,18 +23,19 @@
     @endif
   </div>
   <div class="col-md-3">
-      <p class="form-control-static">
-        @if ($name === 'latitude')
-          example: 20&deg; 59' 59" S or N
-        @else
-          example: 090&deg; 59' 59" E
-        @endif
-      </p>
+    <p class="form-control-static">
+      @if ($type === 'lat')
+        example: 20&deg; 59' 59" S or N
+      @elseif ($type === 'long')
+        example: 090&deg; 59' 59" E
+      @endif
+    </p>
   </div>
 </div>
 
-@if ($name === 'latitude')
-  @push('jsready')
+{{-- Require jQuery.input mask --}}
+@push('jsready')
+  @if ($type === 'lat')
     $("input[name='{{ $name }}']").inputmask("L\u00b0 s\u2019 s\u201D C", {
       definitions: {
         "L": {
@@ -48,11 +49,7 @@
         },
       }
     });
-  @endpush
-@endif
-
-@if ($name === 'longitude')
-  @push('jsready')
+  @elseif ($type === 'long')
     $("input[name='{{ $name }}']").inputmask("L\u00b0 s\u2019 s\u201D C", {
       definitions: {
         "L": {
@@ -67,5 +64,5 @@
         },
       }
     });
-  @endpush
-@endif
+  @endif
+@endpush

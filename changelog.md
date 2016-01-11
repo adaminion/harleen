@@ -135,3 +135,5 @@
 - Added jsready stack for javascript that need to be loaded when document ready.
 - Added jquery inputmask.
 - Added Lead index page.
+- Added coordinate form component.
+- Added date form component.

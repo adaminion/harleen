@@ -74,7 +74,6 @@ class LeadController extends Controller
         $gcf = Gcf::find($lead->gcf_id);
 
         return view('lead.form', [
-            'play' => $play,
             'lead' => $lead,
             'gcf' => $gcf,
             'url' => null,

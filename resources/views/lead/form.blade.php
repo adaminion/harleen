@@ -7,7 +7,7 @@
     </div>
 
     {{
-      Form::model(['play' => $play, 'lead' => $lead, 'gcf' => $gcf],
+      Form::model(['lead' => $lead, 'gcf' => $gcf],
         ['url' => $url, 'method' => $method,
           'class' => 'form-horizontal', 'id' => 'form-main'])
     }}
@@ -33,10 +33,12 @@
         @endif
 
         {{ Form::province('lead[province_name]') }}
-        {{ Form::bsText('lead[structure_name]', 'Structure name') }}
-        {{ Form::bsText('lead[closure_name]', 'Closure name') }}
-        {{ Form::coord('latitude', 'Center latitude') }}
-        {{ Form::coord('longitude', 'Center longitude') }}
+        {{ Form::bsText('lead[structure_name]', 'Structure name', true) }}
+        {{ Form::bsText('lead[closure_name]', 'Closure name', true) }}
+        {{ Form::coord('lead[latitude]', 'Center latitude', 'lat') }}
+        {{ Form::coord('lead[longitude]', 'Center longitude', 'long') }}
+        {{ Form::clarified('lead[clarified]')}}
+        {{ Form::bsDate('lead[initiate]', 'Initiation date', true)}}
         {{ Form::analogTo('lead[analog_to]') }}
         {{ Form::analogDistance('lead[analog_distance]') }}
         {{ Form::shore('lead[shore]') }}
