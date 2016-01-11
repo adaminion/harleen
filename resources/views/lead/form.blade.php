@@ -28,6 +28,7 @@
         </div>
       </div>
       <div class="panel-body">
+        {{ Form::playList('lead[play_id]', $playList) }}
         @if (request()->user()->working_area_id === 'WK1047')
           {{ Form::basin('lead[basin_name]') }}
         @endif

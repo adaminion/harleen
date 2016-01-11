@@ -11,7 +11,7 @@ use App\Discovery;
 
 class PlayRepository
 {
-    public function index($workingAreaId)
+    public static function collection($workingAreaId)
     {
         $plays = Play::with('gcf')
             ->where('working_area_id', $workingAreaId)

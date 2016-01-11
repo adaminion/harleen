@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Quinzel\Repository\PlayRepository;
 use App\Quinzel\Repository\LeadRepository;
 
 use App\Play;
@@ -52,7 +53,7 @@ class LeadController extends Controller
     public function index()
     {
         return view('lead.index', [
-            'data' => $this->repo->index($this->workingAreaId)
+            'data' => $this->repo->collection($this->workingAreaId)
         ]);
     }
 
@@ -89,12 +90,42 @@ class LeadController extends Controller
     public function create()
     {
         return view('lead.form', [
-            'play' => new Play,
+            'playList' => PlayRepository::collection($this->workingAreaId)->toArray(),
             'lead' => new Lead,
             'gcf' => new Gcf,
             'url' => url('lead'),
             'method' => 'post',
             'submitButtonText' => 'Save new Lead'
         ]);
+    }
+
+    /**
+     * Menyimpan record Lead baru ke database.
+     *
+     * @return View
+     */
+    public function store()
+    {
+        $play = new Play($request['play']);
+        $play->working_area_id = $this->workingAreaId;
+        $play->rps_year = DB::table('sys_year')
+            ->where('is_active', '=', 1)
+            ->value('rps_year');
+        if ($this->workingAreaId !== 'WK1047') {
+            $play->basin_name = DB::table('basin_working_area')
+                ->where('working_area_id', '=', $this->workingAreaId)
+                ->value('basin_name');
+        }
+
+        $gcf = new Gcf($request['gcf']);
+
+        DB::transaction(function() use ($play, $gcf) {
+            $gcf->save();
+            $play->gcf_id = $gcf->id;
+            $play->save();
+        });
+
+        session()->flash('success', 'Play successfully created, thank you!');
+        return redirect('play');
     }
 }

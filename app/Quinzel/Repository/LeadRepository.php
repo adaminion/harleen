@@ -11,7 +11,7 @@ use App\Discovery;
 
 class LeadRepository
 {
-    public function index($workingAreaId)
+    public static function collection($workingAreaId)
     {
         $leads = Lead::with('gcf')
             ->where('working_area_id', $workingAreaId)

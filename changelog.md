@@ -140,3 +140,6 @@
 - Added data availability (survey) form component.
 - Changed unit to output unescaped in all basic form components.
 - Finished Lead input form.
+- Changed repository index method to collection.
+- Added inputCol on bsText, bsNumber, bsSelect.
+- Added choose Play in Lead form.

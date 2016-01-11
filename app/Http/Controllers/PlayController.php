@@ -48,7 +48,7 @@ class PlayController extends Controller
     public function index()
     {
         return view('play.index', [
-            'data' => $this->repo->index($this->workingAreaId)
+            'data' => $this->repo->collection($this->workingAreaId)
         ]);
     }
 

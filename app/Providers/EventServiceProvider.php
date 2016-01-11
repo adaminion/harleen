@@ -33,14 +33,16 @@ class EventServiceProvider extends ServiceProvider
             'name',
             'label',
             'required' => false,
-            'unit' => false
+            'unit' => false,
+            'inputCol' => 4
         ]);
 
         Form::component('bsNumber', 'shared.components.number', [
             'name',
             'label',
             'required' => false,
-            'unit' => false
+            'unit' => false,
+            'inputCol' => 4
         ]);
 
         Form::component('bsTextarea', 'shared.components.textarea', [
@@ -55,7 +57,8 @@ class EventServiceProvider extends ServiceProvider
             'label',
             'choice',
             'required' => false,
-            'unit' => false
+            'unit' => false,
+            'inputCol' => 4
         ]);
 
         Form::component('twoSelect', 'shared.components.twoSelect', [
@@ -89,6 +92,7 @@ class EventServiceProvider extends ServiceProvider
         ]);
 
         // Sugar components
+        Form::component('playList', 'shared.sugar.playList', ['name', 'playList']);
         Form::component('basin', 'shared.sugar.basin', ['name']);
         Form::component('province', 'shared.sugar.province', ['name']);
         Form::component('clarified', 'shared.sugar.clarified', ['name']);

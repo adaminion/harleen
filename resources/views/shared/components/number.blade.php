@@ -8,9 +8,9 @@
   </label>
 
   @if ($errors->has($name))
-  <div class="col-md-4 has-feedback has-error">
+  <div class="col-md-{{ $inputCol }} has-feedback has-error">
   @else
-  <div class="col-md-4">
+  <div class="col-md-{{ $inputCol }}">
   @endif
 
     @if ($unit)

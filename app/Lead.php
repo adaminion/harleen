@@ -14,7 +14,6 @@ class Lead extends Model
     protected $guarded = [
         'id',
         'working_area_id',
-        'play_id',
         'gcf_id',
         'rps_year',
         'created_at',
