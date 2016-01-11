@@ -83,6 +83,11 @@ class EventServiceProvider extends ServiceProvider
             'required' => false,
         ]);
 
+        Form::component('survey', 'shared.sugar.survey', [
+            'name' => 'survey',
+            'choice'
+        ]);
+
         // Sugar components
         Form::component('basin', 'shared.sugar.basin', ['name' => 'basin_name']);
         Form::component('province', 'shared.sugar.province', ['name' => 'province_name']);

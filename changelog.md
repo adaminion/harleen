@@ -137,3 +137,4 @@
 - Added Lead index page.
 - Added coordinate form component.
 - Added date form component.
+- Added data availability (survey) form component.

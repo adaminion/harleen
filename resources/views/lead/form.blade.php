@@ -46,6 +46,17 @@
         {{ Form::nearbyField('lead[nearby_field]') }}
         {{ Form::nearbyInfra('lead[nearby_infra]') }}
         {{ Form::remark('lead[remark]') }}
+        {{
+          Form::survey('survey', [
+            's2' => '2D Seismic',
+            'geo' => 'Geological',
+            'grav' => 'Gravity',
+            'chem' => 'Geochemistry',
+            'elec' => 'Electromagnetic',
+            'resi' => 'Resistivity',
+            'oter' => 'Other'
+          ])
+        }}
 
         @if (actionName() === 'edit')
           {{ Form::bsTextarea('lead[update_reason]', 'Update reason', true) }}
