@@ -90,7 +90,7 @@ class LeadController extends Controller
     public function create()
     {
         return view('lead.form', [
-            'playList' => PlayRepository::collection($this->workingAreaId)->toArray(),
+            'playList' => PlayRepository::collection($this->workingAreaId),
             'lead' => new Lead,
             'gcf' => new Gcf,
             'url' => url('lead'),

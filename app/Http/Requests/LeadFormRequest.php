@@ -24,11 +24,11 @@ class LeadFormRequest extends Request
     public function rules()
     {
         return [
+            'lead.play_id' => 'required',
             'lead.basin_name' => 'sometimes|required',
-            'lead.play_name' => 'required',
+            'lead.province_name' => 'required',
             'lead.structure_name' => 'required',
             'lead.closure_name' => 'required',
-            'lead.province_name' => 'required',
             'lead.analog_to' => 'required',
             'lead.analog_distance' => 'required',
             'lead.shore' => 'required',

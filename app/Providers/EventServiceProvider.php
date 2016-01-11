@@ -91,7 +91,11 @@ class EventServiceProvider extends ServiceProvider
             'choice'
         ]);
 
-        // Sugar components
+        /**
+         * Sugar components
+         */
+
+        // playList must Laravel Collection object
         Form::component('playList', 'shared.sugar.playList', ['name', 'playList']);
         Form::component('basin', 'shared.sugar.basin', ['name']);
         Form::component('province', 'shared.sugar.province', ['name']);

@@ -252,3 +252,10 @@
   <script src="{{ asset('js/form.js') }}"></script>
   <script src="{{ asset('js/jquery.inputmask.bundle.min.js') }}"></script>
 @endpush
+
+@push('jsready')
+  // On Change it is!
+  $("select[name='lead[play_id]']").on("change", function() {
+    alert('wa');
+  });
+@endpush
