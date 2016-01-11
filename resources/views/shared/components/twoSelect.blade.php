@@ -26,7 +26,7 @@
       }}
 
       @if ($unitA)
-      <div class="input-group-addon">{{ $unitA }}</div>
+      <div class="input-group-addon">{!! $unitA !!}</div>
       @endif
 
     @if ($unitA)
@@ -60,7 +60,7 @@
       }}
 
       @if ($unitB)
-      <div class="input-group-addon">{{ $unitB }}</div>
+      <div class="input-group-addon">{!! $unitB !!}</div>
       @endif
 
     @if ($unitB)

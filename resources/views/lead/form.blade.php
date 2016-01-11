@@ -64,6 +64,49 @@
       </div>
     </div>
 
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="panel-title">
+          Data Availability
+        </div>
+      </div>
+      <div class="panel-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              2D Seismic
+            </div>
+          </div>
+          <div class="panel-body">
+            {{ Form::bsNumber('lead[s2_low]', 'Low estimate', false, 'Acre') }}
+            {{ Form::bsNumber('lead[s2_best]', 'Best estimate', true, 'Acre') }}
+            {{ Form::bsNumber('lead[s2_high]', 'High estimate', false, 'Acre') }}
+            {{ Form::bsText('lead[s2_year]', 'Acquisition year') }}
+            {{
+              Form::bsSelect('lead[s2_vintage]', 'Total vintage', [
+                'Single' => 'Single',
+                'Multiple' => 'Multiple'
+              ])
+            }}
+            {{ Form::bsNumber('lead[s2_crossline]', 'Total crossline') }}
+            {{
+              Form::bsNumber('lead[s2_coverage]', 'Total coverage area', false,
+                'Km<sup>2</sup>')
+            }}
+            {{
+              Form::bsNumber('lead[s2_avg_interval]',
+                'Average parallel spacing interval', false, 'Km')
+            }}
+            {{ Form::bsText('lead[s2_late_year]', 'Latest processing year') }}
+            {{ Form::lateMethod('lead[s2_late_method]') }}
+            {{ Form::seismicImage('lead[s2_image]') }}
+          </div>
+        </div> {{-- 2D Seismic --}}
+
+      </div>
+    </div> {{-- Data Availability --}}
+
     @include('shared.gcf')
 
     @if (isset($submitButtonText))

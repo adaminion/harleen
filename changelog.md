@@ -138,3 +138,4 @@
 - Added coordinate form component.
 - Added date form component.
 - Added data availability (survey) form component.
+- Changed unit to output unescaped in all basic form components.

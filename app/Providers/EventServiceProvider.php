@@ -89,15 +89,17 @@ class EventServiceProvider extends ServiceProvider
         ]);
 
         // Sugar components
-        Form::component('basin', 'shared.sugar.basin', ['name' => 'basin_name']);
-        Form::component('province', 'shared.sugar.province', ['name' => 'province_name']);
-        Form::component('clarified', 'shared.sugar.clarified', ['name' => 'clarified']);
-        Form::component('analogTo', 'shared.sugar.analogTo', ['name' => 'analog_to']);
-        Form::component('analogDistance', 'shared.sugar.analogDistance', ['name' => 'analog_distance']);
-        Form::component('shore', 'shared.sugar.shore', ['name' => 'shore']);
-        Form::component('terrain', 'shared.sugar.terrain', ['name' => 'terrain']);
-        Form::component('nearbyField', 'shared.sugar.nearbyField', ['name' => 'nearby_field']);
-        Form::component('nearbyInfra', 'shared.sugar.nearbyInfra', ['name' => 'nearby_infra']);
-        Form::component('remark', 'shared.sugar.remark', ['name' => 'remark']);
+        Form::component('basin', 'shared.sugar.basin', ['name']);
+        Form::component('province', 'shared.sugar.province', ['name']);
+        Form::component('clarified', 'shared.sugar.clarified', ['name']);
+        Form::component('analogTo', 'shared.sugar.analogTo', ['name']);
+        Form::component('analogDistance', 'shared.sugar.analogDistance', ['name']);
+        Form::component('shore', 'shared.sugar.shore', ['name']);
+        Form::component('terrain', 'shared.sugar.terrain', ['name']);
+        Form::component('nearbyField', 'shared.sugar.nearbyField', ['name']);
+        Form::component('nearbyInfra', 'shared.sugar.nearbyInfra', ['name']);
+        Form::component('remark', 'shared.sugar.remark', ['name']);
+        Form::component('lateMethod', 'shared.sugar.lateMethod', ['name']);
+        Form::component('seismicImage', 'shared.sugar.seismicImage', ['name']);
     }
 }

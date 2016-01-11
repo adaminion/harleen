@@ -26,7 +26,7 @@
       }}
 
       @if ($unit)
-      <div class="input-group-addon">{{ $unit }}</div>
+      <div class="input-group-addon">{!! $unit !!}</div>
       @endif
 
     @if ($unit)

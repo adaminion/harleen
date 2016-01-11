@@ -15,6 +15,18 @@
         {{ Form::checkbox($name.'[]', $key) }} {{ $value }}
       </label>
     </div>
+
+    {{--
+      Survey toggle, pada form isian haruslah ada sub-form dengan
+      korespondensi dengan masing-masing survey yang disediakan.
+      dan pastikan id dari sub-form tersebut sesuai dengan
+      script di bawah dan ditambah class 'hidden'.
+    --}}
+    @push('jsready')
+      $("#{{ $name }}-{{ $key }}").click(function() {
+        $("#{{ $name }}-{{ $key }}-form").toggleClass('hidden');
+      });
+    @endpush
   @endforeach
 
   @if ($errors->has(squareToDot($name)))
