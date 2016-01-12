@@ -11,6 +11,12 @@ use App\Discovery;
 
 class PlayRepository
 {
+    /**
+     * Mencari seluruh Play pada wilayah kerja tertentu.
+     *
+     * @param  string @workingAreaId
+     * @return \Illuminate\Support\Collection
+     */
     public static function collection($workingAreaId)
     {
         $plays = Play::with('gcf')
@@ -29,6 +35,17 @@ class PlayRepository
                 $item->gcf->trp_type
             );
         });
+    }
+
+    /**
+     * Mencari detail untuk satu Play beserta data GCF.
+     *
+     * @param  int @playId
+     * @return \Illuminate\Support\Collection
+     */
+    public static function detail($playId)
+    {
+        return Play::with('gcf')->findOrFail($playId);
     }
 
     /**

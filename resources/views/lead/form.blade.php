@@ -29,6 +29,7 @@
       </div>
       <div class="panel-body">
         {{ Form::playList('lead[play_id]', $playList) }}
+
         @if (request()->user()->working_area_id === 'WK1047')
           {{ Form::basin('lead[basin_name]') }}
         @endif
@@ -254,8 +255,22 @@
 @endpush
 
 @push('jsready')
-  // On Change it is!
   $("select[name='lead[play_id]']").on("change", function() {
-    alert('wa');
+    $.ajax({
+      header: { csrftoken: "{{ csrf_token() }}"},
+      url: "gcf",
+      data: {
+        _token: "{{ csrf_token() }}",
+        playId: $("select[name='lead[play_id]']").val(),
+      },
+      type: "post",
+      dataType: "json",
+      success: function(data) {
+        updateGcf(data);
+      },
+      error: function(xhr, status, errorThrown) {
+        alert('Sorry, there is some problem in our end');
+      }
+    });
   });
 @endpush

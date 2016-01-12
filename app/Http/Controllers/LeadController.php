@@ -128,4 +128,14 @@ class LeadController extends Controller
         session()->flash('success', 'Play successfully created, thank you!');
         return redirect('play');
     }
+
+    /**
+     * AJAX call, Mengambil data GCF pada Play tertentu.
+     *
+     * @return JSON
+     */
+    public function getPlayGcf()
+    {
+        return PlayRepository::detail(request('playId'));
+    }
 }

@@ -36,7 +36,7 @@ Route::group(['prefix' => 'lead', 'middleware' => 'auth'], function() {
     Route::get('{id}/edit', 'LeadController@edit');
     Route::put('{id}', 'LeadController@update');
     Route::post('destroy', 'LeadController@destroy');
-    Route::post('child', 'LeadController@findLeadProspect');
+    Route::post('gcf', 'LeadController@getPlayGcf');
 });
 
 Route::get('administrator', 'AdministratorController@index');

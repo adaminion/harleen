@@ -1,64 +1,53 @@
-function updateGcf(gcfUrl, id) {
-  $.ajax({
-    url: gcfUrl,
-    data: {play_id: id},
-    type: 'POST',
-    dataType: 'json',
-    success: function(r) {
-      $("#gcf_is_sr").val(r.gcf_is_sr);
-      $("#gcf_sr_age_system").val(r.gcf_sr_age_system);
-      $("#gcf_sr_age_serie").val(r.gcf_sr_age_serie);
-      $("#gcf_sr_formation").val(r.gcf_sr_formation);
-      $("#gcf_sr_formation_serie").val(r.gcf_sr_formation_serie);
-      $("#gcf_sr_kerogen").val(r.gcf_sr_kerogen);
-      $("#gcf_sr_toc").val(r.gcf_sr_toc);
-      $("#gcf_sr_hfu").val(r.gcf_sr_hfu);
-      $("#gcf_sr_distribution").val(r.gcf_sr_distribution);
-      $("#gcf_sr_continuity").val(r.gcf_sr_continuity);
-      $("#gcf_sr_maturity").val(r.gcf_sr_maturity);
-      $("#gcf_sr_otr").val(r.gcf_sr_otr);
-
-      $("#gcf_is_res").val(r.gcf_is_res);
-      $("#gcf_res_distribution").val(r.gcf_res_distribution);
-      $("#gcf_res_continuity").val(r.gcf_res_continuity);
-      $("#gcf_res_age_system").val(r.gcf_res_age_system);
-      $("#gcf_res_age_serie").val(r.gcf_res_age_serie);
-      $("#gcf_res_formation").val(r.gcf_res_formation);
-      $("#gcf_res_formation_serie").val(r.gcf_res_formation_serie);
-      $("#gcf_res_lithology").val(r.gcf_res_lithology);
-      $("#gcf_res_depos_env").val(r.gcf_res_depos_env);
-      $("#gcf_res_depos_set").val(r.gcf_res_depos_set);
-      $("#gcf_res_por_primary").val(r.gcf_res_por_primary);
-      $("#gcf_res_por_secondary").val(r.gcf_res_por_secondary);
-
-      $("#gcf_is_trap").val(r.gcf_is_trap);
-      $("#gcf_trap_type").val(r.gcf_trap_type);
-      $("#gcf_trap_age_system").val(r.gcf_trap_age_system);
-      $("#gcf_trap_age_serie").val(r.gcf_trap_age_serie);
-      $("#gcf_trap_geometry").val(r.gcf_trap_geometry);
-      $("#gcf_trap_closure").val(r.gcf_trap_closure);
-      $("#gcf_trap_seal_age_system").val(r.gcf_trap_seal_age_system);
-      $("#gcf_trap_seal_age_serie").val(r.gcf_trap_seal_age_serie);
-      $("#gcf_trap_seal_formation").val(r.gcf_trap_seal_formation);
-      $("#gcf_trap_seal_formation_serie").val(r.gcf_trap_seal_formation_serie);
-      $("#gcf_trap_seal_distribution").val(r.gcf_trap_seal_distribution);
-      $("#gcf_trap_seal_continuity").val(r.gcf_trap_seal_continuity);
-      $("#gcf_trap_seal_type").val(r.gcf_trap_seal_type);
-
-      $("#gcf_is_dyn").val(r.gcf_is_dyn);
-      $("#gcf_dyn_migration").val(r.gcf_dyn_migration);
-      $("#gcf_dyn_kitchen").val(r.gcf_dyn_kitchen);
-      $("#gcf_dyn_petroleum").val(r.gcf_dyn_petroleum);
-      $("#gcf_dyn_early_age_system").val(r.gcf_dyn_early_age_system);
-      $("#gcf_dyn_early_age_serie").val(r.gcf_dyn_early_age_serie);
-      $("#gcf_dyn_late_age_system").val(r.gcf_dyn_late_age_system);
-      $("#gcf_dyn_late_age_serie").val(r.gcf_dyn_late_age_serie);
-      $("#gcf_dyn_preservation").val(r.gcf_dyn_preservation);
-      $("#gcf_dyn_pathways").val(r.gcf_dyn_pathways);
-      $("#gcf_dyn_migration_age_system").val(r.gcf_dyn_migration_age_system);
-      $("#gcf_dyn_migration_age_serie").val(r.gcf_dyn_migration_age_serie);
-    },
-  });
+function updateGcf(data) {
+      $("[name='gcf[src_data]']").val(data.gcf.src_data);
+      $("[name='gcf[src_formation]']").val(data.gcf.src_formation);
+      $("[name='gcf[src_formation_level]']").val(data.gcf.src_formation_level);
+      $("[name='gcf[src_age_period]']").val(data.gcf.src_age_period);
+      $("[name='gcf[src_age_epoch]']").val(data.gcf.src_age_epoch);
+      $("[name='gcf[src_kerogen]']").val(data.gcf.src_kerogen);
+      $("[name='gcf[src_capacity]']").val(data.gcf.src_capacity);
+      $("[name='gcf[src_heatflow]']").val(data.gcf.src_heatflow);
+      $("[name='gcf[src_distribution]']").val(data.gcf.src_distribution);
+      $("[name='gcf[src_continuity]']").val(data.gcf.src_continuity);
+      $("[name='gcf[src_maturity]']").val(data.gcf.src_maturity);
+      $("[name='gcf[src_other]']").val(data.gcf.src_other);
+      $("[name='gcf[res_data]']").val(data.gcf.res_data);
+      $("[name='gcf[res_litho]']").val(data.gcf.res_litho);
+      $("[name='gcf[res_formation]']").val(data.gcf.res_formation);
+      $("[name='gcf[res_formation_level]']").val(data.gcf.res_formation_level);
+      $("[name='gcf[res_age_period]']").val(data.gcf.res_age_period);
+      $("[name='gcf[res_age_epoch]']").val(data.gcf.res_age_epoch);
+      $("[name='gcf[res_dep_env]']").val(data.gcf.res_dep_env);
+      $("[name='gcf[res_dep_set]']").val(data.gcf.res_dep_set);
+      $("[name='gcf[res_distribution]']").val(data.gcf.res_distribution);
+      $("[name='gcf[res_continuity]']").val(data.gcf.res_continuity);
+      $("[name='gcf[res_primary]']").val(data.gcf.res_primary);
+      $("[name='gcf[res_second]']").val(data.gcf.res_second);
+      $("[name='gcf[trp_data]']").val(data.gcf.trp_data);
+      $("[name='gcf[trp_type]']").val(data.gcf.trp_type);
+      $("[name='gcf[trp_age_period]']").val(data.gcf.trp_age_period);
+      $("[name='gcf[trp_age_epoch]']").val(data.gcf.trp_age_epoch);
+      $("[name='gcf[trp_geometry]']").val(data.gcf.trp_geometry);
+      $("[name='gcf[trp_seal_type]']").val(data.gcf.trp_seal_type);
+      $("[name='gcf[trp_seal_distribution]']").val(data.gcf.trp_seal_distribution);
+      $("[name='gcf[trp_seal_continuity]']").val(data.gcf.trp_seal_continuity);
+      $("[name='gcf[trp_seal_age_period]']").val(data.gcf.trp_seal_age_period);
+      $("[name='gcf[trp_seal_age_epoch]']").val(data.gcf.trp_seal_age_epoch);
+      $("[name='gcf[trp_seal_formation]']").val(data.gcf.trp_seal_formation);
+      $("[name='gcf[trp_seal_formation_level]']").val(data.gcf.trp_seal_formation_level);
+      $("[name='gcf[trp_closure]']").val(data.gcf.trp_closure);
+      $("[name='gcf[dyn_data]']").val(data.gcf.dyn_data);
+      $("[name='gcf[dyn_authenticate]']").val(data.gcf.dyn_authenticate);
+      $("[name='gcf[dyn_kitchen]']").val(data.gcf.dyn_kitchen);
+      $("[name='gcf[dyn_tectonic]']").val(data.gcf.dyn_tectonic);
+      $("[name='gcf[dyn_regime_early_age_period]']").val(data.gcf.dyn_regime_early_age_period);
+      $("[name='gcf[dyn_regime_early_age_epoch]']").val(data.gcf.dyn_regime_early_age_epoch);
+      $("[name='gcf[dyn_regime_late_age_period]']").val(data.gcf.dyn_regime_late_age_period);
+      $("[name='gcf[dyn_regime_late_age_epoch]']").val(data.gcf.dyn_regime_late_age_epoch);
+      $("[name='gcf[dyn_preservation]']").val(data.gcf.dyn_preservation);
+      $("[name='gcf[dyn_pathway]']").val(data.gcf.dyn_pathway);
+      $("[name='gcf[dyn_age_period]']").val(data.gcf.dyn_age_period);
+      $("[name='gcf[dyn_age_epoch]']").val(data.gcf.dyn_age_epoch);
 }
 
 // Survey toggle

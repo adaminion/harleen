@@ -143,3 +143,4 @@
 - Changed repository index method to collection.
 - Added inputCol on bsText, bsNumber, bsSelect.
 - Added choose Play in Lead form.
+- Changed javascript updateGcf function.
