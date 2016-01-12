@@ -76,7 +76,6 @@ class EventServiceProvider extends ServiceProvider
         Form::component('coord', 'shared.components.coordinate', [
             'name',
             'label',
-            'type',
             'required' => true,
         ]);
 
@@ -109,5 +108,9 @@ class EventServiceProvider extends ServiceProvider
         Form::component('remark', 'shared.sugar.remark', ['name', 'required' => false]);
         Form::component('lateMethod', 'shared.sugar.lateMethod', ['name']);
         Form::component('seismicImage', 'shared.sugar.seismicImage', ['name']);
+        Form::component('latitude', 'shared.sugar.latitude', [
+            'name',
+
+        ]);
     }
 }

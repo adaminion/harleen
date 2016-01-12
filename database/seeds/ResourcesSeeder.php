@@ -58,9 +58,18 @@ class ResourcesSeeder extends Seeder
                     ->value('basin_name');
             }
 
+            if ($play->terrain === '< 12 miles Offshore') {
+                $play->terrain = '< 20 Km Offshore';
+            }
+
+            if ($play->terrain === '> 12 miles Offshore') {
+                $play->terrain = '> 20 Km Offshore';
+            }
+
             $playId = DB::table('play')->insertGetId([
                 'working_area_id' => $play->working_area_id,
                 'gcf_id' => $gcfId,
+                'rps_year' => '2015',
                 'basin_name' => $play->basin_name,
                 'province_name' => $play->province_name,
                 'remark' => $play->remark,
@@ -79,6 +88,7 @@ class ResourcesSeeder extends Seeder
                 'grav_depth' => $play->grav_depth,
                 'resi_acreage' => $play->resi_acreage,
                 'created_at' => $play->created_at,
+                'updated_at' => $play->created_at,
             ]);
 
             $originalPlayIds[$play->play_id] = $playId;
@@ -186,16 +196,25 @@ class ResourcesSeeder extends Seeder
             }
 
             // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
-            if ($play->working_area_id != 'WK1047') {
-                $play->basin_name = DB::table('basin_working_area')
-                    ->where('working_area_id', $play->working_area_id)
+            if ($lead->working_area_id != 'WK1047') {
+                $lead->basin_name = DB::table('basin_working_area')
+                    ->where('working_area_id', $lead->working_area_id)
                     ->value('basin_name');
+            }
+
+            if ($lead->terrain === '< 12 miles Offshore') {
+                $lead->terrain = '< 20 Km Offshore';
+            }
+
+            if ($lead->terrain === '> 12 miles Offshore') {
+                $lead->terrain = '> 20 Km Offshore';
             }
 
             DB::table('lead')->insert([
                 'working_area_id' => $lead->working_area_id,
                 'play_id' => $originalPlayIds[$lead->play_id],
                 'gcf_id' => $gcfId,
+                'rps_year' => '2015',
                 'basin_name' => $lead->basin_name,
                 'province_name' => $lead->province_name,
                 'closure_name' => $this->nameCleaner($lead->closure_name),
@@ -264,6 +283,7 @@ class ResourcesSeeder extends Seeder
                 'oter_remark' => $lead->oter_remark,
 
                 'created_at' => $lead->created_at,
+                'updated_at' => $lead->created_at,
                 'deleted_at' => $deletedAt,
                 'delete_reason' => $deleteReason,
             ]);
@@ -335,11 +355,20 @@ class ResourcesSeeder extends Seeder
                     ->value('basin_name');
             }
 
+            if ($drillable->terrain === '< 12 miles Offshore') {
+                $drillable->terrain = '< 20 Km Offshore';
+            }
+
+            if ($drillable->terrain === '> 12 miles Offshore') {
+                $drillable->terrain = '> 20 Km Offshore';
+            }
+
             DB::table('drillable')->insert([
                 'working_area_id' => $drillable->working_area_id,
                 'play_id' => $originalPlayIds[$drillable->play_id],
                 'prospect_survey_id' => $surveyId,
                 'gcf_id' => $gcfId,
+                'rps_year' => '2015',
                 'basin_name' => $drillable->basin_name,
                 'province_name' => $drillable->province_name,
                 'closure_name' => $this->nameCleaner($drillable->closure_name),
@@ -358,6 +387,7 @@ class ResourcesSeeder extends Seeder
                 'sat_p50' => $drillable->sat_p50,
                 'sat_p10' => $drillable->sat_p10,
                 'created_at' => $drillable->created_at,
+                'updated_at' => $drillable->created_at,
                 'deleted_at' => $deletedAt,
                 'delete_reason' => $deleteReason,
             ]);
@@ -568,10 +598,18 @@ class ResourcesSeeder extends Seeder
             }
 
             // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
-            if ($play->working_area_id != 'WK1047') {
-                $play->basin_name = DB::table('basin_working_area')
-                    ->where('working_area_id', $play->working_area_id)
+            if ($postdrill->working_area_id != 'WK1047') {
+                $postdrill->basin_name = DB::table('basin_working_area')
+                    ->where('working_area_id', $postdrill->working_area_id)
                     ->value('basin_name');
+            }
+
+            if ($postdrill->terrain === '< 12 miles Offshore') {
+                $postdrill->terrain = '< 20 Km Offshore';
+            }
+
+            if ($postdrill->terrain === '> 12 miles Offshore') {
+                $postdrill->terrain = '> 20 Km Offshore';
             }
 
             if (array_key_exists($postdrill->prospect_id, $originalWellPostdrillIds)) {
@@ -586,6 +624,7 @@ class ResourcesSeeder extends Seeder
                 'postdrill_well_id' => $wellPostdrillId,
                 'prospect_survey_id' => $surveyId,
                 'gcf_id' => $gcfId,
+                'rps_year' => '2015',
                 'basin_name' => $postdrill->basin_name,
                 'province_name' => $postdrill->province_name,
                 'structure_name' => $this->nameCleaner($postdrill->structure_name),
@@ -598,6 +637,7 @@ class ResourcesSeeder extends Seeder
                 'nearby_field' => $postdrill->nearby_field,
                 'nearby_infra' => $postdrill->nearby_infra,
                 'created_at' => $postdrill->created_at,
+                'updated_at' => $postdrill->created_at,
                 'deleted_at' => $deletedAt,
                 'delete_reason' => $deleteReason,
             ]);
@@ -659,10 +699,18 @@ class ResourcesSeeder extends Seeder
             }
 
             // Ubah basin yang salah pada tiap WK kecuali WK Pertamina EP
-            if ($play->working_area_id != 'WK1047') {
-                $play->basin_name = DB::table('basin_working_area')
-                    ->where('working_area_id', $play->working_area_id)
+            if ($discovery->working_area_id != 'WK1047') {
+                $discovery->basin_name = DB::table('basin_working_area')
+                    ->where('working_area_id', $discovery->working_area_id)
                     ->value('basin_name');
+            }
+
+            if ($discovery->terrain === '< 12 miles Offshore') {
+                $discovery->terrain = '< 20 Km Offshore';
+            }
+
+            if ($discovery->terrain === '> 12 miles Offshore') {
+                $discovery->terrain = '> 20 Km Offshore';
             }
 
             $discoveryId = DB::table('discovery')->insertGetId([
@@ -670,6 +718,7 @@ class ResourcesSeeder extends Seeder
                 'play_id' => $originalPlayIds[$discovery->play_id],
                 'prospect_survey_id' => $surveyId,
                 'gcf_id' => $gcfId,
+                'rps_year' => '2015',
                 'basin_name' => $discovery->basin_name,
                 'province_name' => $discovery->province_name,
                 'structure_name' => $this->nameCleaner($discovery->structure_name),
@@ -682,6 +731,7 @@ class ResourcesSeeder extends Seeder
                 'nearby_field' => $discovery->nearby_field,
                 'nearby_infra' => $discovery->nearby_infra,
                 'created_at' => $discovery->created_at,
+                'updated_at' => $discovery->created_at,
                 'deleted_at' => $deletedAt,
                 'delete_reason' => $deleteReason,
             ]);

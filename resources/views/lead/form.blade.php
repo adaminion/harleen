@@ -249,7 +249,7 @@
   @endif
 
   <script src="{{ asset('js/form.js') }}"></script>
-  <script src="{{ asset('js/jquery.inputmask.bundle.min.js') }}"></script>
+  <script src="{{ asset('js/jquery.inputmask.min.js') }}"></script>
 @endpush
 
 @push('jsready')

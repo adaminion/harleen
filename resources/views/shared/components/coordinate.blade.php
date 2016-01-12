@@ -13,7 +13,7 @@
   <div class="col-md-4">
   @endif
 
-    {{ Form::text($name, null, ['class' => 'form-control'])}}
+    {{ Form::text($name, null, ['class' => 'form-control']) }}
 
     @if ($errors->has(squareToDot($name)))
     <span class="form-control-feedback glyphicon glyphicon-remove"
@@ -39,8 +39,10 @@
     $("input[name='{{ $name }}']").inputmask("L\u00b0 s\u2019 s\u201D C", {
       definitions: {
         "L": {
-          validator: "[0-1][0-9]|[2][0]",
-          cardinality: 2,
+          validator: function(chrs, buffer, pos, strict, opts) {
+            console.log(chrs);
+          },
+          cardinality: 1,
         },
         "C": {
           validator: "[sSnN]",

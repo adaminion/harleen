@@ -392,8 +392,8 @@ class CreateInitialTables extends Migration
             $table->char('rps_year', 4);
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
-            $table->string('structure_name', 100);
-            $table->string('closure_name', 100);
+            $table->string('structure_name', 100)->nullable();
+            $table->string('closure_name', 100)->nullable();
             $table->string('clarified', 100);
             $table->date('initiate');
             $table->string('latitude', 100);
@@ -539,7 +539,7 @@ class CreateInitialTables extends Migration
             $table->string('basin_name', 100);
             $table->string('province_name', 100);
             $table->string('structure_name', 100)->nullable();
-            $table->string('closure_name', 100);
+            $table->string('closure_name', 100)->nullable();
             $table->string('clarified', 100);
             $table->date('initiate');
             $table->string('latitude', 100);
