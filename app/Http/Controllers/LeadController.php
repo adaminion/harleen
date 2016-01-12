@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Gate;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use App\Http\Requests\LeadFormRequest;
 use App\Http\Controllers\Controller;
 
 use App\Quinzel\Repository\PlayRepository;
@@ -107,29 +107,29 @@ class LeadController extends Controller
      *
      * @return View
      */
-    public function store()
+    public function store(LeadFormRequest $request)
     {
-        $play = new Play($request['play']);
-        $play->working_area_id = $this->workingAreaId;
-        $play->rps_year = DB::table('sys_year')
+        $lead = new Lead($request['lead']);
+        $lead->working_area_id = $this->workingAreaId;
+        $lead->rps_year = DB::table('sys_year')
             ->where('is_active', '=', 1)
             ->value('rps_year');
         if ($this->workingAreaId !== 'WK1047') {
-            $play->basin_name = DB::table('basin_working_area')
+            $lead->basin_name = DB::table('basin_working_area')
                 ->where('working_area_id', '=', $this->workingAreaId)
                 ->value('basin_name');
         }
 
         $gcf = new Gcf($request['gcf']);
 
-        DB::transaction(function() use ($play, $gcf) {
+        DB::transaction(function() use ($lead, $gcf) {
             $gcf->save();
-            $play->gcf_id = $gcf->id;
-            $play->save();
+            $lead->gcf_id = $gcf->id;
+            $lead->save();
         });
 
-        session()->flash('success', 'Play successfully created, thank you!');
-        return redirect('play');
+        session()->flash('success', 'Lead successfully created, thank you!');
+        return redirect('lead');
     }
 
     /**

@@ -22,7 +22,7 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name.'[degree]' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name).'.degree') }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name).'.degree') }}</p>
     @endif
   </div>
 
@@ -41,7 +41,7 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name.'[minute]' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name).'.minute') }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name).'.minute') }}</p>
     @endif
   </div>
 
@@ -60,14 +60,14 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name.'[second]' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name).'.second') }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name).'.second') }}</p>
     @endif
   </div>
 
   @if ($errors->has(squareToDot($name).'.cardinal'))
-  <div class="col-md-1 has-feedback has-error">
+  <div class="col-md-2 has-feedback has-error">
   @else
-  <div class="col-md-1">
+  <div class="col-md-2">
   @endif
 
     {{ Form::text($name.'[cardinal]', null, ['class' => 'form-control', 'placeholder' => 'S/N']) }}
@@ -76,7 +76,7 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name.'[cardinal]' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name).'.cardinal') }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name).'.cardinal') }}</p>
     @endif
   </div>
 </div>

@@ -22,7 +22,7 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name.'[degree]' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name).'.degree') }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name).'.degree') }}</p>
     @endif
   </div>
 
@@ -41,7 +41,7 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name.'[minute]' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name).'.minute') }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name).'.minute') }}</p>
     @endif
   </div>
 
@@ -60,7 +60,7 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name.'[second]' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name).'.second') }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name).'.second') }}</p>
     @endif
   </div>
 

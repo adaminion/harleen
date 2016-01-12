@@ -31,7 +31,7 @@
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
     <span id="{{ $name }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name)) }}</p>
+    <p class="help-block">{{ $errors->first(squareToDot($name)) }}</p>
     @endif
   </div>
 </div>
