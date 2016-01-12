@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Gate;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -75,6 +77,7 @@ class LeadController extends Controller
         $gcf = Gcf::find($lead->gcf_id);
 
         return view('lead.form', [
+            'playList' => PlayRepository::collection($this->workingAreaId),
             'lead' => $lead,
             'gcf' => $gcf,
             'url' => null,

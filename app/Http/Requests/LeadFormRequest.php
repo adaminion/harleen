@@ -29,24 +29,52 @@ class LeadFormRequest extends Request
             'lead.province_name' => 'required',
             'lead.structure_name' => 'required',
             'lead.closure_name' => 'required',
-            'lead.analog_to' => 'required',
-            'lead.analog_distance' => 'required',
+            'lead.latitude' => 'required',
+            'lead.longitude' => 'required',
+            'lead.clarified' => 'required',
+            'lead.initiate' => 'required',
             'lead.shore' => 'required',
             'lead.terrain' => 'required',
             'lead.nearby_field' => 'required',
             'lead.nearby_infra' => 'required',
             'lead.update_reason' => 'sometimes|required',
-            'lead.delete_reason' => 'sometimes|required',
+            'lead.s2_low' => 'numeric|min:1',
+            'lead.s2_best' => 'sometimes|required|numeric|min:1',
+            'lead.s2_high' => 'numeric|min:1',
+            'lead.geo_low' => 'numeric|min:1',
+            'lead.geo_best' => 'sometimes|required|numeric|min:1',
+            'lead.geo_high' => 'numeric|min:1',
+            'lead.chem_low' => 'numeric|min:1',
+            'lead.chem_best' => 'sometimes|required|numeric|min:1',
+            'lead.chem_high' => 'numeric|min:1',
+            'lead.grav_low' => 'numeric|min:1',
+            'lead.grav_best' => 'sometimes|required|numeric|min:1',
+            'lead.grav_high' => 'numeric|min:1',
+            'lead.elec_low' => 'numeric|min:1',
+            'lead.elec_best' => 'sometimes|required|numeric|min:1',
+            'lead.elec_high' => 'numeric|min:1',
+            'lead.resi_low' => 'numeric|min:1',
+            'lead.resi_best' => 'sometimes|required|numeric|min:1',
+            'lead.resi_high' => 'numeric|min:1',
+            'lead.oter_low' => 'numeric|min:1',
+            'lead.oter_best' => 'sometimes|required|numeric|min:1',
+            'lead.oter_high' => 'numeric|min:1',
             'gcf.src_data' => 'required',
             'gcf.res_data' => 'required',
-            'gcf.res_litho' => 'required',
-            'gcf.res_formation' => 'required',
-            'gcf.res_age_period' => 'required',
-            'gcf.res_age_epoch' => 'required',
-            'gcf.res_dep_env' => 'required',
             'gcf.trp_data' => 'required',
-            'gcf.trp_type' => 'required',
             'gcf.dyn_data' => 'required'
         ];
+    }
+
+    /**
+     * Override fungsi untuk memodifikasi input sebelum divalidasi.
+     *
+     * @return Request
+     */
+    public function all()
+    {
+        $input = parent::all();
+
+        return $input;
     }
 }

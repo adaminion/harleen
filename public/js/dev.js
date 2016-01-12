@@ -22,103 +22,82 @@ $(document).ready(function() {
     });
 
     $("#devLeadSampleInput").on("click", function() {
-        $("#structure_name").val("Test Structure");
-        $("#closure_name").val("Test Closure");
-        $("#center_lat_degree").val('1');
-        $("#center_lat_minute").val('59');
-        $("#center_lat_second").val('59');
-        $("#center_lat_direction").val('S');
-        $("#center_long_degree").val('90');
-        $("#center_long_minute").val('59');
-        $("#center_long_second").val('59');
-        $("#lead_clarified").val('Join Study');
-        $("#lead_shore").val('Onshore');
-        $("#lead_terrain").val('Farmland');
-        $("#lead_near_field").val('< 5');
-        $("#lead_near_infra_structure").val('< 50');
-        $("#lead_remark").val('Remark at its best');
-
-        $("#s2-cb").prop('checked', true);
-        $("#geological-cb").prop('checked', true);
-        $("#gravity-cb").prop('checked', true);
-        $("#electromagnetic-cb").prop('checked', true);
-        $("#resistivity-cb").prop('checked', true);
-        $("#geochemistry-cb").prop('checked', true);
-        $("#other-cb").prop('checked', true);
-        $('#s2-form').toggleClass('hidden');
-        $('#geological-form').toggleClass('hidden');
-        $('#gravity-form').toggleClass('hidden');
-        $('#electromagnetic-form').toggleClass('hidden');
-        $('#resistivity-form').toggleClass('hidden');
-        $('#geochemistry-form').toggleClass('hidden');
-        $('#other-form').toggleClass('hidden');
-
-        // Seismic
-        $("#ls2d_low_estimate").val('50');
-        $("#ls2d_best_estimate").val('100');
-        $("#ls2d_high_estimate").val('150');
-        $("#ls2d_year_survey").val('2010, 2012');
-        $("#ls2d_vintage_number").val('Multiple');
-        $("#ls2d_total_crossline").val('5');
-        $("#ls2d_total_coverage").val('10000');
-        $("#ls2d_average_interval").val('23');
-        $("#ls2d_late_method").val('PSTM');
-        $("#ls2d_img_quality").val('Good');
-
-        // Geological field
-        $("#lsgf_low_estimate").val('50');
-        $("#lsgf_best_estimate").val('100');
-        $("#lsgf_high_estimate").val('150');
-        $("#lsgf_year_survey").val('2010, 2012');
-        $("#lsgf_survey_method").val('Stream Sampling');
-        $("#lsgf_coverage_area").val('200');
-
-        // Gravity
-        $("#lsgv_low_estimate").val('50');
-        $("#lsgv_best_estimate").val('100');
-        $("#lsgv_high_estimate").val('150');
-        $("#lsgv_year_survey").val('2010, 2012');
-        $("#lsgv_survey_method").val('Airbornes');
-        $("#lsgv_coverage_area").val('4000');
-        $("#lsgv_range_penetration").val('300');
-        $("#lsgv_spacing_interval").val('30');
-
-        // Electromagnetic
-        $("#lsel_low_estimate").val('50');
-        $("#lsel_best_estimate").val('100');
-        $("#lsel_high_estimate").val('150');
-        $("#lsel_year_survey").val('2010, 2012');
-        $("#lsel_survey_method").val('Airbornes');
-        $("#lsel_coverage_area").val('4000');
-        $("#lsel_range_penetration").val('300');
-        $("#lsel_spacing_interval").val('30');
-
-        // Resistivity
-        $("#lsrt_low_estimate").val('50');
-        $("#lsrt_best_estimate").val('100');
-        $("#lsrt_high_estimate").val('150');
-        $("#lsrt_year_survey").val('2010, 2012');
-        $("#lsrt_survey_method").val('Airbornes');
-        $("#lsrt_coverage_area").val('4000');
-        $("#lsrt_range_penetration").val('300');
-        $("#lsrt_spacing_interval").val('30');
-
-        // Geochemistry
-        $("#lsgc_low_estimate").val('50');
-        $("#lsgc_best_estimate").val('100');
-        $("#lsgc_high_estimate").val('150');
-        $("#lsgc_year_survey").val('2010, 2012');
-        $("#lsgc_range_interval").val('5');
-        $("#lsgc_number_rock").val('49');
-        $("#lsgc_number_fluid").val('42');
-        $("#lsgc_hc_composition").val('NaCL');
-
-        // Other
-        $("#lsor_low_estimate").val('50');
-        $("#lsor_best_estimate").val('100');
-        $("#lsor_high_estimate").val('150');
-        $("#lsor_year_survey").val('2010, 2012');
-        $("#lsor_remark").val('Perhaps, this is 3D');
+        $("#survey-s2-panel").toggleClass('hidden');
+        $("#survey-geo-panel").toggleClass('hidden');
+        $("#survey-chem-panel").toggleClass('hidden');
+        $("#survey-grav-panel").toggleClass('hidden');
+        $("#survey-elec-panel").toggleClass('hidden');
+        $("#survey-resi-panel").toggleClass('hidden');
+        $("#survey-oter-panel").toggleClass('hidden');
+        $("[name='lead[basin_name]']").val("Barito");
+        $("[name='lead[province_name]']").val("Bali");
+        $("[name='lead[structure_name]']").val("Test Structure");
+        $("[name='lead[closure_name]']").val("Test Closure");
+        $("[name='lead[latitude]']").val('205959S');
+        $("[name='lead[longitude]']").val('0905959');
+        $("[name='lead[clarified]']").val('Join Study');
+        $("[name='lead[initiate]']").val('2015-01-01');
+        $("[name='lead[shore]']").val('Onshore');
+        $("[name='lead[terrain]']").val('Farmland');
+        $("[name='lead[nearby_field]']").val('< 5');
+        $("[name='lead[nearby_infra]']").val('< 50');
+        $("[name='lead[remark]']").val('Remark at its best');
+        $("[name='survey[]']").prop('checked', true);
+        $("[name='lead[s2_low]']").val('50');
+        $("[name='lead[s2_best]']").val('100');
+        $("[name='lead[s2_high]']").val('150');
+        $("[name='lead[s2_year]']").val('2010, 2012');
+        $("[name='lead[s2_vintage]']").val('Multiple');
+        $("[name='lead[s2_crossline]']").val('5');
+        $("[name='lead[s2_coverage]']").val('10000');
+        $("[name='lead[s2_avg_interval]']").val('23');
+        $("[name='lead[s2_late_year]']").val('2015');
+        $("[name='lead[s2_late_method]']").val('PSTM');
+        $("[name='lead[s2_image]']").val('Good');
+        $("[name='lead[geo_low]']").val('50');
+        $("[name='lead[geo_best]']").val('100');
+        $("[name='lead[geo_high]']").val('150');
+        $("[name='lead[geo_year]']").val('2010, 2012');
+        $("[name='lead[geo_method]']").val('Stream Sampling');
+        $("[name='lead[geo_coverage]']").val('200');
+        $("[name='lead[chem_low]']").val('50');
+        $("[name='lead[chem_best]']").val('100');
+        $("[name='lead[chem_high]']").val('150');
+        $("[name='lead[chem_year]']").val('2010, 2012');
+        $("[name='lead[chem_interval]']").val('5');
+        $("[name='lead[chem_sample]']").val('49');
+        $("[name='lead[chem_rock]']").val('49');
+        $("[name='lead[chem_fluid]']").val('42');
+        $("[name='lead[chem_composition]']").val('NaCL');
+        $("[name='lead[grav_low]']").val('50');
+        $("[name='lead[grav_best]']").val('100');
+        $("[name='lead[grav_high]']").val('150');
+        $("[name='lead[grav_year]']").val('2010, 2012');
+        $("[name='lead[grav_method]']").val('Airbones');
+        $("[name='lead[grav_coverage]']").val('4000');
+        $("[name='lead[grav_penetrate]']").val('300');
+        $("[name='lead[grav_recorder]']").val('30');
+        $("[name='lead[elec_low]']").val('50');
+        $("[name='lead[elec_best]']").val('100');
+        $("[name='lead[elec_high]']").val('150');
+        $("[name='lead[elec_year]']").val('2010, 2012');
+        $("[name='lead[elec_method]']").val('Airbones');
+        $("[name='lead[elec_coverage]']").val('4000');
+        $("[name='lead[elec_penetrate]']").val('300');
+        $("[name='lead[elec_recorder]']").val('30');
+        $("[name='lead[resi_low]']").val('50');
+        $("[name='lead[resi_best]']").val('100');
+        $("[name='lead[resi_high]']").val('150');
+        $("[name='lead[resi_year]']").val('2010, 2012');
+        $("[name='lead[resi_method]']").val('Airbones');
+        $("[name='lead[resi_coverage]']").val('4000');
+        $("[name='lead[resi_penetrate]']").val('300');
+        $("[name='lead[resi_recorder]']").val('30');
+        $("[name='lead[oter_low]']").val('50');
+        $("[name='lead[oter_best]']").val('100');
+        $("[name='lead[oter_high]']").val('150');
+        $("[name='lead[oter_year]']").val('2010, 2012');
+        $("[name='lead[oter_remark]']").val('Perhaps, this is 3D');
 
         gcfTest('lead');
     });

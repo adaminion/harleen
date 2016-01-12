@@ -190,7 +190,7 @@
 
         {{
           Form::bsSelect('gcf[trp_type]', 'Trapping type',
-            App\Quinzel\Gcf\Trap::factorOptions('trapType'), true)
+            App\Quinzel\Gcf\Trap::factorOptions('trapType'), $requiredReservoir)
         }}
 
         {{

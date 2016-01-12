@@ -41,8 +41,6 @@
         {{ Form::coord('lead[longitude]', 'Center longitude', 'long') }}
         {{ Form::clarified('lead[clarified]')}}
         {{ Form::bsDate('lead[initiate]', 'Initiation date', true)}}
-        {{ Form::analogTo('lead[analog_to]') }}
-        {{ Form::analogDistance('lead[analog_distance]') }}
         {{ Form::shore('lead[shore]') }}
         {{ Form::terrain('lead[terrain]') }}
         {{ Form::nearbyField('lead[nearby_field]') }}
