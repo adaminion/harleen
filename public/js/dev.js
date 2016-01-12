@@ -33,8 +33,13 @@ $(document).ready(function() {
         $("[name='lead[province_name]']").val("Bali");
         $("[name='lead[structure_name]']").val("Test Structure");
         $("[name='lead[closure_name]']").val("Test Closure");
-        $("[name='lead[latitude]']").val('205959S');
-        $("[name='lead[longitude]']").val('0905959');
+        $("[name='lead[latitude][degree]']").val('20');
+        $("[name='lead[latitude][minute]']").val('59');
+        $("[name='lead[latitude][second]']").val('59');
+        $("[name='lead[latitude][cardinal]']").val('N');
+        $("[name='lead[longitude][degree]']").val('145');
+        $("[name='lead[longitude][minute]']").val('59');
+        $("[name='lead[longitude][second]']").val('59');
         $("[name='lead[clarified]']").val('Join Study');
         $("[name='lead[initiate]']").val('2015-01-01');
         $("[name='lead[shore]']").val('Onshore');

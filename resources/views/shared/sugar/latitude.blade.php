@@ -7,76 +7,76 @@
     Center latitude
   </label>
 
-  @if ($errors->has(squareToDot($name.'_degree')))
+  @if ($errors->has(squareToDot($name).'.degree'))
   <div class="col-md-2 has-feedback has-error">
   @else
   <div class="col-md-2">
   @endif
 
     <div class="input-group">
-      {{ Form::text($name.'_degree', null, ['class' => 'form-control', 'placeholder' => 'degree']) }}
+      {{ Form::text($name.'[degree]', null, ['class' => 'form-control', 'placeholder' => 'degree']) }}
       <div class="input-group-addon">&deg;</div>
     </div>
 
-    @if ($errors->has(squareToDot($name.'_degree')))
+    @if ($errors->has(squareToDot($name).'.degree'))
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
-    <span id="{{ $name.'_degree' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name.'_degree')) }}</p>
+    <span id="{{ $name.'[degree]' }}" class="sr-only">(error)</span>
+    <p class="help-block">{{ $errors->first(squareToDo($name).'.degree') }}</p>
     @endif
   </div>
 
-  @if ($errors->has(squareToDot($name.'_minute')))
+  @if ($errors->has(squareToDot($name).'.minute'))
   <div class="col-md-2 has-feedback has-error">
   @else
   <div class="col-md-2">
   @endif
 
     <div class="input-group">
-      {{ Form::text($name.'_minute', null, ['class' => 'form-control', 'placeholder' => 'minute']) }}
+      {{ Form::text($name.'[minute]', null, ['class' => 'form-control', 'placeholder' => 'minute']) }}
       <div class="input-group-addon">'</div>
     </div>
 
-    @if ($errors->has(squareToDot($name.'_minute')))
+    @if ($errors->has(squareToDot($name).'.minute'))
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
-    <span id="{{ $name.'_minute' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name.'_minute')) }}</p>
+    <span id="{{ $name.'[minute]' }}" class="sr-only">(error)</span>
+    <p class="help-block">{{ $errors->first(squareToDo($name).'.minute') }}</p>
     @endif
   </div>
 
-  @if ($errors->has(squareToDot($name.'_second')))
+  @if ($errors->has(squareToDot($name).'.second'))
   <div class="col-md-2 has-feedback has-error">
   @else
   <div class="col-md-2">
   @endif
 
     <div class="input-group">
-      {{ Form::text($name.'_second', null, ['class' => 'form-control', 'placeholder' => 'second']) }}
+      {{ Form::text($name.'[second]', null, ['class' => 'form-control', 'placeholder' => 'second']) }}
       <div class="input-group-addon">"</div>
     </div>
 
-    @if ($errors->has(squareToDot($name.'_second')))
+    @if ($errors->has(squareToDot($name).'.second'))
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
-    <span id="{{ $name.'_second' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name.'_second')) }}</p>
+    <span id="{{ $name.'[second]' }}" class="sr-only">(error)</span>
+    <p class="help-block">{{ $errors->first(squareToDo($name).'.second') }}</p>
     @endif
   </div>
 
-  @if ($errors->has(squareToDot($name.'_cardinal')))
+  @if ($errors->has(squareToDot($name).'.cardinal'))
   <div class="col-md-1 has-feedback has-error">
   @else
   <div class="col-md-1">
   @endif
 
-    {{ Form::text($name.'_cardinal', null, ['class' => 'form-control', 'placeholder' => 'S/N']) }}
+    {{ Form::text($name.'[cardinal]', null, ['class' => 'form-control', 'placeholder' => 'S/N']) }}
 
-    @if ($errors->has(squareToDot($name.'_cardinal')))
+    @if ($errors->has(squareToDot($name).'.cardinal'))
     <span class="form-control-feedback glyphicon glyphicon-remove"
           style="right: -15px;"></span>
-    <span id="{{ $name.'_cardinal' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name.'_cardinal')) }}</p>
+    <span id="{{ $name.'[cardinal]' }}" class="sr-only">(error)</span>
+    <p class="help-block">{{ $errors->first(squareToDo($name).'.cardinal') }}</p>
     @endif
   </div>
 </div>
