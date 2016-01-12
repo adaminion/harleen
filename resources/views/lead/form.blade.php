@@ -37,8 +37,8 @@
         {{ Form::province('lead[province_name]') }}
         {{ Form::bsText('lead[structure_name]', 'Structure name', true) }}
         {{ Form::bsText('lead[closure_name]', 'Closure name', true) }}
-        {{ Form::coord('lead[latitude]', 'Center latitude', 'lat') }}
-        {{ Form::coord('lead[longitude]', 'Center longitude', 'long') }}
+        {{ Form::latitude('lead[latitude]') }}
+        {{ Form::longitude('lead[longitude]') }}
         {{ Form::clarified('lead[clarified]')}}
         {{ Form::bsDate('lead[initiate]', 'Initiation date', true)}}
         {{ Form::shore('lead[shore]') }}

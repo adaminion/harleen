@@ -135,7 +135,6 @@
 - Added jsready stack for javascript that need to be loaded when document ready.
 - Added jquery inputmask.
 - Added Lead index page.
-- Added coordinate form component.
 - Added date form component.
 - Added data availability (survey) form component.
 - Changed unit to output unescaped in all basic form components.
@@ -144,3 +143,4 @@
 - Added inputCol on bsText, bsNumber, bsSelect.
 - Added choose Play in Lead form.
 - Changed javascript updateGcf function.
+- Added latitude and longitude form component.

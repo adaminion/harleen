@@ -72,22 +72,10 @@ class EventServiceProvider extends ServiceProvider
             'requiredB' => false,
             'unitB' => false,
         ]);
-
-        Form::component('coord', 'shared.components.coordinate', [
-            'name',
-            'label',
-            'required' => true,
-        ]);
-
         Form::component('bsDate', 'shared.components.date', [
             'name',
             'label',
             'required' => false,
-        ]);
-
-        Form::component('survey', 'shared.sugar.survey', [
-            'name' => 'survey',
-            'choice'
         ]);
 
         /**
@@ -96,6 +84,7 @@ class EventServiceProvider extends ServiceProvider
 
         // playList must Laravel Collection object
         Form::component('playList', 'shared.sugar.playList', ['name', 'playList']);
+
         Form::component('basin', 'shared.sugar.basin', ['name']);
         Form::component('province', 'shared.sugar.province', ['name']);
         Form::component('clarified', 'shared.sugar.clarified', ['name']);
@@ -108,9 +97,20 @@ class EventServiceProvider extends ServiceProvider
         Form::component('remark', 'shared.sugar.remark', ['name', 'required' => false]);
         Form::component('lateMethod', 'shared.sugar.lateMethod', ['name']);
         Form::component('seismicImage', 'shared.sugar.seismicImage', ['name']);
+
         Form::component('latitude', 'shared.sugar.latitude', [
             'name',
+            'required' => true,
+        ]);
 
+        Form::component('longitude', 'shared.sugar.longitude', [
+            'name',
+            'required' => true,
+        ]);
+
+        Form::component('survey', 'shared.sugar.survey', [
+            'name' => 'survey',
+            'choice'
         ]);
     }
 }

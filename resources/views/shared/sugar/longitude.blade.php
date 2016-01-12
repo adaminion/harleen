@@ -4,7 +4,7 @@
   @else
   <label for="{{ $name }}" class="col-md-3 control-label">
   @endif
-    Center latitude
+    Center longitude
   </label>
 
   @if ($errors->has(squareToDot($name.'_degree')))
@@ -64,19 +64,7 @@
     @endif
   </div>
 
-  @if ($errors->has(squareToDot($name.'_cardinal')))
-  <div class="col-md-1 has-feedback has-error">
-  @else
   <div class="col-md-1">
-  @endif
-
-    {{ Form::text($name.'_cardinal', null, ['class' => 'form-control', 'placeholder' => 'S/N']) }}
-
-    @if ($errors->has(squareToDot($name.'_cardinal')))
-    <span class="form-control-feedback glyphicon glyphicon-remove"
-          style="right: -15px;"></span>
-    <span id="{{ $name.'_cardinal' }}" class="sr-only">(error)</span>
-    <p class="help-block">{{ $errors->first(squareToDo($name.'_cardinal')) }}</p>
-    @endif
+    <p class="form-control-static">E</p>
   </div>
 </div>
