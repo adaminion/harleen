@@ -109,6 +109,7 @@ class LeadController extends Controller
      */
     public function store(LeadFormRequest $request)
     {
+        dd('wa');
         $lead = new Lead($request['lead']);
         $lead->working_area_id = $this->workingAreaId;
         $lead->rps_year = DB::table('sys_year')

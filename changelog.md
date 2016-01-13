@@ -144,3 +144,6 @@
 - Added choose Play in Lead form.
 - Changed javascript updateGcf function.
 - Added latitude and longitude form component.
+- Added custom message for survey.
+- Added custom attachTemp and reattach function to toggle survey panel.
+- Added in form.js jQuery namespace `quinzel`.

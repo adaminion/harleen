@@ -76,7 +76,7 @@
 @push('js')
   <script src="{{ asset('js/datatables.min.js') }}"></script>
   <script>
-    $.harleen = {};
+    $.quinzel = {};
 
     $(document).ready(function() {
       $('#resources-table').DataTable({
@@ -88,21 +88,21 @@
     });
 
     $("a[name='button-delete']").click(function(e) {
-      $.harleen.id = e.currentTarget.id;
-      $.harleen.name = $("#pn" + e.currentTarget.id).text();
+      $.quinzel.id = e.currentTarget.id;
+      $.quinzel.name = $("#pn" + e.currentTarget.id).text();
 
       $.ajax({
         header: {"csrftoken": "{{ csrf_token() }}"},
         url: "{{ url("play/child") }}",
         data: {
-          id: $.harleen.id,
+          id: $.quinzel.id,
           _token: "{{ csrf_token() }}"
         },
         type: "post",
         dataType: "json",
         success: function(data) {
           msg = "<p style='text-align:center;'>"
-            + "<strong>" + $.harleen.name + "</strong></p>";
+            + "<strong>" + $.quinzel.name + "</strong></p>";
 
           if (! $.isEmptyObject(data)) {
             msg = msg + "<hr/><p>" + "{!! trans('crud.play.child') !!}" + "</p><hr/>";
@@ -171,7 +171,7 @@
         url: "play/destroy",
         data: {
           _token: "{{ csrf_token() }}",
-          id: $.harleen.id,
+          id: $.quinzel.id,
           reason: $("#delete-reason").val()
         },
         type: "post",

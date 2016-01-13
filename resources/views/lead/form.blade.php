@@ -17,6 +17,10 @@
         <div class="panel-heading">Dev Toolbox</div>
         <div class="panel-body">
           <a id="devLeadSampleInput" href="#" class="btn btn-success">Sample</a>
+
+          @if (isset($submitButtonText))
+            {{ Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'id' => 'submit-button']) }}
+          @endif
         </div>
       </div>
     @endif
@@ -47,7 +51,7 @@
         {{ Form::nearbyInfra('lead[nearby_infra]') }}
         {{ Form::remark('lead[remark]') }}
         {{
-          Form::survey('survey', [
+          Form::survey('lead[survey]', [
             's2' => '2D Seismic',
             'geo' => 'Geological',
             'chem' => 'Geochemistry',
@@ -57,6 +61,11 @@
             'oter' => 'Other'
           ])
         }}
+
+        {{ Form::text('lead[waaaaaa]', 'fuu', ['id' => 'wa']) }}
+        @push('jsready')
+          $("#wa").hide();
+        @endpush
 
         @if (actionName() === 'edit')
           {{ Form::bsTextarea('lead[update_reason]', 'Update reason', true) }}
@@ -72,7 +81,9 @@
       </div>
       <div class="panel-body">
 
-        <div id="survey-s2-panel" class="panel panel-default hidden">
+        {{-- 2D Seismic Placeholder --}}
+        <span id="s2-place" style="display: none;"></span>
+        <div id="s2-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               2D Seismic
@@ -101,7 +112,9 @@
           </div>
         </div> {{-- 2D Seismic --}}
 
-        <div id="survey-geo-panel" class="panel panel-default hidden">
+        {{-- Geological Field Placeholder --}}
+        <span id="geo-place" style="display: none;"></span>
+        <div id="geo-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               Geological Field
@@ -122,7 +135,9 @@
           </div>
         </div> {{-- Geological Field --}}
 
-        <div id="survey-chem-panel" class="panel panel-default hidden">
+        {{-- Geochemistry Placeholder --}}
+        <span id="chem-place" style="display: none;"></span>
+        <div id="chem-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               Geochemistry
@@ -141,7 +156,9 @@
           </div>
         </div> {{-- Geochemistry --}}
 
-        <div id="survey-grav-panel" class="panel panel-default hidden">
+        {{-- Gravity Placeholder --}}
+        <span id="grav-place" style="display: none;"></span>
+        <div id="grav-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               Gravity
@@ -165,7 +182,9 @@
           </div>
         </div> {{-- Gravity --}}
 
-        <div id="survey-elec-panel" class="panel panel-default hidden">
+        {{-- Electromagnetic Placeholder --}}
+        <span id="elec-place" style="display: none;"></span>
+        <div id="elec-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               Electromagnetic
@@ -189,7 +208,9 @@
           </div>
         </div> {{-- Electromagnetic --}}
 
-        <div id="survey-resi-panel" class="panel panel-default hidden">
+        {{-- Resistivity Placeholder --}}
+        <span id="resi-place" style="display: none;"></span>
+        <div id="resi-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               Resistivity
@@ -213,7 +234,9 @@
           </div>
         </div> {{-- Resistivity --}}
 
-        <div id="survey-oter-panel" class="panel panel-default hidden">
+        {{-- Other Placeholder --}}
+        <span id="oter-place" style="display: none;"></span>
+        <div id="oter-panel" class="panel panel-default">
           <div class="panel-heading">
             <div class="panel-title">
               Other

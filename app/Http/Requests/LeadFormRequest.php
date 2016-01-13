@@ -43,8 +43,9 @@ class LeadFormRequest extends Request
             'lead.nearby_field' => 'required',
             'lead.nearby_infra' => 'required',
             'lead.update_reason' => 'sometimes|required',
+            'lead.survey' => 'required',
             'lead.s2_low' => 'numeric|min:1',
-            'lead.s2_best' => 'sometimes|required|numeric|min:1',
+            'lead.s2_best' => 'required|numeric|min:1',
             'lead.s2_high' => 'numeric|min:1',
             'lead.geo_low' => 'numeric|min:1',
             'lead.geo_best' => 'sometimes|required|numeric|min:1',
@@ -74,11 +75,13 @@ class LeadFormRequest extends Request
     /**
      * Override fungsi untuk memodifikasi input sebelum divalidasi.
      *
-     * @return Request
+     * @return array
      */
     public function all()
     {
         $input = parent::all();
+
+        dd($input);
 
         return $input;
     }

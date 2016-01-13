@@ -22,13 +22,13 @@ $(document).ready(function() {
     });
 
     $("#devLeadSampleInput").on("click", function() {
-        $("#survey-s2-panel").toggleClass('hidden');
-        $("#survey-geo-panel").toggleClass('hidden');
-        $("#survey-chem-panel").toggleClass('hidden');
-        $("#survey-grav-panel").toggleClass('hidden');
-        $("#survey-elec-panel").toggleClass('hidden');
-        $("#survey-resi-panel").toggleClass('hidden');
-        $("#survey-oter-panel").toggleClass('hidden');
+        $.quinzel.s2.reattach();
+        $.quinzel.geo.reattach();
+        $.quinzel.chem.reattach();
+        $.quinzel.grav.reattach();
+        $.quinzel.elec.reattach();
+        $.quinzel.resi.reattach();
+        $.quinzel.oter.reattach();
         $("[name='lead[basin_name]']").val("Barito");
         $("[name='lead[province_name]']").val("Bali");
         $("[name='lead[structure_name]']").val("Test Structure");
@@ -47,7 +47,7 @@ $(document).ready(function() {
         $("[name='lead[nearby_field]']").val('< 5');
         $("[name='lead[nearby_infra]']").val('< 50');
         $("[name='lead[remark]']").val('Remark at its best');
-        $("[name='survey[]']").prop('checked', true);
+        $("[name='lead[survey][]']").prop('checked', true);
         $("[name='lead[s2_low]']").val('50');
         $("[name='lead[s2_best]']").val('100');
         $("[name='lead[s2_high]']").val('150');

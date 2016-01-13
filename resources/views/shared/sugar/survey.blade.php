@@ -12,7 +12,7 @@
   @foreach ($choice as $key => $value)
     <div class="checkbox">
       <label>
-        {{ Form::checkbox($name.'[]', $key, false, ['id' => $name.'-'.$key]) }} {{ $value }}
+        {{ Form::checkbox($name.'[]', $key, false, ['id' => $key.'-check']) }} {{ $value }}
       </label>
     </div>
 
@@ -23,10 +23,20 @@
       class 'hidden' pada panel.
     --}}
     @push('jsready')
-      $("#{{ $name }}-{{ $key }}").click(function() {
-        $("#{{ $name }}-{{ $key }}-panel").toggleClass('hidden');
+      {{-- vg how!? --}}
+      $.quinzel.{{ $key }} = $("#{{ $key }}-panel").detachTemp("{{ $key }}-place");
+
+      $("#{{ $key }}-check").click(function() {
+        if ($("#{{ $key }}-check").is(":checked")) {
+          $.quinzel.{{ $key }}.reattach();
+        } else {
+          $.quinzel.{{ $key }}.detachTemp("{{ $key }}-place");
+        }
       });
-    @endpush
+{{--       @if (in_array($key, (array) old(squareToDot($name))))
+        $("#{{ $key }}-panel").toggleClass('hidden');
+      @endif
+ --}}    @endpush
   @endforeach
 
   @if ($errors->has(squareToDot($name)))

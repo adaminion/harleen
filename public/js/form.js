@@ -1,3 +1,5 @@
+$.quinzel = {};
+
 function updateGcf(data) {
   $("[name='gcf[src_data]']").val(data.gcf.src_data);
   $("[name='gcf[src_formation]']").val(data.gcf.src_formation);
@@ -63,4 +65,24 @@ $('#form-main').on('keyup keypress', function(e) {
 // Disable button submit, pada saat KKKS submit isiannya.
 $('#form-main').submit(function() {
   $('#submit-button').prop('disabled', true);
-})
+});
+
+(function($) {
+  $.fn.detachTemp = function(place) {
+    this.data('dt_placeholder', $('<span id="'+place+'" style="display: none;"></span>').insertAfter( this ));
+    return this.detach();
+  }
+
+  $.fn.reattach = function() {
+    if(this.data('dt_placeholder')){
+      this.insertBefore( this.data('dt_placeholder') );
+      this.data('dt_placeholder').remove();
+      this.removeData('dt_placeholder');
+    }
+    else if(window.console && console.error)
+      console.error("Unable to reattach this element "
+        + "because its placeholder is not available.");
+    return this;
+  }
+
+})(jQuery);

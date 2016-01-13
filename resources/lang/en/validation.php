@@ -88,8 +88,10 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'lead' => [
+            'survey' => [
+                'required' => 'At least pick one survey',
+            ],
         ],
     ],
 
