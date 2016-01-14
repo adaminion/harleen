@@ -22,13 +22,13 @@ $(document).ready(function() {
     });
 
     $("#devLeadSampleInput").on("click", function() {
-        $.quinzel.s2.reattach();
-        $.quinzel.geo.reattach();
-        $.quinzel.chem.reattach();
-        $.quinzel.grav.reattach();
-        $.quinzel.elec.reattach();
-        $.quinzel.resi.reattach();
-        $.quinzel.oter.reattach();
+        $("#s2-panel").toggleClass("hidden");
+        $("#geo-panel").toggleClass("hidden");
+        $("#chem-panel").toggleClass("hidden");
+        $("#grav-panel").toggleClass("hidden");
+        $("#elec-panel").toggleClass("hidden");
+        $("#resi-panel").toggleClass("hidden");
+        $("#oter-panel").toggleClass("hidden");
         $("[name='lead[basin_name]']").val("Barito");
         $("[name='lead[province_name]']").val("Bali");
         $("[name='lead[structure_name]']").val("Test Structure");
@@ -47,7 +47,13 @@ $(document).ready(function() {
         $("[name='lead[nearby_field]']").val('< 5');
         $("[name='lead[nearby_infra]']").val('< 50');
         $("[name='lead[remark]']").val('Remark at its best');
-        $("[name='lead[survey][]']").prop('checked', true);
+        $("[name='lead[s2_data]']").prop('checked', true);
+        $("[name='lead[geo_data]']").prop('checked', true);
+        $("[name='lead[chem_data]']").prop('checked', true);
+        $("[name='lead[grav_data]']").prop('checked', true);
+        $("[name='lead[elec_data]']").prop('checked', true);
+        $("[name='lead[resi_data]']").prop('checked', true);
+        $("[name='lead[oter_data]']").prop('checked', true);
         $("[name='lead[s2_low]']").val('50');
         $("[name='lead[s2_best]']").val('100');
         $("[name='lead[s2_high]']").val('150');
