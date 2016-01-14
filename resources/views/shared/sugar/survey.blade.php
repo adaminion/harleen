@@ -25,27 +25,19 @@
       korespondensi dengan masing-masing survey yang disediakan, dan pastikan
       id dari sub-form tersebut sesuai dengan script di bawah dan ditambah
       class 'hidden' pada panel.
+
+      Untuk diingat bahwa panel pertama kali haruslah mempunyai class `hidden`
+      menjadikan untuk mengolah panel tersebut mengasumsikan panel tidak ada.
     --}}
     @push('jsready')
+      if ($("#{{ $checkbox }}").is(":checked") && $("#{{ $panel }}").hasClass("hidden")) {
+        $("#{{ $panel }}").removeClass("hidden");
+      }
+
       $("#{{ $checkbox }}").click(function() {
         $("#{{ $panel }}").toggleClass('hidden');
       });
-      {{-- vg how!? --}}
-{{--       if ($("#{{ $key }}-check").not(":checked")) {
-        $.quinzel.{{ $key }} = $("#{{ $key }}-panel").detachTemp("{{ $key }}-place");
-      }
-
-      $("#{{ $key }}-check").click(function() {
-        if ($("#{{ $key }}-check").is(":checked")) {
-          $.quinzel.{{ $key }}.reattach();
-        } else {
-          $.quinzel.{{ $key }}.detachTemp("{{ $key }}-place");
-        }
-      });
- --}}{{--       @if (in_array($key, (array) old(squareToDot($name))))
-        $("#{{ $key }}-panel").toggleClass('hidden');
-      @endif
- --}}    @endpush
+    @endpush
   @endforeach
 
   @if ($errors->has(squareToDot($name)))
