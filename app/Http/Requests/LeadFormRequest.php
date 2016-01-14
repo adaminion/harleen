@@ -45,25 +45,25 @@ class LeadFormRequest extends Request
             'lead.update_reason' => 'sometimes|required',
             'lead.survey' => 'required',
             'lead.s2_low' => 'numeric|min:1',
-            'lead.s2_best' => 'required|numeric|min:1',
+            'lead.s2_best' => 'required_if:lead.s2_data,checked|numeric|min:1',
             'lead.s2_high' => 'numeric|min:1',
             'lead.geo_low' => 'numeric|min:1',
-            'lead.geo_best' => 'sometimes|required|numeric|min:1',
+            'lead.geo_best' => 'required_if:lead.s2_data,checked|numeric|min:1',
             'lead.geo_high' => 'numeric|min:1',
             'lead.chem_low' => 'numeric|min:1',
-            'lead.chem_best' => 'sometimes|required|numeric|min:1',
+            'lead.chem_best' => 'required_if:lead.s2_data,checked|numeric|min:1',
             'lead.chem_high' => 'numeric|min:1',
             'lead.grav_low' => 'numeric|min:1',
-            'lead.grav_best' => 'sometimes|required|numeric|min:1',
+            'lead.grav_best' => 'required_if:lead.s2_data,checked|numeric|min:1',
             'lead.grav_high' => 'numeric|min:1',
             'lead.elec_low' => 'numeric|min:1',
-            'lead.elec_best' => 'sometimes|required|numeric|min:1',
+            'lead.elec_best' => 'required_if:lead.s2_data,checked|numeric|min:1',
             'lead.elec_high' => 'numeric|min:1',
             'lead.resi_low' => 'numeric|min:1',
-            'lead.resi_best' => 'sometimes|required|numeric|min:1',
+            'lead.resi_best' => 'required_if:lead.s2_data,checked|numeric|min:1',
             'lead.resi_high' => 'numeric|min:1',
             'lead.oter_low' => 'numeric|min:1',
-            'lead.oter_best' => 'sometimes|required|numeric|min:1',
+            'lead.oter_best' => 'required_if:lead.s2_data,checked|numeric|min:1',
             'lead.oter_high' => 'numeric|min:1',
             'gcf.src_data' => 'required',
             'gcf.res_data' => 'required',
@@ -81,6 +81,8 @@ class LeadFormRequest extends Request
     {
         $input = $this->all();
 
+        // Menentukan jika kontraktor mengisi survey atau tidak
+        // sama sekali
         if (!array_key_exists('s2_data', $input['lead'])
             && !array_key_exists('geo_data', $input['lead'])
             && !array_key_exists('chem_data', $input['lead'])

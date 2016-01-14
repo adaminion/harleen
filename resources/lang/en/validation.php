@@ -58,7 +58,7 @@ return [
     'not_in'               => 'The selected :attribute is invalid.',
     'numeric'              => 'The :attribute must be a number.',
     'regex'                => 'The :attribute format is invalid.',
-    'required'             => 'The field cannot be blank',
+    'required'             => 'Sorry, this field cannot be empty.',
     'required_if'          => 'The :attribute field is required when :other is :value.',
     'required_with'        => 'The :attribute field is required when :values is present.',
     'required_with_all'    => 'The :attribute field is required when :values is present.',
@@ -90,7 +90,28 @@ return [
     'custom' => [
         'lead' => [
             'survey' => [
-                'required' => 'At least pick one survey',
+                'required' => 'Sorry, you have to choose at least one Data Availability.',
+            ],
+            's2_best' => [
+                'required_if' => 'The field cannot be empty when 2D seismic is choosen.'
+            ],
+            'geo_best' => [
+                'required_if' => 'The field cannot be empty when Geological field is choosen.'
+            ],
+            'chem_best' => [
+                'required_if' => 'The field cannot be empty when Geochemistry is choosen.'
+            ],
+            'grav_best' => [
+                'required_if' => 'The field cannot be empty when Gravity is choosen.'
+            ],
+            'elec_best' => [
+                'required_if' => 'The field cannot be empty when Electromagnetic is choosen.'
+            ],
+            'resi_best' => [
+                'required_if' => 'The field cannot be empty when Resistivity is choosen.'
+            ],
+            'oter_best' => [
+                'required_if' => 'The field cannot be empty when Other survey is choosen.'
             ],
         ],
     ],

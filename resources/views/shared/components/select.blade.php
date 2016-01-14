@@ -1,4 +1,9 @@
+@if ($errors->has(squareToDot($name)))
+<div class="form-group has-feedback has-error">
+@else
 <div class="form-group">
+@endif
+
   @if ($required)
   <label for="{{ $name }}" class="col-md-3 control-label required">
   @else
@@ -7,11 +12,7 @@
     {{ $label }}
   </label>
 
-  @if ($errors->has(squareToDot($name)))
-  <div class="col-md-{{ $inputCol }} has-feedback has-error">
-  @else
   <div class="col-md-{{ $inputCol }}">
-  @endif
 
     @if ($unit)
     <div class="input-group">

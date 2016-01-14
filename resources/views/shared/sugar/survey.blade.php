@@ -1,4 +1,9 @@
+@if ($errors->has(squareToDot($name)))
+<div class="form-group has-feedback has-error">
+@else
 <div class="form-group">
+@endif
+
   <label for="{{ $name }}" class="col-md-3 control-label required">
     Data availability
   </label>

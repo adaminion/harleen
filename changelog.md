@@ -150,3 +150,5 @@
 - Added survey data checklist in database.
 - Added helper function extractSquare.
 - Overrided getValidatorInstance to modify input before validation.
+- Changed Lead survey validation rules with required_if.
+- Changed error message to be more friendly.

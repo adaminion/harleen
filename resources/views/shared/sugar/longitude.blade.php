@@ -1,4 +1,11 @@
+@if ($errors->has(squareToDot($name).'.degree')
+  || $errors->has(squareToDot($name).'.minute')
+  || $errors->has(squareToDot($name).'.second'))
+<div class="form-group has-feedback has-error">
+@else
 <div class="form-group">
+@endif
+
   @if ($required)
   <label for="{{ $name }}" class="col-md-3 control-label required">
   @else
