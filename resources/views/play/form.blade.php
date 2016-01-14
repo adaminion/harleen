@@ -6,6 +6,10 @@
       <h1>Create New Play</h1>
     </div>
 
+    @if ($errors->any())
+      @include('shared.notification.error')
+    @endif
+
     {{
       Form::model(['play' => $play, 'gcf' => $gcf],
         ['url' => $url, 'method' => $method,
@@ -17,6 +21,9 @@
         <div class="panel-heading">Dev Toolbox</div>
         <div class="panel-body">
           <a id="devPlaySampleInput" href="#" class="btn btn-success">Sample</a>
+          @if (isset($submitButtonText))
+            {{ Form::submit($submitButtonText, ['class' => 'btn btn-primary', 'id' => 'submit-button']) }}
+          @endif
         </div>
       </div>
     @endif

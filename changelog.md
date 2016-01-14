@@ -152,3 +152,5 @@
 - Overrided getValidatorInstance to modify input before validation.
 - Changed Lead survey validation rules with required_if.
 - Changed error message to be more friendly.
+- Added generic error alert.
+- Added error alert in Play and Lead form.

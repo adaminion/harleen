@@ -6,6 +6,10 @@
       <h1>Create New Lead</h1>
     </div>
 
+    @if ($errors->any())
+      @include('shared.notification.error')
+    @endif
+
     {{
       Form::model(['lead' => $lead, 'gcf' => $gcf],
         ['url' => $url, 'method' => $method,
