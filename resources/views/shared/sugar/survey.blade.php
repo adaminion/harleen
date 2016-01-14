@@ -10,9 +10,13 @@
   @endif
 
   @foreach ($choice as $key => $value)
+    <?php
+      $checkbox = extractSquare($key, '-check', '_data');
+      $panel = extractSquare($key, '-panel', '_data');
+    ?>
     <div class="checkbox">
       <label>
-        {{ Form::checkbox($name.'[]', $key, false, ['id' => $key.'-check']) }} {{ $value }}
+        {{ Form::checkbox($key, 'checked', false, ['id' => $checkbox]) }} {{ $value }}
       </label>
     </div>
 
@@ -23,12 +27,12 @@
       class 'hidden' pada panel.
     --}}
     @push('jsready')
+      $("#{{ $checkbox }}").click(function() {
+        $("#{{ $panel }}").toggleClass('hidden');
+      });
       {{-- vg how!? --}}
-      $.quinzel.{{ $key }} = $("#{{ $key }}-panel").detachTemp("{{ $key }}-place");
-      if ($("#{{ $key }}-check").is(":checked")) {
-        $.quinzel.{{ $key }}.reattach();
-      } else {
-        $.quinzel.{{ $key }}.detachTemp("{{ $key }}-place");
+{{--       if ($("#{{ $key }}-check").not(":checked")) {
+        $.quinzel.{{ $key }} = $("#{{ $key }}-panel").detachTemp("{{ $key }}-place");
       }
 
       $("#{{ $key }}-check").click(function() {
@@ -38,7 +42,7 @@
           $.quinzel.{{ $key }}.detachTemp("{{ $key }}-place");
         }
       });
-{{--       @if (in_array($key, (array) old(squareToDot($name))))
+ --}}{{--       @if (in_array($key, (array) old(squareToDot($name))))
         $("#{{ $key }}-panel").toggleClass('hidden');
       @endif
  --}}    @endpush

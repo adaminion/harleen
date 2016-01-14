@@ -73,16 +73,29 @@ class LeadFormRequest extends Request
     }
 
     /**
-     * Override fungsi untuk memodifikasi input sebelum divalidasi.
+     * Modifikasi data input sebelum divalidasi.
      *
-     * @return array
+     * @return Validator
      */
-    public function all()
+    public function getValidatorInstance()
     {
-        $input = parent::all();
+        $input = $this->all();
 
-        dd($input);
+        if (!array_key_exists('s2_data', $input['lead'])
+            && !array_key_exists('geo_data', $input['lead'])
+            && !array_key_exists('chem_data', $input['lead'])
+            && !array_key_exists('grav_data', $input['lead'])
+            && !array_key_exists('elec_data', $input['lead'])
+            && !array_key_exists('resi_data', $input['lead'])
+            && !array_key_exists('oter_data', $input['lead'])
+        ) {
+            $input['lead']['survey'] = null;
+        } else {
+            $input['lead']['survey'] = 1;
+        }
 
-        return $input;
+        $this->getInputSource()->replace($input);
+
+        return parent::getValidatorInstance();
     }
 }

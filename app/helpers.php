@@ -132,7 +132,7 @@ function getActiveRPSYear()
 }
 
 /**
- * Merubah name input html "parent[child]" menjadi "parent.child"
+ * Merubah name input html "parent[child]" menjadi "parent.child".
  *
  * @param  string $name
  * @return string
@@ -141,4 +141,29 @@ function squareToDot($name)
 {
     $name = str_replace('[', '.', $name);
     return str_replace(']', '', $name);
+}
+
+/**
+ * Mengambil input terakhir array dalam string, "parent[child]"
+ * mengembalikan "child".
+ *
+ * @param  string $name String dalam bentuk array
+ * @param  string $append Untuk menambahkan string di akhir $name
+ * @return string
+ */
+function extractSquare($name, $append = null, $omit = null)
+{
+    $name = array_values(
+        array_slice(
+            explode('.', squareToDot($name)), -1, 1, true))[0];
+
+    if ($append) {
+        $name = $name . $append;
+    }
+
+    if ($omit) {
+        $name = str_replace($omit, '', $name);
+    }
+
+    return $name;
 }

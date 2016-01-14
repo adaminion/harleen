@@ -47,16 +47,4 @@ class PlayFormRequest extends Request
             'gcf.dyn_data' => 'required'
         ];
     }
-
-    /**
-     * Override fungsi untuk memodifikasi input sebelum divalidasi.
-     *
-     * @return Request
-     */
-    public function all()
-    {
-        $input = parent::all();
-
-        return $input;
-    }
 }

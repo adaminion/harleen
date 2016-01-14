@@ -148,3 +148,5 @@
 - Added custom attachTemp and reattach function to toggle survey panel.
 - Added in form.js jQuery namespace `quinzel`.
 - Added survey data checklist in database.
+- Added helper function extractSquare.
+- Overrided getValidatorInstance to modify input before validation.
