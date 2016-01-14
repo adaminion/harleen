@@ -16,7 +16,7 @@
     }
     body {
       background-color: #f7f7f7;
-      margin-top: 60px;
+      margin-top: 10px;
       margin-bottom: 150px;
     }
     .footer {
