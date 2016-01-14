@@ -25,6 +25,11 @@
     @push('jsready')
       {{-- vg how!? --}}
       $.quinzel.{{ $key }} = $("#{{ $key }}-panel").detachTemp("{{ $key }}-place");
+      if ($("#{{ $key }}-check").is(":checked")) {
+        $.quinzel.{{ $key }}.reattach();
+      } else {
+        $.quinzel.{{ $key }}.detachTemp("{{ $key }}-place");
+      }
 
       $("#{{ $key }}-check").click(function() {
         if ($("#{{ $key }}-check").is(":checked")) {

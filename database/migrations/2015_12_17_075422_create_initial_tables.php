@@ -163,6 +163,7 @@ class CreateInitialTables extends Migration
         Schema::create('prospect_survey', function (Blueprint $table) {
             $table->increments('id');
 
+            $table->string('s3_data', 3)->nullable();
             $table->float('s3_area_p90')->nullable();
             $table->float('s3_area_p50')->nullable();
             $table->float('s3_area_p10')->nullable();
@@ -185,7 +186,8 @@ class CreateInitialTables extends Migration
             $table->string('s3_cut_vshale', 100)->nullable();
             $table->string('s3_cut_porosity', 100)->nullable();
             $table->string('s3_cut_saturation', 100)->nullable();
-            $table->string('geo_coverage', 100)->nullable();
+
+            $table->string('s2_data', 3)->nullable();
             $table->float('s2_area_p90')->nullable();
             $table->float('s2_area_p50')->nullable();
             $table->float('s2_area_p10')->nullable();
@@ -206,6 +208,8 @@ class CreateInitialTables extends Migration
             $table->string('s2_cut_vshale', 100)->nullable();
             $table->string('s2_cut_porosity', 100)->nullable();
             $table->string('s2_cut_saturation', 100)->nullable();
+
+            $table->string('geo_data', 3)->nullable();
             $table->float('geo_area_p90')->nullable();
             $table->float('geo_area_p50')->nullable();
             $table->float('geo_area_p10')->nullable();
@@ -217,6 +221,9 @@ class CreateInitialTables extends Migration
             $table->float('geo_gross_sand_p10')->nullable();
             $table->string('geo_year', 100)->nullable();
             $table->string('geo_method', 100)->nullable();
+            $table->string('geo_coverage', 100)->nullable();
+
+            $table->string('chem_data', 3)->nullable();
             $table->float('chem_area_p90')->nullable();
             $table->float('chem_area_p50')->nullable();
             $table->float('chem_area_p10')->nullable();
@@ -229,6 +236,8 @@ class CreateInitialTables extends Migration
             $table->string('chem_rock', 100)->nullable();
             $table->string('chem_fluid', 100)->nullable();
             $table->string('chem_composition', 100)->nullable();
+
+            $table->string('grav_data', 3)->nullable();
             $table->float('grav_area_p90')->nullable();
             $table->float('grav_area_p50')->nullable();
             $table->float('grav_area_p10')->nullable();
@@ -244,6 +253,8 @@ class CreateInitialTables extends Migration
             $table->string('grav_formation_thick', 100)->nullable();
             $table->string('grav_top_seismic', 100)->nullable();
             $table->string('grav_bot_seismic', 100)->nullable();
+
+            $table->string('elec_data', 3)->nullable();
             $table->float('elec_area_p90')->nullable();
             $table->float('elec_area_p50')->nullable();
             $table->float('elec_area_p10')->nullable();
@@ -255,6 +266,8 @@ class CreateInitialTables extends Migration
             $table->string('elec_coverage', 100)->nullable();
             $table->string('elec_range', 100)->nullable();
             $table->string('elec_recorder', 100)->nullable();
+
+            $table->string('resi_data', 3)->nullable();
             $table->float('resi_area_p90')->nullable();
             $table->float('resi_area_p50')->nullable();
             $table->float('resi_area_p10')->nullable();
@@ -266,6 +279,8 @@ class CreateInitialTables extends Migration
             $table->string('resi_coverage', 100)->nullable();
             $table->string('resi_range', 100)->nullable();
             $table->string('resi_recorder', 100)->nullable();
+
+            $table->string('oter_data', 3)->nullable();
             $table->float('oter_area_p90')->nullable();
             $table->float('oter_area_p50')->nullable();
             $table->float('oter_area_p10')->nullable();
@@ -403,6 +418,8 @@ class CreateInitialTables extends Migration
             $table->string('nearby_field', 100);
             $table->string('nearby_infra', 100);
             $table->text('remark')->nullable();
+
+            $table->string('s2_data', 3)->nullable();
             $table->float('s2_low')->nullable();
             $table->float('s2_best')->nullable();
             $table->float('s2_high')->nullable();
@@ -414,12 +431,16 @@ class CreateInitialTables extends Migration
             $table->string('s2_late_year', 100)->nullable();
             $table->string('s2_late_method', 100)->nullable();
             $table->string('s2_image', 100)->nullable();
+
+            $table->string('geo_data', 3)->nullable();
             $table->float('geo_low')->nullable();
             $table->float('geo_best')->nullable();
             $table->float('geo_high')->nullable();
             $table->string('geo_year', 100)->nullable();
             $table->string('geo_method', 100)->nullable();
             $table->string('geo_coverage', 100)->nullable();
+
+            $table->string('chem_data', 3)->nullable();
             $table->float('chem_low')->nullable();
             $table->float('chem_best')->nullable();
             $table->float('chem_high')->nullable();
@@ -429,6 +450,8 @@ class CreateInitialTables extends Migration
             $table->string('chem_rock', 100)->nullable();
             $table->string('chem_fluid', 100)->nullable();
             $table->string('chem_composition', 100)->nullable();
+
+            $table->string('grav_data', 3)->nullable();
             $table->float('grav_low')->nullable();
             $table->float('grav_best')->nullable();
             $table->float('grav_high')->nullable();
@@ -437,6 +460,8 @@ class CreateInitialTables extends Migration
             $table->string('grav_coverage', 100)->nullable();
             $table->string('grav_penetrate', 100)->nullable();
             $table->string('grav_recorder', 100)->nullable();
+
+            $table->string('elec_data', 3)->nullable();
             $table->float('elec_low')->nullable();
             $table->float('elec_best')->nullable();
             $table->float('elec_high')->nullable();
@@ -444,6 +469,8 @@ class CreateInitialTables extends Migration
             $table->string('elec_coverage', 100)->nullable();
             $table->string('elec_penetrate', 100)->nullable();
             $table->string('elec_recorder', 100)->nullable();
+
+            $table->string('resi_data', 3)->nullable();
             $table->float('resi_low')->nullable();
             $table->float('resi_best')->nullable();
             $table->float('resi_high')->nullable();
@@ -452,6 +479,8 @@ class CreateInitialTables extends Migration
             $table->string('resi_coverage', 100)->nullable();
             $table->string('resi_range', 100)->nullable();
             $table->string('resi_recorder', 100)->nullable();
+
+            $table->string('oter_data', 3)->nullable();
             $table->float('oter_low')->nullable();
             $table->float('oter_best')->nullable();
             $table->float('oter_high')->nullable();
