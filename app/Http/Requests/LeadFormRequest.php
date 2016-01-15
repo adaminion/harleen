@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use App\Http\Requests\Request;
 
 class LeadFormRequest extends Request
@@ -36,7 +37,7 @@ class LeadFormRequest extends Request
             'lead.longitude.degree' => 'required|numeric|min:90|max:145',
             'lead.longitude.minute' => 'required|numeric|min:0|max:59',
             'lead.longitude.second' => 'required|numeric|min:0|max:59',
-            'lead.clarified' => 'required',
+            'lead.clarified' => 'required|date',
             'lead.initiate' => 'required',
             'lead.shore' => 'required',
             'lead.terrain' => 'required',
@@ -95,6 +96,13 @@ class LeadFormRequest extends Request
         } else {
             $input['lead']['survey'] = 1;
         }
+
+        // Menggabungkan 3 field "Initiation date" menjadi satu field
+        $input['lead']['initiate'] = Carbon::createFromDate(
+            $input['lead']['initiate']['year'],
+            $input['lead']['initiate']['month'],
+            $input['lead']['initiate']['day']
+        )->toDateString();
 
         $this->getInputSource()->replace($input);
 
