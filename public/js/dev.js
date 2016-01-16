@@ -41,7 +41,9 @@ $(document).ready(function() {
         $("[name='lead[longitude][minute]']").val('59');
         $("[name='lead[longitude][second]']").val('59');
         $("[name='lead[clarified]']").val('Join Study');
-        $("[name='lead[initiate]']").val('2015-01-01');
+        $("[name='lead[initiate][day]']").val('1');
+        $("[name='lead[initiate][month]']").val('1');
+        $("[name='lead[initiate][year]']").val('2015');
         $("[name='lead[shore]']").val('Onshore');
         $("[name='lead[terrain]']").val('Farmland');
         $("[name='lead[nearby_field]']").val('< 5');

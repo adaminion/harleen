@@ -23,7 +23,7 @@
         ['class' => 'form-control'])
     }}
 
-    @if ($errors->has(squareToDot($name.'_day')))
+    @if ($errors->has(squareToDot($name.'[day]')))
       <span class="form-control-feedback glyphicon glyphicon-remove"
             style="right: -15px;"></span>
       <span id="{{ $name.'[day]' }}" class="sr-only">(error)</span>
