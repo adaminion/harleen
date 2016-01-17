@@ -74,7 +74,9 @@ class LeadFormRequest extends Request
     }
 
     /**
-     * Modifikasi data input sebelum divalidasi.
+     * Modifikasi data input sebelum divalidasi, input juga akan diteruskan ke
+     * LeadController untuk mengurangi modifikasi input sebelum menyimpan ke
+     * database.
      *
      * @return Validator
      */
@@ -103,6 +105,17 @@ class LeadFormRequest extends Request
             $input['lead']['initiate']['month'],
             $input['lead']['initiate']['day']
         )->toDateString();
+
+        $input['lead']['lat'] = $input['lead']['lat']['degree']
+            . "," . $input['lead']['lat']['minute']
+            . "," . $input['lead']['lat']['second']
+            . "," . $input['lead']['lat']['cardinal'];
+
+        $input['lead']['long'] = $input['lead']['long']['degree']
+            . "," . $input['lead']['long']['minute']
+            . "," . $input['lead']['long']['second'] . "E";
+
+        dd($input);
 
         $this->getInputSource()->replace($input);
 

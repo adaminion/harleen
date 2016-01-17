@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use Gate;
-
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Requests\LeadFormRequest;
 use App\Http\Controllers\Controller;
-
 use App\Quinzel\Repository\PlayRepository;
 use App\Quinzel\Repository\LeadRepository;
-
 use App\Play;
 use App\Lead;
 use App\Gcf;
@@ -109,7 +106,7 @@ class LeadController extends Controller
      */
     public function store(LeadFormRequest $request)
     {
-        dd('wa');
+        dd($request['lead']);
         $lead = new Lead($request['lead']);
         $lead->working_area_id = $this->workingAreaId;
         $lead->rps_year = DB::table('sys_year')
