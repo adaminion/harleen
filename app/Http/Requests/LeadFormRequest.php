@@ -30,13 +30,13 @@ class LeadFormRequest extends Request
             'lead.province_name' => 'required',
             'lead.structure_name' => 'required',
             'lead.closure_name' => 'required',
-            'lead.latitude.degree' => 'required|numeric|min:0|max:20',
-            'lead.latitude.minute' => 'required|numeric|min:0|max:59',
-            'lead.latitude.second' => 'required|numeric|min:0|max:59',
-            'lead.latitude.cardinal' => 'required|in:s,S,n,N',
-            'lead.longitude.degree' => 'required|numeric|min:90|max:145',
-            'lead.longitude.minute' => 'required|numeric|min:0|max:59',
-            'lead.longitude.second' => 'required|numeric|min:0|max:59',
+            'lead.latitude_degree' => 'required|numeric|min:0|max:20',
+            'lead.latitude_minute' => 'required|numeric|min:0|max:59',
+            'lead.latitude_second' => 'required|numeric|min:0|max:59',
+            'lead.latitude_cardinal' => 'required|in:s,S,n,N',
+            'lead.longitude_degree' => 'required|numeric|min:90|max:145',
+            'lead.longitude_minute' => 'required|numeric|min:0|max:59',
+            'lead.longitude_second' => 'required|numeric|min:0|max:59',
             'lead.clarified' => 'required',
             'lead.initiate' => 'required|date',
             'lead.shore' => 'required',
@@ -106,16 +106,14 @@ class LeadFormRequest extends Request
             $input['lead']['initiate']['day']
         )->toDateString();
 
-        $input['lead']['lat'] = $input['lead']['lat']['degree']
-            . "," . $input['lead']['lat']['minute']
-            . "," . $input['lead']['lat']['second']
-            . "," . $input['lead']['lat']['cardinal'];
+        $input['lead']['latitude'] = $input['lead']['latitude_degree']
+            . "," . $input['lead']['latitude_minute']
+            . "," . $input['lead']['latitude_second']
+            . "," . $input['lead']['latitude_cardinal'];
 
-        $input['lead']['long'] = $input['lead']['long']['degree']
-            . "," . $input['lead']['long']['minute']
-            . "," . $input['lead']['long']['second'] . "E";
-
-        dd($input);
+        $input['lead']['longitude'] = $input['lead']['longitude_degree']
+            . "," . $input['lead']['longitude_minute']
+            . "," . $input['lead']['longitude_second'] . ",E";
 
         $this->getInputSource()->replace($input);
 

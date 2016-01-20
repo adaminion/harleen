@@ -167,3 +167,10 @@ function extractSquare($name, $append = null, $omit = null)
 
     return $name;
 }
+
+function addToSquare($name, $prepend = null, $append = null)
+{
+    $name = explode('.', squareToDot($name));
+
+    return $name[0] . '[' . $prepend . $name[1] . $append . ']';
+}
