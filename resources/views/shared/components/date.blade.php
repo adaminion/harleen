@@ -12,7 +12,7 @@
     {{ $label }}
   </label>
 
-  @if ($errors->has(squareToDot($name.'[day]')))
+  @if ($errors->has(squareToDot($name).'.day'))
     <div class="col-md-1 has-feedback has-error">
   @else
     <div class="col-md-1">
@@ -23,15 +23,15 @@
         ['class' => 'form-control'])
     }}
 
-    @if ($errors->has(squareToDot($name.'[day]')))
+    @if ($errors->has(squareToDot($name).'.day'))
       <span class="form-control-feedback glyphicon glyphicon-remove"
             style="right: -15px;"></span>
       <span id="{{ $name.'[day]' }}" class="sr-only">(error)</span>
-      <p class="help-block">{{ $errors->first(squareToDo($name.'[day]')) }}</p>
+      <p class="help-block">{{ $errors->first(squareToDot($name).'.day') }}</p>
     @endif
   </div>
 
-  @if ($errors->has(squareToDot($name.'[month]')))
+  @if ($errors->has(squareToDot($name).'.month'))
     <div class="col-md-1 has-feedback has-error">
   @else
     <div class="col-md-1">
@@ -42,15 +42,15 @@
         ['class' => 'form-control'])
     }}
 
-    @if ($errors->has(squareToDot($name.'[month]')))
+    @if ($errors->has(squareToDot($name).'.month'))
       <span class="form-control-feedback glyphicon glyphicon-remove"
             style="right: -15px;"></span>
       <span id="{{ $name.'[month]' }}" class="sr-only">(error)</span>
-      <p class="help-block">{{ $errors->first(squareToDo($name.'[month]')) }}</p>
+      <p class="help-block">{{ $errors->first(squareToDot($name).'.month') }}</p>
     @endif
   </div>
 
-  @if ($errors->has(squareToDot($name.'[year]')))
+  @if ($errors->has(squareToDot($name).'.year'))
     <div class="col-md-2 has-feedback has-error">
   @else
     <div class="col-md-2">
@@ -61,11 +61,11 @@
         ['class' => 'form-control'])
     }}
 
-    @if ($errors->has(squareToDot($name.'[year]')))
+    @if ($errors->has(squareToDot($name).'.year'))
       <span class="form-control-feedback glyphicon glyphicon-remove"
             style="right: -15px;"></span>
       <span id="{{ $name.'_year' }}" class="sr-only">(error)</span>
-      <p class="help-block">{{ $errors->first(squareToDo($name.'[year]')) }}</p>
+      <p class="help-block">{{ $errors->first(squareToDot($name).'.year') }}</p>
     @endif
   </div>
 </div>
