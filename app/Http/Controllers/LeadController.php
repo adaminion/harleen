@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Gate;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -106,8 +107,18 @@ class LeadController extends Controller
      */
     public function store(LeadFormRequest $request)
     {
-        dd($request['lead']);
-        $lead = new Lead($request['lead']);
+        $input = $request->except([
+            'lead.latitude_degree',
+            'lead.latitude_minute',
+            'lead.latitude_second',
+            'lead.latitude_cardinal',
+            'lead.longitude_degree',
+            'lead.longitude_minute',
+            'lead.longitude_second',
+            'lead.survey'
+        ]);
+
+        $lead = new Lead($input['lead']);
         $lead->working_area_id = $this->workingAreaId;
         $lead->rps_year = DB::table('sys_year')
             ->where('is_active', '=', 1)
@@ -118,7 +129,7 @@ class LeadController extends Controller
                 ->value('basin_name');
         }
 
-        $gcf = new Gcf($request['gcf']);
+        $gcf = new Gcf($input['gcf']);
 
         DB::transaction(function() use ($lead, $gcf) {
             $gcf->save();

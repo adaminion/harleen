@@ -277,7 +277,7 @@ class CreateInitialTables extends Migration
             $table->string('resi_year', 100)->nullable();
             $table->string('resi_method', 100)->nullable();
             $table->string('resi_coverage', 100)->nullable();
-            $table->string('resi_range', 100)->nullable();
+            $table->string('resi_penetrate', 100)->nullable();
             $table->string('resi_recorder', 100)->nullable();
 
             $table->string('oter_data', 3)->nullable();
@@ -465,6 +465,7 @@ class CreateInitialTables extends Migration
             $table->float('elec_low')->nullable();
             $table->float('elec_best')->nullable();
             $table->float('elec_high')->nullable();
+            $table->string('elec_year', 100)->nullable();
             $table->string('elec_method', 100)->nullable();
             $table->string('elec_coverage', 100)->nullable();
             $table->string('elec_penetrate', 100)->nullable();
@@ -477,7 +478,7 @@ class CreateInitialTables extends Migration
             $table->string('resi_year', 100)->nullable();
             $table->string('resi_method', 100)->nullable();
             $table->string('resi_coverage', 100)->nullable();
-            $table->string('resi_range', 100)->nullable();
+            $table->string('resi_penetrate', 100)->nullable();
             $table->string('resi_recorder', 100)->nullable();
 
             $table->string('oter_data', 3)->nullable();
