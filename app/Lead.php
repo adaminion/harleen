@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -43,5 +44,36 @@ class Lead extends Model
     public function gcf()
     {
         return $this->belongsTo('App\Gcf');
+    }
+
+    /**
+     * Custom fields.
+     *
+     * @param  \App\Lead $lead
+     * @return Eloquent
+     */
+    public static function addCustomFields($lead)
+    {
+        // Coordinate
+        $latitude = explode(',', $lead->latitude);
+        $longitude = explode(',', $lead->longitude);
+
+        $lead->latitude_degree = $latitude[0];
+        $lead->latitude_minute = $latitude[1];
+        $lead->latitude_second = $latitude[2];
+        $lead->latitude_cardinal = $latitude[3];
+
+        $lead->longitude_degree = $longitude[0];
+        $lead->longitude_minute = $longitude[1];
+        $lead->longitude_second = $longitude[2];
+
+        // Lead initiate date
+        $initiate = explode('-', $lead->initiate);
+
+        $lead->initiate_year = $initiate[0];
+        $lead->initiate_month = $initiate[1];
+        $lead->initiate_day = $initiate[2];
+
+        return $lead;
     }
 }

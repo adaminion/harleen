@@ -66,13 +66,14 @@ class LeadController extends Controller
     public function show($id)
     {
         $lead = Lead::findOrFail($id);
-        $play = Play::findOrFail($lead->play_id);
 
         if (Gate::denies('access-lead', $lead)) {
             abort(404);
         }
 
         $gcf = Gcf::find($lead->gcf_id);
+
+        $lead = Lead::addCustomFields($lead);
 
         return view('lead.form', [
             'playList' => PlayRepository::collection($this->workingAreaId),
