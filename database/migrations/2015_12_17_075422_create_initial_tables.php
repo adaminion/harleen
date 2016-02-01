@@ -527,25 +527,31 @@ class CreateInitialTables extends Migration
             $table->float('sat_p90')->nullable();
             $table->float('sat_p50')->nullable();
             $table->float('sat_p10')->nullable();
-            $table->float('ooip_p90')->nullable();
-            $table->float('ooip_p50')->nullable();
-            $table->float('ooip_p10')->nullable();
-            $table->float('ogip_p90')->nullable();
-            $table->float('ogip_p50')->nullable();
-            $table->float('ogip_p10')->nullable();
-            $table->float('boi')->nullable();
-            $table->float('bgi')->nullable();
+            $table->float('ooip_p90')->nullable()->comment('MMBO');
+            $table->float('ooip_p50')->nullable()->comment('MMBO');
+            $table->float('ooip_p10')->nullable()->comment('MMBO');
+            $table->float('ogip_p90')->nullable()->comment('BCF');
+            $table->float('ogip_p50')->nullable()->comment('BCF');
+            $table->float('ogip_p10')->nullable()->comment('BCF');
+            $table->float('boi')->nullable()->comment('RB/STB');
+            $table->float('bgi')->nullable()->comment('RCF/SCF');
             $table->float('accumulation_oil')->nullable();
             $table->float('accumulation_gas')->nullable();
             $table->float('recovery_oil')->nullable();
             $table->float('recovery_gas')->nullable();
             $table->float('success_ratio')->nullable();
-            $table->float('stoip_p90')->nullable();
-            $table->float('stoip_p50')->nullable();
-            $table->float('stoip_p10')->nullable();
-            $table->float('igip_p90')->nullable();
-            $table->float('igip_p50')->nullable();
-            $table->float('igip_p10')->nullable();
+            $table->float('stoip_p90')->nullable()->comment('MMSTB');
+            $table->float('stoip_p50')->nullable()->comment('MMSTB');
+            $table->float('stoip_p10')->nullable()->comment('MMSTB');
+            $table->float('igip_p90')->nullable()->comment('BSCF');
+            $table->float('igip_p50')->nullable()->comment('BSCF');
+            $table->float('igip_p10')->nullable()->comment('BSCF');
+            $table->float('eur_oil_p90')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p50')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p10')->nullable()->comment('MMSTB');
+            $table->float('eur_gas_p90')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p50')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p10')->nullable()->comment('BSCF');
             $table->float('source_rock')->nullable();
             $table->float('reservoir')->nullable();
             $table->float('trap')->nullable();
@@ -593,6 +599,69 @@ class CreateInitialTables extends Migration
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
             $table->boolean('is_pinned')->default(false);
+        });
+
+        /**
+         * Ekivalen tidak dimasukkan
+         * karena dapat dihitung langsung. Play sudah dihubungkan
+         * langsung dengan drillable_id masing-masing.
+         */
+        Schema::create('re_drillable', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('drillable_id');
+            $table->foreign('drillable_id')->references('id')->on('drillable');
+            $table->unsignedInteger('contractor_working_area_id');
+            $table->foreign('contractor_working_area_id')
+                ->references('id')->on('contractor_working_area');
+            $table->unsignedInteger('re_play_id');
+            $table->foreign('re_play_id')->references('id')->on('re_play');
+
+            $table->char('rps_year', 4);
+            $table->string('structure_name', 100)->nullable();
+            $table->string('closure_name', 100);
+            $table->float('area_p90')->nullable();
+            $table->float('area_p50')->nullable();
+            $table->float('area_p10')->nullable();
+            $table->float('net_pay_p90')->nullable();
+            $table->float('net_pay_p50')->nullable();
+            $table->float('net_pay_p10')->nullable();
+            $table->float('por_p90')->nullable();
+            $table->float('por_p50')->nullable();
+            $table->float('por_p10')->nullable();
+            $table->float('sat_p90')->nullable();
+            $table->float('sat_p50')->nullable();
+            $table->float('sat_p10')->nullable();
+            $table->float('ooip_p90')->nullable()->comment('MMBO');
+            $table->float('ooip_p50')->nullable()->comment('MMBO');
+            $table->float('ooip_p10')->nullable()->comment('MMBO');
+            $table->float('ogip_p90')->nullable()->comment('BCF');
+            $table->float('ogip_p50')->nullable()->comment('BCF');
+            $table->float('ogip_p10')->nullable()->comment('BCF');
+            $table->float('boi')->nullable()->comment('RB/STB');
+            $table->float('bgi')->nullable()->comment('RCF/SCF');
+            $table->float('accumulation_oil')->nullable();
+            $table->float('accumulation_gas')->nullable();
+            $table->float('recovery_oil')->nullable();
+            $table->float('recovery_gas')->nullable();
+            $table->float('success_ratio')->nullable();
+            $table->float('stoip_p90')->nullable()->comment('MMSTB');
+            $table->float('stoip_p50')->nullable()->comment('MMSTB');
+            $table->float('stoip_p10')->nullable()->comment('MMSTB');
+            $table->float('igip_p90')->nullable()->comment('BSCF');
+            $table->float('igip_p50')->nullable()->comment('BSCF');
+            $table->float('igip_p10')->nullable()->comment('BSCF');
+            $table->float('eur_oil_p90')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p50')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p10')->nullable()->comment('MMSTB');
+            $table->float('eur_gas_p90')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p50')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p10')->nullable()->comment('BSCF');
+            $table->float('source_rock')->nullable();
+            $table->float('reservoir')->nullable();
+            $table->float('trap')->nullable();
+            $table->float('dynamic')->nullable();
+            $table->float('gcf')->nullable();
+            $table->float('rci')->nullable();
         });
 
         Schema::create('postdrill_well', function (Blueprint $table) {
@@ -705,6 +774,70 @@ class CreateInitialTables extends Migration
             $table->boolean('is_pinned')->default(false);
         });
 
+        /**
+         * Ekivalen tidak dimasukkan
+         * karena dapat dihitung langsung. Play sudah dihubungkan
+         * langsung dengan drillable_id masing-masing.
+         */
+        Schema::create('re_postdrill', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('postdrill_id');
+            $table->foreign('postdrill_id')->references('id')->on('postdrill');
+            $table->unsignedInteger('contractor_working_area_id');
+            $table->foreign('contractor_working_area_id')
+                ->references('id')->on('contractor_working_area');
+            $table->unsignedInteger('re_play_id');
+            $table->foreign('re_play_id')->references('id')->on('re_play');
+
+            $table->char('rps_year', 4);
+            $table->string('structure_name', 100)->nullable();
+            $table->string('well_name', 100)->nullable();
+            $table->string('well_result', 100)->nullable();
+            $table->float('area_p90')->nullable();
+            $table->float('area_p50')->nullable();
+            $table->float('area_p10')->nullable();
+            $table->float('net_pay_p90')->nullable();
+            $table->float('net_pay_p50')->nullable();
+            $table->float('net_pay_p10')->nullable();
+            $table->float('por_p90')->nullable();
+            $table->float('por_p50')->nullable();
+            $table->float('por_p10')->nullable();
+            $table->float('sat_p90')->nullable();
+            $table->float('sat_p50')->nullable();
+            $table->float('sat_p10')->nullable();
+            $table->float('ooip_p90')->nullable()->comment('MMBO');
+            $table->float('ooip_p50')->nullable()->comment('MMBO');
+            $table->float('ooip_p10')->nullable()->comment('MMBO');
+            $table->float('ogip_p90')->nullable()->comment('BCF');
+            $table->float('ogip_p50')->nullable()->comment('BCF');
+            $table->float('ogip_p10')->nullable()->comment('BCF');
+            $table->float('boi')->nullable()->comment('RB/STB');
+            $table->float('bgi')->nullable()->comment('RCF/SCF');
+            $table->float('accumulation_oil')->nullable();
+            $table->float('accumulation_gas')->nullable();
+            $table->float('recovery_oil')->nullable();
+            $table->float('recovery_gas')->nullable();
+            $table->float('success_ratio')->nullable();
+            $table->float('stoip_p90')->nullable()->comment('MMSTB');
+            $table->float('stoip_p50')->nullable()->comment('MMSTB');
+            $table->float('stoip_p10')->nullable()->comment('MMSTB');
+            $table->float('igip_p90')->nullable()->comment('BSCF');
+            $table->float('igip_p50')->nullable()->comment('BSCF');
+            $table->float('igip_p10')->nullable()->comment('BSCF');
+            $table->float('eur_oil_p90')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p50')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p10')->nullable()->comment('MMSTB');
+            $table->float('eur_gas_p90')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p50')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p10')->nullable()->comment('BSCF');
+            $table->float('source_rock')->nullable();
+            $table->float('reservoir')->nullable();
+            $table->float('trap')->nullable();
+            $table->float('dynamic')->nullable();
+            $table->float('gcf')->nullable();
+            $table->float('rci')->nullable();
+        });
+
         Schema::create('discovery', function (Blueprint $table) {
             $table->increments('id');
             $table->string('working_area_id', 15);
@@ -737,6 +870,82 @@ class CreateInitialTables extends Migration
             $table->text('upgrade_reason')->nullable();
             $table->text('delete_reason')->nullable();
             $table->boolean('is_pinned')->default(false);
+        });
+
+        /**
+         * Ekivalen tidak dimasukkan
+         * karena dapat dihitung langsung. Play sudah dihubungkan
+         * langsung dengan drillable_id masing-masing.
+         */
+        Schema::create('re_discovery', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('discovery_id');
+            $table->foreign('discovery_id')->references('id')->on('discovery');
+            $table->unsignedInteger('contractor_working_area_id');
+            $table->foreign('contractor_working_area_id')
+                ->references('id')->on('contractor_working_area');
+            $table->unsignedInteger('re_play_id');
+            $table->foreign('re_play_id')->references('id')->on('re_play');
+
+            $table->char('rps_year', 4);
+            $table->string('structure_name', 100)->nullable();
+            $table->string('well_name', 100)->nullable();
+            $table->string('well_result', 100)->nullable();
+            $table->string('zone_result', 100)->nullable();
+            $table->float('area_p90')->nullable();
+            $table->float('area_p50')->nullable();
+            $table->float('area_p10')->nullable();
+            $table->float('net_pay_p90')->nullable();
+            $table->float('net_pay_p50')->nullable();
+            $table->float('net_pay_p10')->nullable();
+            $table->float('por_p90')->nullable();
+            $table->float('por_p50')->nullable();
+            $table->float('por_p10')->nullable();
+            $table->float('sat_p90')->nullable();
+            $table->float('sat_p50')->nullable();
+            $table->float('sat_p10')->nullable();
+            $table->float('ooip_p90')->nullable()->comment('MMBO');
+            $table->float('ooip_p50')->nullable()->comment('MMBO');
+            $table->float('ooip_p10')->nullable()->comment('MMBO');
+            $table->float('ogip_p90')->nullable()->comment('BCF');
+            $table->float('ogip_p50')->nullable()->comment('BCF');
+            $table->float('ogip_p10')->nullable()->comment('BCF');
+            $table->float('boi')->nullable()->comment('RB/STB');
+            $table->float('bgi')->nullable()->comment('RCF/SCF');
+            $table->float('accumulation_oil')->nullable();
+            $table->float('accumulation_gas')->nullable();
+            $table->float('recovery_oil')->nullable();
+            $table->float('recovery_gas')->nullable();
+            $table->float('success_ratio')->nullable();
+            $table->float('radius_investigation')->nullable();
+            $table->float('stoip_p90')->nullable()->comment('MMSTB');
+            $table->float('stoip_p50')->nullable()->comment('MMSTB');
+            $table->float('stoip_p10')->nullable()->comment('MMSTB');
+            $table->float('igip_p90')->nullable()->comment('BSCF');
+            $table->float('igip_p50')->nullable()->comment('BSCF');
+            $table->float('igip_p10')->nullable()->comment('BSCF');
+            $table->float('oil_1p')->nullable()->comment('MMSTB');
+            $table->float('oil_2p')->nullable()->comment('MMSTB');
+            $table->float('oil_cr1')->nullable()->comment('MMSTB');
+            $table->float('oil_cr2')->nullable()->comment('MMSTB');
+            $table->float('oil_cr3')->nullable()->comment('MMSTB');
+            $table->float('gas_1p')->nullable()->comment('BSCF');
+            $table->float('gas_2p')->nullable()->comment('BSCF');
+            $table->float('gas_cr1')->nullable()->comment('BSCF');
+            $table->float('gas_cr2')->nullable()->comment('BSCF');
+            $table->float('gas_cr3')->nullable()->comment('BSCF');
+            $table->float('eur_oil_p90')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p50')->nullable()->comment('MMSTB');
+            $table->float('eur_oil_p10')->nullable()->comment('MMSTB');
+            $table->float('eur_gas_p90')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p50')->nullable()->comment('BSCF');
+            $table->float('eur_gas_p10')->nullable()->comment('BSCF');
+            $table->float('source_rock')->nullable();
+            $table->float('reservoir')->nullable();
+            $table->float('trap')->nullable();
+            $table->float('dynamic')->nullable();
+            $table->float('gcf')->nullable();
+            $table->float('rci')->nullable();
         });
 
         Schema::create('tested_well', function (Blueprint $table) {
